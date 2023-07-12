@@ -6,24 +6,17 @@ import { HomePageUnder } from "./homepageUnder";
 import { HomePageButton } from "./homePageButton";
 import { BlockIcan } from "../blockIcan/blockIcan";
 
-const StyleMain = styled.div`
-  color: #161513;
-  font-family: Bai Jamjuree;
-  font-style: Regular;
-  font-size: 56px;
-  line-height: 64px;
-  line-height: 91%;
-  align: Left;
-  vertical-align: Top;
-  letter-spacing: 0.56px;
-  margin-top: 40px;
-`;
+// import BackgroundImg from '../background/backgrounStyle'
+
 const HomePageContainer = styled.div`
   width: 100%;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 20px 20px;
   justify-content: space-between;
   padding-top: 40px;
+
+  @media screen and (min-width: 768px) {
+  }
 `;
 const HomePageContainerLeft = styled.div`
   padding-top: 100px;
@@ -44,6 +37,19 @@ const HomePageContainerRight = styled.div`
 `;
 const HomeDivFlex = styled.div`
   display: flex;
+`;
+
+const StyleMain = styled.div`
+  color: #161513;
+  font-family: Bai Jamjuree;
+  font-style: Regular;
+  font-size: 56px;
+  line-height: 64px;
+  line-height: 91%;
+  align: Left;
+  vertical-align: Top;
+  letter-spacing: 0.56px;
+  margin-top: 40px;
 `;
 
 export const HomePage = () => {

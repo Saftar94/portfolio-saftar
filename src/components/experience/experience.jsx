@@ -12,7 +12,7 @@ const ExperienceUl = styled.ul`
   position: relative;
 `;
 
-const rotate = keyframes` 
+const Rotate = keyframes` 
 0%,
 100% {
     clip-path: inset(0 0 0 95%);
@@ -47,7 +47,7 @@ const ExperienceLi = styled.li`
     bottom: 0;
     border: 2px solid #020024;
     transition: all 0.5s;
-    animation: ${rotate} 3s infinite linear;
+    animation: ${Rotate} 3s infinite linear;
   }
 `;
 

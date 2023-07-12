@@ -7,6 +7,7 @@ import { Portfolio } from "./components/portfolio/portfolio";
 import { Services } from "./components/services/services";
 import { HappyCustomer } from "./components/happyCustomer/happyCustomer";
 import { Footer } from "./components/footer/footer";
+
 function App() {
   return (
     <>

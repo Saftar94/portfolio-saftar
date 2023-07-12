@@ -1,6 +1,6 @@
 export const lang = {
   en: {
-    Headermain: "Saftar",
+    Headername: "SUN4S",
     Maintext: "HI, I’M SAFTAR. A CREATIVE",
     Maintexttwo: "FONT-END DEVELOPER",
     Creative: "CREATIVE",

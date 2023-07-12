@@ -1,6 +1,6 @@
 import { v4 as uuid } from "uuid";
 
-export const awardsList = [
+export const AwardsList = [
   {
     id: uuid(),
     number: 1,

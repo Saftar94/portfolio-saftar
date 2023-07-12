@@ -7,10 +7,7 @@ export const HeaderText = () => {
   return (
     <WrapperLink>
       <Link to={"/"}>
-        <HeaderButtonIcon
-          text={lang.en.Headermain}
-          aria-label={lang.en.Headermain}
-        />
+        <HeaderButtonIcon text={lang.en.Headername} />
       </Link>
     </WrapperLink>
   );

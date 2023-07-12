@@ -4,7 +4,11 @@ import { Navigation } from "../navigation/navigation";
 import { HeaderText } from "../headerButtonIcon/headerTextButton";
 import { ButtonForm } from "../homePage/homePageButton";
 import { lang } from "../shared/staticText/staticText";
+import { FaBars } from "react-icons/fa";
 
+// @media screen and (min-width: 768px) {
+
+// }
 const BlockHeader = styled.header`
   top: 0px;
   left: 0px;
@@ -16,6 +20,28 @@ const BlockHeader = styled.header`
   }
   @media screen and (min-width: 1920px) {
     opacity: 1;
+  }
+`;
+const HeaderWrapButton = styled.div`
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  display: none;
+  @media screen and (min-width: 768px) {
+    display: flex;
+  }
+`;
+const HeaderNavButton = styled.button`
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  padding-top: 27px;
+  padding-bottom: 27px;
+  display: flex;
+  justify-content: flex-end;
+  @media screen and (min-width: 768px) {
+    opacity: ${(props) => props.isOpen || "0"};
+    display: none;
   }
 `;
 
@@ -43,8 +69,15 @@ export const Header = ({ isOpen }) => {
       <Container style={{ overflowX: "visible" }}>
         <NavigationContainer>
           <HeaderText />
+
+          <HeaderNavButton>
+            <FaBars style={{ height: "32px", width: "32px" }} />
+          </HeaderNavButton>
           <Navigation />
-          <ButtonForm>{lang.en.ButtonMain}</ButtonForm>
+
+          <HeaderWrapButton>
+            <ButtonForm>{lang.en.ButtonMain}</ButtonForm>
+          </HeaderWrapButton>
         </NavigationContainer>
       </Container>
     </BlockHeader>

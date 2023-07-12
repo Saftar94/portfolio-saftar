@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-
+import { theme } from "./theme";
 import "slick-carousel/slick/slick.css";
 
 export const GlobalStyle = createGlobalStyle`
@@ -7,12 +7,12 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 12px;
     font-weight: 400;
     margin: 0;
-    background:    linear-gradient(90deg, rgb(7 119 113 / 0%), rgb(37 177 179 / 76%), rgb(99 64 162 / 0%))}
+    background:    ${theme.color.primaryBackGround}}
 
   * {
     box-sizing: border-box;
-    font-family: 'Bai Jamjuree', sans-serif;		
-    &::before, &::after {
+    font-family: 'Bai Jamjuree', sans-ser;
+      &::before, &::after {
       box-sizing: border-box;
     }
   }

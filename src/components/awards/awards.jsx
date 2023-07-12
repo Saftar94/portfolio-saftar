@@ -2,7 +2,7 @@ import Container from "../container/constainer";
 import styled from "styled-components";
 import { lang } from "../shared/staticText/staticText";
 import { FcMindMap } from "react-icons/fc";
-import { awardsList } from "./awardsList";
+import { AwardsList } from "./awardsList";
 
 const Awardsblock = styled.div`
   text-align: center;
@@ -116,7 +116,7 @@ export const Awards = () => {
         <AwardHead>{lang.en.AwardsHe}</AwardHead>
         <AwardReg>{lang.en.AwardsRegion}</AwardReg>
         <AwardsUl>
-          {awardsList.map((item) => (
+          {AwardsList.map((item) => (
             <AwardsLi key={item.id}>
               <AwardINBloLeft>
                 <AwardsNum> {item.number}</AwardsNum>

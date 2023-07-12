@@ -2,7 +2,7 @@ import Container from "../container/constainer";
 import styled from "styled-components";
 import { FcMindMap } from "react-icons/fc";
 import { lang } from "../shared/staticText/staticText";
-import { happyCustomerList } from "./happyCustomerList";
+import { HappyCustomerList } from "./happyCustomerList";
 const HappyCustomerblock = styled.div`
   text-align: center;
   margin-bottom: 120px;
@@ -54,7 +54,7 @@ export const HappyCustomer = () => {
         <HappyCustomerHead>{lang.en.HappyCustomer}</HappyCustomerHead>
 
         <HappyCuoUl>
-          {happyCustomerList.map((item) => (
+          {HappyCustomerList.map((item) => (
             <HappyCuLi key={item.id}>
               <HappySvg>{item.svg}</HappySvg>
             </HappyCuLi>

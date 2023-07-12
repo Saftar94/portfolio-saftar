@@ -1,0 +1,94 @@
+.timeline,
+.heroes,
+.statistics,
+.history {
+  background-position: 50% 50%;
+  background-size: cover;
+}
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .timeline {
+    background-image: url("../image&svg/image/space-mob..webp");
+    aspect-ratio: 1/1;
+  }
+  .heroes {
+    background-image: url("../image&svg/image/space-mob..webp");
+    aspect-ratio: 1/1;
+  }
+
+  .statistics {
+    background-image: url("../image&svg/image/space-mob..webp");
+    aspect-ratio: 1/1;
+  }
+  .history {
+    aspect-ratio: 1/1;
+  }
+}
+@media screen and (min-width: 768px) {
+  .timeline {
+    grid-column: 1 / 2;
+    grid-row: 2 / 4;
+
+    background-image: url("../image&svg/image/space-tap.jpeg");
+  }
+  .heroes {
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+
+    background-image: url("../image&svg/image/space-tap.jpeg");
+  }
+  .history {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+  }
+  .statistics {
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+
+    background-image: url("../image&svg/image/space-tap.jpeg");
+  }
+}
+@media screen and (min-width: 1200px) {
+  .timeline {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+
+    background-image: url("../image&svg/image/space-tap.jpeg");
+  }
+
+  .statistics {
+    grid-column: 2 / 4;
+    grid-row: 1 / 2;
+
+    background-image: url("../image&svg/image/space-tap.jpeg");
+  }
+  .heroes {
+    grid-column: 2 / 3;
+    grid-row: 2 /3;
+
+    background-image: url("../image&svg/image/space-tap.jpeg");
+  }
+  .history {
+    grid-column: 3 / 4;
+    grid-row: 2 /3;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .timeline {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    background-image: url("../image&svg/image/space-tap.jpeg");
+  }
+
+  .heroes {
+    grid-column: 2 / 3;
+    grid-row: 2 /3;
+
+    background-image: url("../image&svg/image/space-tap.jpeg");
+  }
+  .statistics {
+    grid-column: 2 / 4;
+    grid-row: 1 / 2;
+
+    background-image: url("../image&svg/image/space-tap.jpeg");
+  }
+}
