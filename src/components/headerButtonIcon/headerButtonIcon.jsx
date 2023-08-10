@@ -1,14 +1,6 @@
 import styled from "styled-components";
 import { FcMindMap } from "react-icons/fc";
-// text-shadow:
-//   0 0 black,
-//   0 0 green,
-//   0 0 red;
 
-// text-shadow:
-//   -400px 0 tomato,
-//   400px 0 yellowgreen,
-//   0 0 #440492;
 const TextMainHead = styled.p`
   opacity: 1;
   transition: all 1s;

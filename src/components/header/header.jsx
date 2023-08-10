@@ -4,11 +4,12 @@ import { Navigation } from "../navigation/navigation";
 import { HeaderText } from "../headerButtonIcon/headerTextButton";
 import { ButtonForm } from "../homePage/homePageButton";
 import { lang } from "../shared/staticText/staticText";
-import { FaBars } from "react-icons/fa";
+import { SliderMenu } from "../navigation/navSideBar";
 
-// @media screen and (min-width: 768px) {
+import { useState } from "react";
 
-// }
+import { Divide as Hamburger } from "hamburger-react";
+
 const BlockHeader = styled.header`
   top: 0px;
   left: 0px;
@@ -31,19 +32,6 @@ const HeaderWrapButton = styled.div`
     display: flex;
   }
 `;
-const HeaderNavButton = styled.button`
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  padding-top: 27px;
-  padding-bottom: 27px;
-  display: flex;
-  justify-content: flex-end;
-  @media screen and (min-width: 768px) {
-    opacity: ${(props) => props.isOpen || "0"};
-    display: none;
-  }
-`;
 
 const NavigationContainer = styled.div`
   display: flex;
@@ -63,18 +51,44 @@ const NavigationContainer = styled.div`
   }
 `;
 
-export const Header = ({ isOpen }) => {
+const SliderButton = styled.button`
+  color: black;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 50px;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  padding-top: 27px;
+  padding-bottom: 27px;
+
+  @media screen and (min-width: 768px) {
+    opacity: ${(props) => props.isOpen || "0"};
+  }
+`;
+
+export const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleMenu = () => setIsOpen(!isOpen);
+
   return (
-    <BlockHeader isOpen={isOpen}>
+    <BlockHeader>
       <Container style={{ overflowX: "visible" }}>
         <NavigationContainer>
           <HeaderText />
+          <Wrapper>
+            <SliderMenu closeMenu={toggleMenu} isOpen={isOpen} />
 
-          <HeaderNavButton>
-            <FaBars style={{ height: "32px", width: "32px" }} />
-          </HeaderNavButton>
+            <SliderButton onClick={toggleMenu}>
+              <Hamburger size={32} toggled={isOpen} toggle={setIsOpen} />
+            </SliderButton>
+          </Wrapper>
+
           <Navigation />
-
           <HeaderWrapButton>
             <ButtonForm>{lang.en.ButtonMain}</ButtonForm>
           </HeaderWrapButton>
