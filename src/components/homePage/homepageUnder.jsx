@@ -4,9 +4,15 @@ import styled from "styled-components";
 
 const StyleUnder = styled.div`
   display: flex;
+  flex-direction: initial;
+  justify-content: center;
   color: #161513;
   margin-top: 35px;
   align-items: center;
+  font-size: 16px;
+  line-height: 91%;
+  vertical-align: top;
+  letter-spacing: 0.56px;
 `;
 
 export const HomePageUnder = () => {

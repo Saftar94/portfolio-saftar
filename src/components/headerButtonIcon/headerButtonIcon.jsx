@@ -1,35 +1,42 @@
 import styled from "styled-components";
 import { FcMindMap } from "react-icons/fc";
+import { theme } from "../style/theme";
+
+const Headerprops = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 const TextMainHead = styled.p`
   opacity: 1;
+  letter-spacing: 10.6px;
   transition: all 1s;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 1.19;
+  color: ${theme.color.buttonaccentColor};
+  text-decoration: none;
   &:hover {
     opacity: 1;
+    transform: scale(1.1);
+  }
+
+  @media screen and (min-width: 768px) {
+    font-size: 18px;
   }
 `;
+
 export const HeaderButtonIcon = (props) => {
   return (
     <Headerprops>
       <FcMindMap
         style={{
           marginRight: "12px",
-          height: "30px",
-          width: "30px",
+          height: "38px",
+          width: "38px",
         }}
       />
       <TextMainHead>{props.text}</TextMainHead>
     </Headerprops>
   );
 };
-
-const Headerprops = styled.div`
-  display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-
-  font-family: "Lora", serif;
-  font-size: large;
-  font-weight: bold;
-  letter-spacing: 10.6px;
-`;

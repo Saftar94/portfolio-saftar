@@ -5,17 +5,19 @@ import { HeaderText } from "../headerButtonIcon/headerTextButton";
 import { ButtonForm } from "../homePage/homePageButton";
 import { lang } from "../shared/staticText/staticText";
 import { SliderMenu } from "../navigation/navSideBar";
-
 import { useState } from "react";
-
 import { Divide as Hamburger } from "hamburger-react";
+import { useRef } from "react";
 
 const BlockHeader = styled.header`
+  position: sticky;
+  z-index: 100;
   top: 0px;
   left: 0px;
   width: 100%;
   padding-top: 27px;
   padding-bottom: 27px;
+  background: ${(props) => props.isColor || "#253069"};
   @media screen and (min-width: 768px) {
     opacity: ${(props) => props.isOpen || "1"};
   }
@@ -67,19 +69,35 @@ const Wrapper = styled.div`
   padding-bottom: 27px;
 
   @media screen and (min-width: 768px) {
-    opacity: ${(props) => props.isOpen || "0"};
+    display: ${(props) => props.isOpen || "none"};
   }
 `;
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen(!isOpen);
+  const ref = useRef(null);
+
+  const changeColor = () => {
+    if (window.scrollY >= 80) {
+      setIsOpen(false);
+    } else {
+      setIsOpen(true);
+    }
+  };
+
+  window.addEventListener("scroll", changeColor);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  };
 
   return (
-    <BlockHeader>
+    <BlockHeader changeNav={changeColor} isColor={isOpen} ref={ref}>
       <Container style={{ overflowX: "visible" }}>
         <NavigationContainer>
           <HeaderText />
+
           <Wrapper>
             <SliderMenu closeMenu={toggleMenu} isOpen={isOpen} />
 
@@ -88,9 +106,9 @@ export const Header = () => {
             </SliderButton>
           </Wrapper>
 
-          <Navigation />
+          <Navigation changeText={changeColor} isOpen={isOpen} />
           <HeaderWrapButton>
-            <ButtonForm>{lang.en.ButtonMain}</ButtonForm>
+            <ButtonForm onClick={scrollToTop}>{lang.en.ButtonMain}</ButtonForm>
           </HeaderWrapButton>
         </NavigationContainer>
       </Container>

@@ -4,8 +4,12 @@ import Container from "../container/constainer";
 import { FcMindMap } from "react-icons/fc";
 import { HomePageUnder } from "./homepageUnder";
 import { HomePageButton } from "./homePageButton";
-import { BlockIcan } from "../blockIcan/blockIcan";
 
+import { MainPageLink } from "./mainPageLink";
+import { keyframes } from "styled-components";
+
+// import { Fragment } from "react";
+// import { Fade } from "react-reveal";
 // import BackgroundImg from '../background/backgrounStyle'
 
 const HomePageContainer = styled.div`
@@ -18,21 +22,54 @@ const HomePageContainer = styled.div`
   @media screen and (min-width: 768px) {
   }
 `;
-const HomePageContainerLeft = styled.div`
-  padding-top: 100px;
-  font-family: Bai Jamjuree;
-  font-style: Regular;
-  line-height: 64px;
-  align-items: left;
-  vertical-align: Top;
-  letter-spacing: 0.56px;
+
+const rotateslideright = keyframes`   
+from {
+  transform: translateX(-100%);
+}
+to {
+  transform: translateX(0);
+}
 `;
 
-const HomePageContainerRight = styled.div`
-  img {
+const HomePageContainerLeft = styled.div`
+  font-weight: 900;
+  font-size: 38px;
+  line-height: 1.2;
+  text-align: center;
+  letter-spacing: 0.04em;
+  width: 100%;
+
+  @media screen and (min-width: 768px) {
+    padding-top: 100px;
+    font-family: Bai Jamjuree;
+    font-style: Regular;
+    line-height: 64px;
+    align-items: left;
+    vertical-align: Top;
+    letter-spacing: 0.56px;
     width: 100%;
-    height: 100%;
-    overflow: visible;
+
+    animation: ${rotateslideright} 0.3s ease-in-out;
+  }
+`;
+
+const rotateslideLeft = keyframes`   
+from {
+  transform: translateX(100%);
+}
+to {
+  transform: translateX(0);
+}
+`;
+const HomePageContainerRight = styled.div`
+  display: ${(props) => props.isOpen || "none"};
+
+  @media (min-width: 768px) {
+    display: ${(props) => props.isOpen || "block"};
+    width: 100%;
+    overflow: hidden;
+    animation: ${rotateslideLeft} 0.5s ease-in-out;
   }
 `;
 const HomeDivFlex = styled.div`
@@ -54,38 +91,42 @@ const StyleMain = styled.div`
 
 export const HomePage = () => {
   return (
-    <HomePageContainer>
-      <Container style={{ overflowX: "visible" }}>
-        <HomeDivFlex>
-          <HomePageContainerLeft>
-            <StyleMain>
-              {lang.en.Maintext}
+    <>
+      <HomePageContainer>
+        <Container style={{ overflowX: "visible" }}>
+          <HomeDivFlex>
+            <HomePageContainerLeft>
+              <StyleMain>
+                {lang.en.Maintext}
+                <FcMindMap
+                  style={{
+                    marginRight: "12px",
+                    marginLeft: "12px",
+                    height: "40px",
+                    width: "40px",
+                  }}
+                />
+                {lang.en.Maintexttwo}
+              </StyleMain>
+              <HomePageUnder />
+              <HomePageButton />
+            </HomePageContainerLeft>
+
+            <HomePageContainerRight>
               <FcMindMap
                 style={{
-                  marginRight: "12px",
-                  marginLeft: "12px",
-                  height: "40px",
-                  width: "40px",
+                  //   marginRight: '12px',
+                  //   marginLeft: '12px',
+                  height: "563px",
+                  width: "562px",
                 }}
               />
-              {lang.en.Maintexttwo}
-            </StyleMain>
-            <HomePageUnder />
-            <HomePageButton />
-          </HomePageContainerLeft>
-          <HomePageContainerRight>
-            <FcMindMap
-              style={{
-                //   marginRight: '12px',
-                //   marginLeft: '12px',
-                height: "563px",
-                width: "562px",
-              }}
-            />
-          </HomePageContainerRight>
-        </HomeDivFlex>
-      </Container>
-      <BlockIcan />
-    </HomePageContainer>
+            </HomePageContainerRight>
+          </HomeDivFlex>
+        </Container>
+      </HomePageContainer>
+
+      <MainPageLink />
+    </>
   );
 };

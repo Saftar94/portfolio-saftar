@@ -1,39 +1,29 @@
 import { lang } from "../shared/staticText/staticText";
 import styled from "styled-components";
-import { keyframes } from "styled-components";
+import { theme } from "../style/theme";
 
 const StyleButton = styled.div`
-  color: red;
+  display: flex;
+  flex-direction: initial;
+  justify-content: space-evenly;
+  margin-top: 35px;
 `;
 
-const ring = keyframes`    0% {
-  width: 30px;
-  height: 30px;
-  opacity: 1;
-}
-100% {
-  width: 300px;
-  height: 300px;
-  opacity: 0;
-
-}`;
 export const ButtonForm = styled.button`
   min-width: 126px;
-  min-height: 42px;
-  font-family: Nunito, sans-serif;
-  font-size: 16px;
+  min-height: 32px;
+  line-height: 1.14;
+  font-size: 12px;
+  color: ${theme.color.primaryColor};
+  border: none;
+  cursor: pointer;
   text-transform: uppercase;
   letter-spacing: 1.3px;
-  font-weight: 400;
-  color: rgb(49, 49, 51);
-  background: linear-gradient(
-    90deg,
-    rgb(129, 230, 217) 0%,
-    rgb(79, 209, 197) 100%
-  );
+  font-weight: 500;
+  color: ${theme.color.secondaryColor};
+  background: ${theme.color.buttonaccentColor};
   border: none;
   border-radius: 1000px;
-  box-shadow: rgba(79, 209, 197, 0.64) 12px 12px 24px;
   transition: all 0.3s ease-in-out 0s;
   cursor: pointer;
   outline: none;
@@ -43,10 +33,9 @@ export const ButtonForm = styled.button`
   &: before {
     content: "";
     border-radius: 1000px;
-    min-width: calc(180px + 12px);
-    min-height: calc(60px + 12px);
-    border: 3px solid #00ffcb;
-    box-shadow: 0 0 60px rgba(0, 255, 203, 0.64);
+    width: 115%;
+    height: 150%;
+    border: 3px solid ${theme.color.buttonaccentColor};
     position: absolute;
     top: 50%;
     left: 50%;
@@ -56,7 +45,8 @@ export const ButtonForm = styled.button`
   }
   &:hover,
   :focus {
-    color: #313133;
+    background: ${theme.color.secondaryColor};
+    color: ${theme.color.buttonaccentColor};
     transform: translateY(-6px);
   }
   &:hover:before,
@@ -68,19 +58,21 @@ export const ButtonForm = styled.button`
     width: 30px;
     height: 30px;
     border-radius: 100%;
-    border: 6px solid #00ffcb;
     position: absolute;
     z-index: -1;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: ${ring} 1.5s infinite;
   }
 
   &:hover:after,
   :focus:after {
     animation: none;
     display: none;
+  }
+
+  @media (min-width: 1200px) {
+    font-size: 20px;
   }
 `;
 

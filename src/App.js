@@ -1,27 +1,31 @@
 import { Header } from "./components/header/header";
 import { HomePage } from "./components/homePage/homePage";
-import { AboutMe } from "./components/aboutMe/aboutMe";
-import { Experience } from "./components/experience/experience";
-import { Awards } from "./components/awards/awards";
-import { Portfolio } from "./components/portfolio/portfolio";
-import { Services } from "./components/services/services";
-import { HappyCustomer } from "./components/happyCustomer/happyCustomer";
-import { Footer } from "./components/footer/footer";
 
-function App() {
+import { Routes, Route } from "react-router-dom";
+import { AboutMeExample } from "./components/aboutMe/aboutExample";
+
+function App(isOpen) {
   return (
     <>
       <Header />
-      <HomePage />
-      <AboutMe />
-      <Experience />
-      <Awards />
-      <Portfolio />
-      <Services />
-      <HappyCustomer />
-      <Footer />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="about" element={<AboutMeExample />} />
+      </Routes>
     </>
   );
 }
 
 export default App;
+
+// {/* <>
+//       <Header />
+//       <HomePage/>
+//       <AboutMe />
+//       <Experience />
+//       <Awards />
+//       <Portfolio />
+//       <Services />
+//       <HappyCustomer />
+//       <Footer />
+//       </> */}

@@ -7,7 +7,8 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 12px;
     font-weight: 400;
     margin: 0;
-    background:    ${theme.color.primaryBackGround}}
+    background: linear-gradient(to right, ${theme.color.secondaryColor} 50%, ${theme.color.fistaryColor} 50%);
+  }
 
   * {
     box-sizing: border-box;
