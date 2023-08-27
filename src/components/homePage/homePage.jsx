@@ -7,7 +7,7 @@ import { HomePageButton } from "./homePageButton";
 
 import { MainPageLink } from "./mainPageLink";
 import { keyframes } from "styled-components";
-
+import { theme } from "../style/theme";
 // import { Fragment } from "react";
 // import { Fade } from "react-reveal";
 // import BackgroundImg from '../background/backgrounStyle'
@@ -20,6 +20,7 @@ const HomePageContainer = styled.div`
   padding-top: 40px;
 
   @media screen and (min-width: 768px) {
+    padding-top: 60px;
   }
 `;
 
@@ -80,13 +81,16 @@ const StyleMain = styled.div`
   color: #161513;
   font-family: Bai Jamjuree;
   font-style: Regular;
-  font-size: 56px;
+  font-size: 53px;
   line-height: 64px;
-  line-height: 91%;
   align: Left;
   vertical-align: Top;
   letter-spacing: 0.56px;
   margin-top: 40px;
+`;
+
+const Styletext = styled.p`
+  color: ${theme.color.primaryColor};
 `;
 
 export const HomePage = () => {
@@ -97,16 +101,8 @@ export const HomePage = () => {
           <HomeDivFlex>
             <HomePageContainerLeft>
               <StyleMain>
-                {lang.en.Maintext}
-                <FcMindMap
-                  style={{
-                    marginRight: "12px",
-                    marginLeft: "12px",
-                    height: "40px",
-                    width: "40px",
-                  }}
-                />
-                {lang.en.Maintexttwo}
+                <Styletext>{lang.en.Maintext}</Styletext>
+                <Styletext>{lang.en.Maintexttwo}</Styletext>
               </StyleMain>
               <HomePageUnder />
               <HomePageButton />
@@ -115,8 +111,6 @@ export const HomePage = () => {
             <HomePageContainerRight>
               <FcMindMap
                 style={{
-                  //   marginRight: '12px',
-                  //   marginLeft: '12px',
                   height: "563px",
                   width: "562px",
                 }}

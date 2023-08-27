@@ -96,7 +96,7 @@ export const SliderMenu = ({ closeMenu, isOpen }) => {
           </SliderList>
 
           <SliderButton onClick={closeMenu}>
-            <Hamburger size={32} toggle={closeMenu} toggled={isOpen} />
+            <Hamburger size={32} closeMenu={closeMenu} toggled={isOpen} />
           </SliderButton>
         </MenuSideBar>
         <HomePageButton />

@@ -1,32 +1,37 @@
 import { v4 as uuid } from "uuid";
 
+import filmoteka1 from "../image&svg/imgae/filmotekaX1.jpg";
+import Elenashop from "../image&svg/imgae/ElenaShopx1.jpeg";
+import HellEnglish from "../image&svg/imgae/hellEnglishX1.jpg";
+import WebStudio from "../image&svg/imgae/WebStudio.jpeg";
+
 export const portfolioList = [
   {
     id: uuid(),
-    image:
-      "https://i.pinimg.com/originals/de/2e/89/de2e8979e0acda7c6814338c2e78d705.jpg",
-    button: "Art Direction",
-    about: "Beautiful and advanced website interfaces",
+    image: filmoteka1,
+    button: "Filmoteka",
+    about: "Beautiful site for finding movies and movie notes!",
+    link: "https://saftar94.github.io/Filmoteka/",
   },
   {
     id: uuid(),
-    image:
-      "https://images.wallpaperscraft.com/image/single/mask_man_anonymous_140774_3840x2400.jpg",
-    button: "Branding",
-    about: "Design and extreme programming practice",
+    image: Elenashop,
+    button: "ElenaShop",
+    about: "Website for women's fashion!",
+    link: "https://nikitamelnychencko.github.io/eleanshop/",
   },
   {
     id: uuid(),
-    image:
-      "https://s1.1zoom.ru/b5050/760/Keyboard_Hands_Robot_560160_3840x2400.jpg",
-    button: "Web Design",
-    about: "Nature inspired design",
+    image: HellEnglish,
+    button: "Hell&English",
+    about: "Beautiful site for English courses!",
+    link: "https://viktor-kostiuchenko.github.io/hellen-english/",
   },
   {
     id: uuid(),
-    image:
-      "https://i.pinimg.com/originals/1c/90/68/1c9068db642dfcb9c95e0c0f1eb6b7f4.png",
-    button: "Motion Graphics",
-    about: "Design & concept at work.",
+    image: WebStudio,
+    button: "WebStudio",
+    about: "Web studio for designers and their team!",
+    link: "https://saftar94.github.io/goit-markup-hw-08/GOIT%20DZ8/",
   },
 ];

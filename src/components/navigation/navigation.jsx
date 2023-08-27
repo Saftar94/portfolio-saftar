@@ -31,7 +31,7 @@ const NavLi = styled.li`
 
 const NavLinkHeader = styled(NavLink)`
 @media screen and (min-width: 768px) {
-  color: ${({ isOpen }) => (isOpen ? "black" : "white")};
+  color: ${({ isColor }) => (isColor ? "black" : "white")};
   font-weight: 500;
   font-size: 12px;
   line-height: 1.14;
@@ -42,7 +42,7 @@ const NavLinkHeader = styled(NavLink)`
   &:focus,
   &:active {
     text-decoration: underline;
-    color: rgb(247 176 16);
+    color: rgb(214, 55, 46);
   }
   }
 
@@ -52,7 +52,7 @@ const NavLinkHeader = styled(NavLink)`
 
 `;
 
-export const Navigation = (changeText, isOpen) => {
+export const Navigation = (changeText, isColor) => {
   return (
     <NavigationMenu>
       <NavUl>
@@ -60,7 +60,7 @@ export const Navigation = (changeText, isOpen) => {
           return (
             <NavLi key={item.id}>
               <NavLinkHeader
-                isOpen={changeText.isOpen}
+                isColor={changeText.isColor}
                 to={item.path}
                 activestyle={{
                   color: "#ffd700",

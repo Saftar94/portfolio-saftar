@@ -43,8 +43,7 @@ export const ButtonForm = styled.button`
     opacity: 0;
     transition: all 0.3s ease-in-out 0s;
   }
-  &:hover,
-  :focus {
+  &:hover{
     background: ${theme.color.secondaryColor};
     color: ${theme.color.buttonaccentColor};
     transform: translateY(-6px);
@@ -73,7 +72,7 @@ export const ButtonForm = styled.button`
 
   @media (min-width: 1200px) {
     font-size: 20px;
-  }
+
 `;
 
 export const HomePageButton = () => {

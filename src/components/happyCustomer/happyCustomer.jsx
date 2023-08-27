@@ -42,8 +42,8 @@ const HappyCuLi = styled.li`
 const HappySvg = styled.a``;
 export const HappyCustomer = () => {
   return (
-    <Container>
-      <HappyCustomerblock>
+    <HappyCustomerblock>
+      <Container>
         <FcMindMap
           style={{
             marginBottom: "20px",
@@ -60,7 +60,7 @@ export const HappyCustomer = () => {
             </HappyCuLi>
           ))}
         </HappyCuoUl>
-      </HappyCustomerblock>
-    </Container>
+      </Container>
+    </HappyCustomerblock>
   );
 };

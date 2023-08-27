@@ -45,8 +45,8 @@ const ServicesText = styled.p``;
 
 export const Services = () => {
   return (
-    <Container>
-      <Servicesblock>
+    <Servicesblock>
+      <Container>
         <FcMindMap
           style={{
             marginBottom: "20px",
@@ -64,7 +64,7 @@ export const Services = () => {
             </ServicesLi>
           ))}
         </ServicesUl>
-      </Servicesblock>
-    </Container>
+      </Container>
+    </Servicesblock>
   );
 };

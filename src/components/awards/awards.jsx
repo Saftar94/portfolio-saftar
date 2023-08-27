@@ -3,38 +3,43 @@ import styled from "styled-components";
 import { lang } from "../shared/staticText/staticText";
 import { FcMindMap } from "react-icons/fc";
 import { AwardsList } from "./awardsList";
+import { theme } from "../style/theme";
 
 const Awardsblock = styled.div`
   text-align: center;
-  margin-bottom: 120px;
 `;
 const AwardHead = styled.p`
-  font-family: Bai Jamjuree;
-  font-style: normal;
-  font-size: 45px;
+  font-weight: 500;
+  font-size: 35px;
+  line-height: 1.17;
   vertical-align: top;
   letter-spacing: 0.06em;
-  color: #161513;
+  color: ${theme.color.primaryColor};
+  text-align: center;
   margin-bottom: 18px;
+
+  @media screen and (min-width: 768px) {
+    font-size: 45px;
+  }
 `;
 
 export const AwardReg = styled.p`
-  font-family: Bai Jamjuree;
-  font-style: normal;
   font-size: 18px;
   vertical-align: top;
   letter-spacing: 0.06em;
-  color: #161513;
-  margin-bottom: 60px;
+  color: ${theme.color.primaryColor};
+  margin-bottom: 40px;
 `;
 const AwardsUl = styled.ul`
 display: block;
 list-style: none;
+display: grid;
+grid-template-columns: repeat(1, 1fr);
+
 }`;
 const AwardsLi = styled.li`
   list-style-type: none;
   padding: 38px 34px;
-  margin-bottom: 24px;
   &:last-child {
     margin-bottom: 0;
   }
@@ -58,72 +63,70 @@ const AwardINBloLeft = styled.div`
   justify-content: space-around;
   align-items: center;
 `;
-const AwardINBloLeIN = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-`;
+
 const AwardINBloRifht = styled.div`
   display: flex;
   flex-direction: initial;
   align-items: center;
+  width: 50%;
+  @media screen and (max-width: 767px) {
+    margin-left: 60px;
+  }
 `;
 
 const AwardsNum = styled.span`
   color: white;
   align-items: center;
-  background-color: rgb(62 157 170 / 80%);
+  background-color: ${theme.color.buttonaccentColor};
   width: 35px;
   height: 35px;
   display: flex;
   justify-content: center;
   margin-right: 24px;
-
   font-style: normal;
   font-size: 18px;
   text-align: left;
-  letter-spacing: 1.18;
 `;
 const AwardsComp = styled.span`
   color: #161513;
   font-style: normal;
-  font-size: 23px;
-  text-align: left;
-  letter-spacing: 1.18;
-`;
-const AwardsPla = styled.span`
-  color: #161513;
-  font-style: normal;
-  font-size: 18px;
+  font-size: 13px;
   text-align: left;
   letter-spacing: 1.18;
 `;
 
 const AwardsDire = styled.span`
-  color: black;
-  margin-right: 16px;
+  color: ${theme.color.secondaryColor};
+  font-style: normal;
+  font-size: 11px;
+  text-align: left;
+  letter-spacing: 1.18;
+  font-weight: 200;
+  margin-right: 20px;
 `;
 const AwardsYear = styled.span`
-  color: black;
+  color: ${theme.color.secondaryColor};
+  font-style: normal;
+  font-size: 11px;
+  text-align: left;
+  letter-spacing: 1.18;
+  font-weight: 200;
 `;
 export const Awards = () => {
   return (
-    <Container>
-      <Awardsblock>
+    <Awardsblock>
+      <Container>
         <FcMindMap
           style={{ marginBottom: "20px", height: "40px", width: "40px" }}
         />
-        <AwardHead>{lang.en.AwardsHe}</AwardHead>
-        <AwardReg>{lang.en.AwardsRegion}</AwardReg>
+        <AwardHead>{lang.en.EducationHeader}</AwardHead>
+        <AwardReg>{lang.en.EducationRegion}</AwardReg>
         <AwardsUl>
           {AwardsList.map((item) => (
             <AwardsLi key={item.id}>
               <AwardINBloLeft>
                 <AwardsNum> {item.number}</AwardsNum>
-                <AwardINBloLeIN>
-                  <AwardsComp>{item.company}</AwardsComp>
-                  <AwardsPla> {item.placce}</AwardsPla>
-                </AwardINBloLeIN>
+                <AwardsComp>{item.EducationName}</AwardsComp>
               </AwardINBloLeft>
               <AwardINBloRifht>
                 <AwardsDire>{item.direction}</AwardsDire>
@@ -132,7 +135,7 @@ export const Awards = () => {
             </AwardsLi>
           ))}
         </AwardsUl>
-      </Awardsblock>
-    </Container>
+      </Container>
+    </Awardsblock>
   );
 };

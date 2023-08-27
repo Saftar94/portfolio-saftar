@@ -19,7 +19,7 @@ const BlockHeader = styled.header`
   padding-bottom: 27px;
   background: ${(props) => props.isColor || "#253069"};
   @media screen and (min-width: 768px) {
-    opacity: ${(props) => props.isOpen || "1"};
+    opacity: ${(props) => props.isColor || "1"};
   }
   @media screen and (min-width: 1920px) {
     opacity: 1;
@@ -74,8 +74,9 @@ const Wrapper = styled.div`
 `;
 
 export const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggleMenu = () => setIsOpen(!isOpen);
+  const [isColor, setIsOpen] = useState(true);
+  const [isOpen, setIssidOpen] = useState(false);
+  const toggleMenu = () => setIssidOpen(!isOpen);
   const ref = useRef(null);
 
   const changeColor = () => {
@@ -93,7 +94,7 @@ export const Header = () => {
   };
 
   return (
-    <BlockHeader changeNav={changeColor} isColor={isOpen} ref={ref}>
+    <BlockHeader changeNav={changeColor} isColor={isColor} ref={ref}>
       <Container style={{ overflowX: "visible" }}>
         <NavigationContainer>
           <HeaderText />
@@ -102,11 +103,11 @@ export const Header = () => {
             <SliderMenu closeMenu={toggleMenu} isOpen={isOpen} />
 
             <SliderButton onClick={toggleMenu}>
-              <Hamburger size={32} toggled={isOpen} toggle={setIsOpen} />
+              <Hamburger size={32} toggled={isOpen} closeMenu={setIsOpen} />
             </SliderButton>
           </Wrapper>
 
-          <Navigation changeText={changeColor} isOpen={isOpen} />
+          <Navigation changeText={changeColor} isColor={isColor} />
           <HeaderWrapButton>
             <ButtonForm onClick={scrollToTop}>{lang.en.ButtonMain}</ButtonForm>
           </HeaderWrapButton>

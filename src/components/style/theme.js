@@ -24,5 +24,6 @@ export const theme = {
 
     transition: "cubic-bezier(0.4, 0, 0.2, 1)",
     eventsListArrow: "#747778",
+    examplePx: "30px",
   },
 };

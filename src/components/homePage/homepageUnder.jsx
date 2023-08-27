@@ -1,7 +1,7 @@
 import { FcMindMap } from "react-icons/fc";
 import { lang } from "../shared/staticText/staticText";
 import styled from "styled-components";
-
+import { theme } from "../style/theme";
 const StyleUnder = styled.div`
   display: flex;
   flex-direction: initial;
@@ -15,10 +15,14 @@ const StyleUnder = styled.div`
   letter-spacing: 0.56px;
 `;
 
+const StyledTextUnder = styled.p`
+  color: ${theme.color.primaryColor};
+`;
+
 export const HomePageUnder = () => {
   return (
     <StyleUnder>
-      {lang.en.Creative}
+      <StyledTextUnder>{lang.en.Creative}</StyledTextUnder>
       <FcMindMap
         style={{
           marginRight: "16px",
@@ -27,7 +31,7 @@ export const HomePageUnder = () => {
           width: "20px",
         }}
       />
-      {lang.en.Development}
+      <StyledTextUnder>{lang.en.Development}</StyledTextUnder>
       <FcMindMap
         style={{
           marginRight: "16px",
@@ -36,7 +40,7 @@ export const HomePageUnder = () => {
           width: "20px",
         }}
       />
-      {lang.en.Webflow}
+      <StyledTextUnder>{lang.en.Webflow}</StyledTextUnder>
     </StyleUnder>
   );
 };
