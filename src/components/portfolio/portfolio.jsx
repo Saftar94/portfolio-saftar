@@ -9,18 +9,22 @@ import { theme } from "../style/theme";
 const Protfolioblock = styled.div`
   text-align: center;
   margin-bottom: 120px;
+  padding-top: 40px;
 `;
 const PortfolioHead = styled.p`
   font-weight: 500;
-  font-size: 45px;
+  font-size: 30px;
   line-height: 1.17;
   vertical-align: top;
   letter-spacing: 0.06em;
   color: ${theme.color.primaryColor};
   text-align: center;
   margin-bottom: 18px;
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 480px) {
     font-size: 35px;
+  }
+  @media screen and (min-width: 768px) {
+    font-size: 45px;
   }
 `;
 
@@ -169,9 +173,10 @@ const PortfolioButton = styled.a`
 `;
 
 const Images = styled.img``;
+
+// const Picture = styled.img`
+// `;
 export const Portfolio = () => {
-  // const webLink = (){
-  // }
   return (
     <Protfolioblock>
       <Container style={{ overflowX: "visible" }}>
@@ -183,7 +188,7 @@ export const Portfolio = () => {
           }}
         />
         <PortfolioHead>{lang.en.Project}</PortfolioHead>
-        <AwardReg>{lang.en.AwardsRegion}</AwardReg>
+        <AwardReg>{lang.en.ProjectSite}</AwardReg>
         <PortfolioUl>
           {portfolioList.map((item) => (
             <PortfolioLi key={item.id}>
@@ -194,7 +199,7 @@ export const Portfolio = () => {
                     height: "100%",
                     width: "90%",
                   }}
-                  src={item.image}
+                  srcSet={`${item.image2} 2x, ${item.image} 1x`}
                   alt="Article Cover"
                 />
               </PortfolioBlockImages>

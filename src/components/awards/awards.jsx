@@ -7,10 +7,11 @@ import { theme } from "../style/theme";
 
 const Awardsblock = styled.div`
   text-align: center;
+  padding-top: 40px;
 `;
 const AwardHead = styled.p`
   font-weight: 500;
-  font-size: 35px;
+  font-size: 30px;
   line-height: 1.17;
   vertical-align: top;
   letter-spacing: 0.06em;
@@ -18,17 +19,24 @@ const AwardHead = styled.p`
   text-align: center;
   margin-bottom: 18px;
 
+  @media screen and (min-width: 480px) {
+    font-size: 35px;
+  }
   @media screen and (min-width: 768px) {
     font-size: 45px;
   }
 `;
 
 export const AwardReg = styled.p`
-  font-size: 18px;
+  font-size: 15px;
   vertical-align: top;
   letter-spacing: 0.06em;
   color: ${theme.color.primaryColor};
   margin-bottom: 40px;
+
+  @media screen and (min-width: 480px) {
+    font-size: 18px;
+  }
 `;
 const AwardsUl = styled.ul`
 display: block;
@@ -60,8 +68,8 @@ const AwardsLi = styled.li`
 
 const AwardINBloLeft = styled.div`
   display: flex;
-  justify-content: space-around;
   align-items: center;
+  width: 50%;
 `;
 
 const AwardINBloRifht = styled.div`
@@ -69,9 +77,7 @@ const AwardINBloRifht = styled.div`
   flex-direction: initial;
   align-items: center;
   width: 50%;
-  @media screen and (max-width: 767px) {
-    margin-left: 60px;
-  }
+  margin-left: 40px;
 `;
 
 const AwardsNum = styled.span`

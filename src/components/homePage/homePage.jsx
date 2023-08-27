@@ -18,7 +18,6 @@ const HomePageContainer = styled.div`
   grid-gap: 20px 20px;
   justify-content: space-between;
   padding-top: 40px;
-
   @media screen and (min-width: 768px) {
     padding-top: 60px;
   }
@@ -81,12 +80,18 @@ const StyleMain = styled.div`
   color: #161513;
   font-family: Bai Jamjuree;
   font-style: Regular;
-  font-size: 53px;
-  line-height: 64px;
+  font-size: 30px;
+  line-height: 47px
   align: Left;
   vertical-align: Top;
   letter-spacing: 0.56px;
-  margin-top: 40px;
+ 
+
+  @media screen and (min-width: 480px){
+    font-size: 53px;
+    line-height: 64px;
+    margin-top: 40px;
+  }
 `;
 
 const Styletext = styled.p`

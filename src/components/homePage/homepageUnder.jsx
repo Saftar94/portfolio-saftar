@@ -9,10 +9,14 @@ const StyleUnder = styled.div`
   color: #161513;
   margin-top: 35px;
   align-items: center;
-  font-size: 16px;
+  font-size: 12px;
   line-height: 91%;
   vertical-align: top;
   letter-spacing: 0.56px;
+
+  @media screen and (min-width: 480px) {
+    font-size: 16px;
+  }
 `;
 
 const StyledTextUnder = styled.p`

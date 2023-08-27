@@ -12,17 +12,20 @@ const TextMainHead = styled.p`
   letter-spacing: 10.6px;
   transition: all 1s;
   font-weight: 700;
-  font-size: 26px;
   line-height: 1.19;
+  font-size: 20px;
   color: ${theme.color.buttonaccentColor};
   text-decoration: none;
   &:hover {
     opacity: 1;
     transform: scale(1.1);
   }
+  @media screen and(min-width: 480px) {
+    font-size: 20px;
+  }
 
   @media screen and (min-width: 768px) {
-    font-size: 18px;
+    font-size: 26px;
   }
 `;
 

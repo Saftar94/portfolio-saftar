@@ -13,8 +13,7 @@ export const ButtonForm = styled.button`
   min-width: 126px;
   min-height: 32px;
   line-height: 1.14;
-  font-size: 12px;
-  color: ${theme.color.primaryColor};
+  font-size: 9px;
   border: none;
   cursor: pointer;
   text-transform: uppercase;
@@ -29,6 +28,9 @@ export const ButtonForm = styled.button`
   outline: none;
   position: relative;
   padding: 9px 26px;
+  @media screen and (min-width: 480px){
+    font-size: 12px;
+  }
 
   &: before {
     content: "";

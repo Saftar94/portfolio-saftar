@@ -17,6 +17,7 @@ export const lang = {
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore",
     EducationHeader: "Education",
     EducationRegion: "Regonitions & Accoimplishments",
+    ProjectSite: "Team Project & Own",
     Project: "Project",
     Services: "SERVICES",
     HappyCustomer: "HAPPY CUSTOMER",

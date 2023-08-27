@@ -8,6 +8,7 @@ import { SliderMenu } from "../navigation/navSideBar";
 import { useState } from "react";
 import { Divide as Hamburger } from "hamburger-react";
 import { useRef } from "react";
+import { theme } from "../style/theme";
 
 const BlockHeader = styled.header`
   position: sticky;
@@ -54,7 +55,7 @@ const NavigationContainer = styled.div`
 `;
 
 const SliderButton = styled.button`
-  color: black;
+  color: ${theme.color.secondaryColor};
 `;
 
 const Wrapper = styled.div`
@@ -101,7 +102,6 @@ export const Header = () => {
 
           <Wrapper>
             <SliderMenu closeMenu={toggleMenu} isOpen={isOpen} />
-
             <SliderButton onClick={toggleMenu}>
               <Hamburger size={32} toggled={isOpen} closeMenu={setIsOpen} />
             </SliderButton>
