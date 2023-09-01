@@ -20,7 +20,7 @@ export const lang = {
     ProjectSite: "Team Project & Own",
     Project: "Project",
     Services: "SERVICES",
-    HappyCustomer: "HAPPY CUSTOMER",
+    HappyCustomer: "TECH SKILLS",
     FooterLefttext: "© Made by Portfolio Template & powered by Flowbase",
   },
 };

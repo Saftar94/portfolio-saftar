@@ -4,27 +4,35 @@ import { FcMindMap } from "react-icons/fc";
 import { lang } from "../shared/staticText/staticText";
 import { AwardReg } from "../awards/awards";
 import { servicesList } from "./servicesList";
+import { theme } from "../style/theme";
 
 const Servicesblock = styled.div`
   text-align: center;
   margin-bottom: 120px;
 `;
 const ServicesHead = styled.p`
-  font-family: Bai Jamjuree;
-  font-style: normal;
-  font-size: 45px;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.17;
   vertical-align: top;
   letter-spacing: 0.06em;
-  color: #161513;
+  color: ${theme.color.primaryColor};
+  text-align: center;
   margin-bottom: 18px;
+  @media screen and (min-width: 480px) {
+    font-size: 35px;
+  }
+  @media screen and (min-width: 768px) {
+    font-size: 45px;
+  }
 `;
 const ServicesUl = styled.ul`
   list-style: none;
   display: flex;
-
   flex-wrap: wrap;
   list-style: none;
   margin-left: 0;
+
   justify-content: space-between;
 `;
 const ServicesLi = styled.li`

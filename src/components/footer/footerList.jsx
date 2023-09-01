@@ -9,17 +9,17 @@ import {
 export const FooterList = [
   {
     id: uuid(),
-    header: "Style Guide",
+    header: `+380962329868 UA`,
     svg: <FaInstagram />,
   },
   {
     id: uuid(),
-    header: "Licence",
+    header: "aliev.saftar94@gmail.com",
     svg: <FaFacebookF />,
   },
   {
     id: uuid(),
-    header: "Changelog",
+    header: "Kharkov, Ukraine",
     svg: <FaLinkedinIn />,
   },
   {

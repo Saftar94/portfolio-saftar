@@ -38,7 +38,6 @@ const PortfolioLi = styled.li`
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
-  margin-bottom: 95px;
   padding: 38px 0;
   &:last-child {
     margin-bottom: 0;
@@ -46,6 +45,10 @@ const PortfolioLi = styled.li`
   &:nth-child(2n + 1) {
     color: white;
     flex-direction: row;
+  }
+
+  @media screen and (min-width: 1024px) {
+    margin-bottom: 50px;
   }
 `;
 const PortfolioBlockImages = styled.div`

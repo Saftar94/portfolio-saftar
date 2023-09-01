@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { FcMindMap } from "react-icons/fc";
 import { lang } from "../shared/staticText/staticText";
 import { FooterList } from "./footerList";
+
 const Footerblock = styled.footer`
   padding: 70px 25px;
   background-color: black;
@@ -83,12 +84,14 @@ export const Footer = () => {
                 width: "32px",
               }}
             />
+            {lang.en.Headername}
+
             <LeftText>{lang.en.FooterLefttext}</LeftText>
           </FooterLeftblock>
           <FooterRighttblock>
             <FooterUpUl>
               {FooterList.map((item) => (
-                <FooterUpli key={item.id}> {item.header}</FooterUpli>
+                <FooterUpli key={item.id}>{item.header}</FooterUpli>
               ))}
             </FooterUpUl>
             <FooterSvgUl>

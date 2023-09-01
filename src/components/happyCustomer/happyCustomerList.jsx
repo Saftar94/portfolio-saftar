@@ -3,34 +3,50 @@ import * as All from "../image&svg/svg/svgExport";
 export const HappyCustomerList = [
   {
     id: uuid(),
-    svg: <All.AirTechni />,
+    svg: <All.React />,
   },
   {
     id: uuid(),
-    svg: <All.Amazon />,
+    svg: <All.Html />,
   },
   {
     id: uuid(),
-    svg: <All.AtlantaThrashers />,
+    svg: <All.Css />,
   },
   {
     id: uuid(),
-    svg: <All.Eurotron />,
+    svg: <All.Scss />,
   },
   {
     id: uuid(),
-    svg: <All.GloriaJeansCoffee />,
+    svg: <All.Js />,
   },
   {
     id: uuid(),
-    svg: <All.Lastrico />,
+    svg: <All.Git />,
   },
   {
     id: uuid(),
-    svg: <All.NickoBusinessLine />,
+    svg: <All.Redux />,
   },
   {
     id: uuid(),
-    svg: <All.Sloggi />,
+    svg: <All.NodeJs />,
+  },
+  {
+    id: uuid(),
+    svg: <All.MongoDb />,
+  },
+  {
+    id: uuid(),
+    svg: <All.Babel />,
+  },
+  {
+    id: uuid(),
+    svg: <All.Webpack />,
+  },
+  {
+    id: uuid(),
+    svg: <All.Figma />,
   },
 ];

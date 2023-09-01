@@ -9,17 +9,6 @@ import HellEnglishx2 from "../image&svg/imgae/hellEnglishX2.jpeg";
 import WebStudio from "../image&svg/imgae/WebStudio.jpeg";
 import WebStudiox2 from "../image&svg/imgae/WebStudiox2.jpeg";
 
-export const Imag = {
-  filmotekax2,
-  filmotekax1,
-  Elenashop,
-  Elenashopx2,
-  HellEnglish,
-  HellEnglishx2,
-  WebStudio,
-  WebStudiox2,
-};
-
 export const portfolioList = [
   {
     id: uuid(),
