@@ -39,11 +39,13 @@ const ServicesLi = styled.li`
   display: flex;
   flex-direction: column;
   text-align: left;
-  flex-basis: ${({ flexBasis }) => flexBasis || "calc(100%/2 - 30px)"};
 
   padding: 34px 49px;
   border: 2px solid;
   margin-top: 30px;
+  @media screen and (min-width: 480px) {
+    flex-basis: ${({ flexBasis }) => flexBasis || "calc(100%/2 - 30px)"};
+  }
 `;
 
 const ServicesHe = styled.h2`

@@ -37,7 +37,7 @@ const NavLinkHeader = styled(NavLink)`
   line-height: 1.14;
   border: none;
   cursor: pointer;
-  transition: color 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 100ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover,
   &:focus,
   &:active {

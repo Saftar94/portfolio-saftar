@@ -16,11 +16,13 @@ const BlockHeader = styled.header`
   top: 0px;
   left: 0px;
   width: 100%;
-  padding-top: 27px;
-  padding-bottom: 27px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   background: ${(props) => props.isColor || "#253069"};
   @media screen and (min-width: 768px) {
     opacity: ${(props) => props.isColor || "1"};
+    padding-top: 27px;
+    padding-bottom: 27px;
   }
   @media screen and (min-width: 1920px) {
     opacity: 1;
@@ -71,6 +73,8 @@ const Wrapper = styled.div`
 
   @media screen and (min-width: 768px) {
     display: ${(props) => props.isOpen || "none"};
+    padding-top: 27px;
+    padding-bottom: 27px;
   }
 `;
 
@@ -81,7 +85,7 @@ export const Header = () => {
   const ref = useRef(null);
 
   const changeColor = () => {
-    if (window.scrollY >= 80) {
+    if (window.scrollY >= 60) {
       setIsOpen(false);
     } else {
       setIsOpen(true);
@@ -89,10 +93,6 @@ export const Header = () => {
   };
 
   window.addEventListener("scroll", changeColor);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  };
 
   return (
     <BlockHeader changeNav={changeColor} isColor={isColor} ref={ref}>
@@ -109,7 +109,7 @@ export const Header = () => {
 
           <Navigation changeText={changeColor} isColor={isColor} />
           <HeaderWrapButton>
-            <ButtonForm onClick={scrollToTop}>{lang.en.ButtonMain}</ButtonForm>
+            <ButtonForm>{lang.en.ButtonMain}</ButtonForm>
           </HeaderWrapButton>
         </NavigationContainer>
       </Container>

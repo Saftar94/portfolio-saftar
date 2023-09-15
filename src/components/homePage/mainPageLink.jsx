@@ -4,10 +4,12 @@ import { Portfolio } from "../portfolio/portfolio";
 import { Services } from "../services/services";
 import { HappyCustomer } from "../happyCustomer/happyCustomer";
 import { Footer } from "../footer/footer";
+import { HelpSection } from "../headerButtonIcon/helpButtonScroll";
 
 export const MainPageLink = () => {
   return (
     <>
+      <HelpSection />
       <Experience />
       <Awards />
       <Portfolio />

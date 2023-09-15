@@ -5,7 +5,7 @@ import { theme } from "../style/theme";
 const StyleButton = styled.div`
   display: flex;
   flex-direction: initial;
-  justify-content: space-evenly;
+  justify-content: space-between;
   margin-top: 35px;
 `;
 

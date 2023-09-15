@@ -4,7 +4,6 @@ import Container from "../container/constainer";
 import { FcMindMap } from "react-icons/fc";
 import { HomePageUnder } from "./homepageUnder";
 import { HomePageButton } from "./homePageButton";
-
 import { MainPageLink } from "./mainPageLink";
 import { keyframes } from "styled-components";
 import { theme } from "../style/theme";

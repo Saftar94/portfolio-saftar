@@ -13,7 +13,7 @@ const Protfolioblock = styled.div`
 `;
 const PortfolioHead = styled.p`
   font-weight: 500;
-  font-size: 30px;
+  font-size: 18px;
   line-height: 1.17;
   vertical-align: top;
   letter-spacing: 0.06em;
@@ -66,36 +66,45 @@ const PortfolioBlockImages = styled.div`
 const PortfolioBlockDesc = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 22px 44px;
+  padding: 22px 20px;
   justify-content: space-between;
   width: 50%;
+  @media screen and (min-width: 480px) {
+    padding: 22px 44px;
+  }
 `;
 
 const PortfolioHedBut = styled.p`
   font-style: normal;
-  font-size: 18px;
+  font-size: 15px;
   text-align: left;
   letter-spacing: 1.44;
   color: #ffffff;
   text-align: center;
   border-radius: 1000px;
   background-color: rgb(214, 55, 46);
-  padding: 12px 5px;
+  padding: 12px 15px;
   align-self: flex-start;
   margin-bottom: 20px;
 
+  @media screen and (min-width: 480px) {
+    font-size: 20px;
+  }
   @media screen and (min-width: 768px) {
     font-size: 25px;
   }
 `;
 const PortfolioHedAbout = styled.p`
   font-style: normal;
-  font-size: 30px;
+  font-size: 20px;
   text-align: left;
   letter-spacing: 1.44;
   color: #161513;
   text-align: center;
   text-align: left;
+  @media screen and (min-width: 480px) {
+    font-size: 30px;
+  }
   @media screen and (min-width: 768px) {
     font-size: 45px;
   }
@@ -110,7 +119,7 @@ const PortfolioButton = styled.a`
   border: 2px solid yellow;
   border-radius: 3px;
   align-self: flex-start;
-  min-width: 126px;
+  max-width: 1100%;
   min-height: 32px;
   line-height: 1.14;
   font-size: 12px;
@@ -175,7 +184,13 @@ const PortfolioButton = styled.a`
   }
 `;
 
-const Images = styled.img``;
+// const Source = styled.source`
+// @media (min-width: 768px) {
+
+// }
+// `
+
+const Images = styled.picture``;
 
 // const Picture = styled.img`
 // `;
@@ -196,7 +211,7 @@ export const Portfolio = () => {
           {portfolioList.map((item) => (
             <PortfolioLi key={item.id}>
               <PortfolioBlockImages>
-                <Images
+                {/* <Images
                   style={{
                     borderRadius: "32%",
                     height: "100%",
@@ -204,7 +219,27 @@ export const Portfolio = () => {
                   }}
                   srcSet={`${item.image2} 2x, ${item.image} 1x`}
                   alt="Article Cover"
-                />
+                /> */}
+                <Images>
+                  <source
+                    srcSet={`${item.image2} 1x, ${item.image2} 2x`}
+                    media="(min-width: 767px)"
+                  />
+                  <source
+                    srcSet={`${item.image} 1x, ${item.image} 2x`}
+                    media="(min-width: 768px) and (max-width: 1200px)"
+                  />
+
+                  <img
+                    src={item.image2}
+                    alt="toy"
+                    style={{
+                      borderRadius: "32%",
+                      width: "90%",
+                      height: "100%",
+                    }}
+                  />
+                </Images>
               </PortfolioBlockImages>
               <PortfolioBlockDesc>
                 <PortfolioHedBut>{item.button}</PortfolioHedBut>

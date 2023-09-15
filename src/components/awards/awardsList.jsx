@@ -7,7 +7,7 @@ export const AwardsList = [
     EducationName: "Synergy University",
     placce: "Runner Up - Webflow Expert Design",
     direction: "Project Management and Human Resources!",
-    year: "2012 - 2017",
+    year: "2012—2017",
   },
   {
     id: uuid(),

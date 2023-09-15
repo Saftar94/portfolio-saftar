@@ -1,8 +1,8 @@
 import { v4 as uuid } from "uuid";
 
-import filmotekax2 from "../image&svg/imgae/filmotekaX1.jpg";
-import filmotekax1 from "../image&svg/imgae/filmotekaX2.jpeg";
-import Elenashop from "../image&svg/imgae/ElenaShopx1.jpeg";
+import filmotekax1 from "../image&svg/imgae/filmotekaX1.jpg";
+import filmotekax2 from "../image&svg/imgae/filmotekaX2.jpeg";
+import Elenashopx1 from "../image&svg/imgae/ElenaShopx1.jpeg";
 import Elenashopx2 from "../image&svg/imgae/ElenaShopx2.jpeg";
 import HellEnglish from "../image&svg/imgae/hellEnglishX1.jpg";
 import HellEnglishx2 from "../image&svg/imgae/hellEnglishX2.jpeg";
@@ -20,7 +20,7 @@ export const portfolioList = [
   },
   {
     id: uuid(),
-    image: Elenashop,
+    image: Elenashopx1,
     image2: Elenashopx2,
     button: "ElenaShop",
     about: "Website for women's fashion!",

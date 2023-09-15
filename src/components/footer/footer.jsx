@@ -1,52 +1,78 @@
 import Container from "../container/constainer";
 import styled from "styled-components";
-import { FcMindMap } from "react-icons/fc";
 import { lang } from "../shared/staticText/staticText";
 import { FooterList } from "./footerList";
 
+import { HeaderText } from "../headerButtonIcon/headerTextButton";
+import { theme } from "../style/theme";
 const Footerblock = styled.footer`
-  padding: 70px 25px;
-  background-color: black;
+  padding: 60px 0px;
+  background: ${(props) => props.isColor || "#253069"};
 `;
 const FooterBlockIn = styled.div`
-  display: flex;
-  justify-content: space-between;
+  display: block;
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 
 const FooterLeftblock = styled.div`
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media screen and (min-width: 768px) {
+    display: block;
+  }
 `;
 const LeftText = styled.p`
-  color: white;
+  font-style: normal;
+  font-size: 10px;
+  vertical-align: top;
+  letter-spacing: 0.06em;
+  color: ${theme.color.secondaryColor};
+  margin-top: 20px;
+  text-align: center;
 `;
 
 const FooterRighttblock = styled.div`
   text-align: centr;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
 `;
 const FooterUpUl = styled.ul`
   display: flex;
+  flex-direction: column-reverse;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  @media screen and (min-width: 768px) {
+    align-items: baseline;
+    margin-bottom: 60px;
+  }
 `;
 const FooterUpli = styled.li`
-  color: white;
-  font-family: Bai Jamjuree;
   font-style: normal;
-  font-size: 16px;
+  font-size: 14px;
   vertical-align: top;
   letter-spacing: 0.06em;
   color: #ffff;
-  margin-bottom: 18px;
-
-  margin-left: 46px;
+  margin-bottom: 9px;
   &:last-child {
     margin-left: 0px;
+  }
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
   }
 `;
 const FooterSvgUl = styled.ul`
   display: flex;
-  justify-content: end;
+  justify-content: center;
+  @media screen and (min-width: 768px) {
+    margin-bottom: 40px;
+  }
 `;
 const FooterSvgli = styled.li`
   color: white;
@@ -71,22 +97,13 @@ const FooterSocialLink = styled.a`
   padding: 5px;
 `;
 
-export const Footer = () => {
+export const Footer = (props) => {
   return (
     <Footerblock>
       <Container>
         <FooterBlockIn>
           <FooterLeftblock>
-            <FcMindMap
-              style={{
-                marginBottom: "60px",
-                height: "32px",
-                width: "32px",
-              }}
-            />
-            {lang.en.Headername}
-
-            <LeftText>{lang.en.FooterLefttext}</LeftText>
+            <HeaderText />
           </FooterLeftblock>
           <FooterRighttblock>
             <FooterUpUl>
@@ -94,15 +111,16 @@ export const Footer = () => {
                 <FooterUpli key={item.id}>{item.header}</FooterUpli>
               ))}
             </FooterUpUl>
-            <FooterSvgUl>
-              {FooterList.map((item) => (
-                <FooterSvgli key={item.id}>
-                  <FooterSocialLink>{item.svg}</FooterSocialLink>
-                </FooterSvgli>
-              ))}
-            </FooterSvgUl>
           </FooterRighttblock>
         </FooterBlockIn>
+        <FooterSvgUl>
+          {FooterList.map((item) => (
+            <FooterSvgli key={item.id}>
+              <FooterSocialLink href={item.link}>{item.svg}</FooterSocialLink>
+            </FooterSvgli>
+          ))}
+        </FooterSvgUl>
+        <LeftText>{lang.en.FooterLefttext}</LeftText>
       </Container>
     </Footerblock>
   );

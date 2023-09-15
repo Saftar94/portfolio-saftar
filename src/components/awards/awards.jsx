@@ -47,7 +47,7 @@ grid-template-columns: repeat(1, 1fr);
 }`;
 const AwardsLi = styled.li`
   list-style-type: none;
-  padding: 38px 34px;
+  padding: 38px 0px;
   &:last-child {
     margin-bottom: 0;
   }
@@ -64,6 +64,9 @@ const AwardsLi = styled.li`
   &:active {
     color: red;
   }
+  @media screen and (min-width: 480px) {
+    padding: 38px 34px;
+  }
 `;
 
 const AwardINBloLeft = styled.div`
@@ -78,6 +81,7 @@ const AwardINBloRifht = styled.div`
   align-items: center;
   width: 50%;
   margin-left: 40px;
+  justify-content: space-between;
 `;
 
 const AwardsNum = styled.span`
