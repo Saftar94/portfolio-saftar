@@ -2,7 +2,7 @@ import Container from "../container/constainer";
 import styled from "styled-components";
 import { lang } from "../shared/staticText/staticText";
 import { FcMindMap } from "react-icons/fc";
-import { AwardsList } from "./awardsList";
+import { educationList } from "./educationList";
 import { theme } from "../style/theme";
 
 const Awardsblock = styled.div`
@@ -15,7 +15,7 @@ const AwardHead = styled.p`
   line-height: 1.17;
   vertical-align: top;
   letter-spacing: 0.06em;
-  color: ${theme.color.primaryColor};
+  color: ${theme.color.HeaderLogocolor};
   text-align: center;
   margin-bottom: 18px;
 
@@ -31,7 +31,7 @@ export const AwardReg = styled.p`
   font-size: 15px;
   vertical-align: top;
   letter-spacing: 0.06em;
-  color: ${theme.color.primaryColor};
+  color: ${theme.color.ColorText};
   margin-bottom: 40px;
 
   @media screen and (min-width: 480px) {
@@ -87,7 +87,7 @@ const AwardINBloRifht = styled.div`
 const AwardsNum = styled.span`
   color: white;
   align-items: center;
-  background-color: ${theme.color.buttonaccentColor};
+  background-color: ${theme.color.ButtonColor};
   width: 35px;
   height: 35px;
   display: flex;
@@ -98,7 +98,7 @@ const AwardsNum = styled.span`
   text-align: left;
 `;
 const AwardsComp = styled.span`
-  color: #161513;
+  color: ${theme.color.ColorText};
   font-style: normal;
   font-size: 13px;
   text-align: left;
@@ -106,7 +106,7 @@ const AwardsComp = styled.span`
 `;
 
 const AwardsDire = styled.span`
-  color: ${theme.color.secondaryColor};
+  color: ${theme.color.ColorText};
   font-style: normal;
   font-size: 11px;
   text-align: left;
@@ -115,14 +115,15 @@ const AwardsDire = styled.span`
   margin-right: 20px;
 `;
 const AwardsYear = styled.span`
-  color: ${theme.color.secondaryColor};
+  color: ${theme.color.ColorText};
   font-style: normal;
   font-size: 11px;
   text-align: left;
   letter-spacing: 1.18;
   font-weight: 200;
 `;
-export const Awards = () => {
+
+export const Education = () => {
   return (
     <Awardsblock>
       <Container>
@@ -132,7 +133,7 @@ export const Awards = () => {
         <AwardHead>{lang.en.EducationHeader}</AwardHead>
         <AwardReg>{lang.en.EducationRegion}</AwardReg>
         <AwardsUl>
-          {AwardsList.map((item) => (
+          {educationList.map((item) => (
             <AwardsLi key={item.id}>
               <AwardINBloLeft>
                 <AwardsNum> {item.number}</AwardsNum>

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { SidebarData } from "./SliderBar";
 import { NavLink } from "react-router-dom";
-
+import { theme } from "../style/theme";
 const NavigationMenu = styled.div`
   display: none;
   @media screen and (min-width: 768px) {
@@ -31,7 +31,7 @@ const NavLi = styled.li`
 
 const NavLinkHeader = styled(NavLink)`
 @media screen and (min-width: 768px) {
-  color: ${({ isColor }) => (isColor ? "black" : "white")};
+  color: ${({ iscolor }) => (iscolor ? "#BDBDBD" : "#F5F5F5")};
   font-weight: 500;
   font-size: 12px;
   line-height: 1.14;
@@ -42,7 +42,7 @@ const NavLinkHeader = styled(NavLink)`
   &:focus,
   &:active {
     text-decoration: underline;
-    color: rgb(214, 55, 46);
+    color: ${theme.color.ButtonColor};
   }
   }
 
@@ -52,7 +52,7 @@ const NavLinkHeader = styled(NavLink)`
 
 `;
 
-export const Navigation = (changeText, isColor) => {
+export const Navigation = (changeText, iscolor) => {
   return (
     <NavigationMenu>
       <NavUl>
@@ -60,7 +60,7 @@ export const Navigation = (changeText, isColor) => {
           return (
             <NavLi key={item.id}>
               <NavLinkHeader
-                isColor={changeText.isColor}
+                iscolor={changeText.isColor}
                 to={item.path}
                 activestyle={{
                   color: "#ffd700",

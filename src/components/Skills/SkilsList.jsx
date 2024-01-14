@@ -1,6 +1,6 @@
 import { v4 as uuid } from "uuid";
 import * as All from "../image&svg/svg/svgExport";
-export const HappyCustomerList = [
+export const SkillsList = [
   {
     id: uuid(),
     svg: <All.React />,

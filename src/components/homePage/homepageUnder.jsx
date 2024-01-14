@@ -20,7 +20,7 @@ const StyleUnder = styled.div`
 `;
 
 const StyledTextUnder = styled.p`
-  color: ${theme.color.primaryColor};
+  color: ${theme.color.ColorText};
 `;
 
 export const HomePageUnder = () => {

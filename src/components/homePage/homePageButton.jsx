@@ -1,11 +1,13 @@
 import { lang } from "../shared/staticText/staticText";
 import styled from "styled-components";
 import { theme } from "../style/theme";
+import { useDispatch } from "react-redux";
+import { openModal } from "../../redux/actions";
 
 const StyleButton = styled.div`
   display: flex;
   flex-direction: initial;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-top: 35px;
 `;
 
@@ -19,8 +21,8 @@ export const ButtonForm = styled.button`
   text-transform: uppercase;
   letter-spacing: 1.3px;
   font-weight: 500;
-  color: ${theme.color.secondaryColor};
-  background: ${theme.color.buttonaccentColor};
+  color: ${theme.color.HeaderLogocolor};
+  background: ${theme.color.ButtonColor};
   border: none;
   border-radius: 1000px;
   transition: all 0.3s ease-in-out 0s;
@@ -37,7 +39,7 @@ export const ButtonForm = styled.button`
     border-radius: 1000px;
     width: 115%;
     height: 150%;
-    border: 3px solid ${theme.color.buttonaccentColor};
+    border: 3px solid ${theme.color.ButtonColor};
     position: absolute;
     top: 50%;
     left: 50%;
@@ -46,8 +48,8 @@ export const ButtonForm = styled.button`
     transition: all 0.3s ease-in-out 0s;
   }
   &:hover{
-    background: ${theme.color.secondaryColor};
-    color: ${theme.color.buttonaccentColor};
+    background: ${theme.color.HeaderLogocolor};
+    color: ${theme.color.ButtonColor};
     transform: translateY(-6px);
   }
   &:hover:before,
@@ -78,10 +80,18 @@ export const ButtonForm = styled.button`
 `;
 
 export const HomePageButton = () => {
+  const dispatch = useDispatch();
+
+  const handleOpenModal = () => {
+    dispatch(openModal());
+  };
+
   return (
-    <StyleButton>
-      <ButtonForm>{lang.en.ButtonTextHome}</ButtonForm>
-      <ButtonForm>{lang.en.ButtonMain}</ButtonForm>
-    </StyleButton>
+    <>
+      <StyleButton>
+        <ButtonForm>{lang.en.ButtonTextHome}</ButtonForm>
+        <ButtonForm onClick={handleOpenModal}>{lang.en.ButtonMain}</ButtonForm>
+      </StyleButton>
+    </>
   );
 };

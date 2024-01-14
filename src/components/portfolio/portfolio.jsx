@@ -2,10 +2,9 @@ import Container from "../container/constainer";
 import styled from "styled-components";
 import { FcMindMap } from "react-icons/fc";
 import { lang } from "../shared/staticText/staticText";
-import { AwardReg } from "../awards/awards";
+import { AwardReg } from "../education/education";
 import { portfolioList } from "./portfolioList";
 import { theme } from "../style/theme";
-
 const Protfolioblock = styled.div`
   text-align: center;
   margin-bottom: 120px;
@@ -17,7 +16,7 @@ const PortfolioHead = styled.p`
   line-height: 1.17;
   vertical-align: top;
   letter-spacing: 0.06em;
-  color: ${theme.color.primaryColor};
+  color: ${theme.color.HeaderLogocolor};
   text-align: center;
   margin-bottom: 18px;
   @media screen and (min-width: 480px) {
@@ -82,7 +81,7 @@ const PortfolioHedBut = styled.p`
   color: #ffffff;
   text-align: center;
   border-radius: 1000px;
-  background-color: rgb(214, 55, 46);
+  background-color: ${theme.color.ButtonColor};
   padding: 12px 15px;
   align-self: flex-start;
   margin-bottom: 20px;
@@ -99,7 +98,7 @@ const PortfolioHedAbout = styled.p`
   font-size: 20px;
   text-align: left;
   letter-spacing: 1.44;
-  color: #161513;
+  color: ${theme.color.HeaderLogocolor};
   text-align: center;
   text-align: left;
   @media screen and (min-width: 480px) {
@@ -109,42 +108,37 @@ const PortfolioHedAbout = styled.p`
     font-size: 45px;
   }
 `;
-
 const PortfolioButton = styled.a`
-  backgroun: ;
-  ${(props) => (props.primary ? "white" : "red")}
-  font-size:1em;
+  background: ${(props) =>
+    props.primary ? theme.color.ColorText : theme.color.ButtonColor};
+  font-size: 1em;
   margin-top: 20px;
   padding: 0.25em 1em;
   border: 2px solid yellow;
-  border-radius: 3px;
+  border-radius: 1000px; /* Предположим, что это было намеренным изменением в рамках стиля кнопки */
   align-self: flex-start;
   max-width: 1100%;
   min-height: 32px;
   line-height: 1.14;
   font-size: 12px;
-  color: ${theme.color.primaryColor};
+  color: ${theme.color.HeaderLogocolor};
   border: none;
   cursor: pointer;
   text-transform: uppercase;
   letter-spacing: 1.3px;
   font-weight: 500;
-  color: ${theme.color.secondaryColor};
-  background: ${theme.color.buttonaccentColor};
-  border: none;
-  border-radius: 1000px;
   transition: all 0.3s ease-in-out 0s;
   cursor: pointer;
   outline: none;
   position: relative;
   padding: 9px 26px;
 
-  &: before {
+  &:before {
     content: "";
     border-radius: 1000px;
     width: 115%;
     height: 150%;
-    border: 3px solid ${theme.color.buttonaccentColor};
+    border: 3px solid ${theme.color.ButtonColor};
     position: absolute;
     top: 50%;
     left: 50%;
@@ -152,31 +146,15 @@ const PortfolioButton = styled.a`
     opacity: 0;
     transition: all 0.3s ease-in-out 0s;
   }
-  &:hover {
-    background: ${theme.color.secondaryColor};
-    color: ${theme.color.buttonaccentColor};
-    transform: translateY(-6px);
-  }
-  &:hover:before,
-  :focus:before {
-    opacity: 1;
-  }
-  &:after {
-    content: "";
-    width: 30px;
-    height: 30px;
-    border-radius: 100%;
-    position: absolute;
-    z-index: -1;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
 
-  &:hover:after,
-  :focus:after {
-    animation: none;
-    display: none;
+  &:hover {
+    background: ${theme.color.HeaderLogocolor};
+    color: ${theme.color.ButtonColor};
+    transform: translateY(-6px);
+
+    &:before {
+      opacity: 1;
+    }
   }
 
   @media (min-width: 1200px) {
@@ -184,16 +162,22 @@ const PortfolioButton = styled.a`
   }
 `;
 
-// const Source = styled.source`
-// @media (min-width: 768px) {
+const Images = styled.picture`
+  position: relative;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  max-width: 1200px; /* Максимальная ширина по вашему медиа-запросу */
+  margin: 0 auto;
+`;
+const Img = styled.img`
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 32px;
+`;
 
-// }
-// `
-
-const Images = styled.picture``;
-
-// const Picture = styled.img`
-// `;
 export const Portfolio = () => {
   return (
     <Protfolioblock>
@@ -211,34 +195,20 @@ export const Portfolio = () => {
           {portfolioList.map((item) => (
             <PortfolioLi key={item.id}>
               <PortfolioBlockImages>
-                {/* <Images
-                  style={{
-                    borderRadius: "32%",
-                    height: "100%",
-                    width: "90%",
-                  }}
-                  srcSet={`${item.image2} 2x, ${item.image} 1x`}
-                  alt="Article Cover"
-                /> */}
                 <Images>
                   <source
+                    srcSet={`${item.image3} 1x, ${item.image3} 2x`}
+                    media="(max-width: 480px)"
+                  />
+                  <source
                     srcSet={`${item.image2} 1x, ${item.image2} 2x`}
-                    media="(min-width: 767px)"
+                    media="(min-width: 768px) and (max-width: 1200px)"
                   />
                   <source
                     srcSet={`${item.image} 1x, ${item.image} 2x`}
-                    media="(min-width: 768px) and (max-width: 1200px)"
+                    media="(min-width: 1201px)"
                   />
-
-                  <img
-                    src={item.image2}
-                    alt="toy"
-                    style={{
-                      borderRadius: "32%",
-                      width: "90%",
-                      height: "100%",
-                    }}
-                  />
+                  <Img src={item.image} alt="toy" />
                 </Images>
               </PortfolioBlockImages>
               <PortfolioBlockDesc>

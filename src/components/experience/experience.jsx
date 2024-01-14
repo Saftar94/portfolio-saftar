@@ -24,7 +24,7 @@ const ExperienceLi = styled.li`
 `;
 
 const ExperienceNumber = styled.p`
-  color: ${theme.color.buttonaccentColor};
+  color: ${theme.color.ButtonColor};
   font-weight: 400;
   line-height: 1.14;
   font-family: var(--text-body);
@@ -35,7 +35,7 @@ const ExperienceNumber = styled.p`
 `;
 
 const ExperienceText = styled.p`
-  color: ${theme.color.primaryColor};
+  color: ${theme.color.ColorText};
   font-size: 18px;
   letter-spacing: 0.03em;
   letter-spacing: 0.03em;

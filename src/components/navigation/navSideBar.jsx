@@ -16,9 +16,7 @@ top: 0;
 right: ${({ isOpen }) => (isOpen ? "0" : "-100%")};
 transition: all 0.4s ease-in-out;
 rgba(0,212,255,1) 100%);
-background: linear-gradient(to right, ${theme.color.secondaryColor} 50%, ${
-  theme.color.fistaryColor
-} 50%);
+background:${theme.color.Maincolor};
 width: 100%;
 padding: 27px 15px 27px 15px;
 margin: 0;
@@ -60,20 +58,30 @@ export const SliderListItem = styled(NavLink)`
   font-size: 30px;
   line-height: 1.18;
   background-color: transparent;
-  color: #161513;
+  color: ${theme.color.ColorText};
   border: none;
   cursor: pointer;
   transition: color 500ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  @media (max-width: 767px) {
+    /* Стили для телефона */
+    font-size: 20px;
+    line-height: 1.3;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    /* Стили для планшета */
+    font-size: 24px;
+    line-height: 1.25;
+  }
   &:hover,
   &:focus {
     text-decoration: underline;
-    color: rgb(247 176 16);
+    color: ${theme.color.ButtonColor};
   }
 `;
 
 export const SliderMenu = ({ closeMenu, isOpen }) => {
-  // console.log(isOpen={isOpen})
-
   return (
     <>
       <TitleSideBar onClick={closeMenu} isOpen={isOpen}>
@@ -85,7 +93,7 @@ export const SliderMenu = ({ closeMenu, isOpen }) => {
                   <SliderListItem
                     to={item.path}
                     activestyle={{
-                      color: "#ffd700",
+                      color: "#536DFE",
                     }}
                   >
                     {item.title}

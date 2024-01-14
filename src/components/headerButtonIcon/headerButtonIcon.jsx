@@ -14,7 +14,7 @@ const TextMainHead = styled.p`
   font-weight: 700;
   line-height: 1.19;
   font-size: 20px;
-  color: ${theme.color.buttonaccentColor};
+  color: ${theme.color.HeaderLogocolor};
   text-decoration: none;
   &:hover {
     opacity: 1;

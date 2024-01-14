@@ -1,5 +1,10 @@
 export const theme = {
   color: {
+    Maincolor: "#212121",
+    ColorText: "#BDBDBD",
+    HeaderSlidecolor: "#757575",
+    HeaderLogocolor: "#F5F5F5",
+    ButtonColor: "#536DFE",
     primaryBackGround:
       "linear-gradient(90deg, rgb(7 119 113 / 0%), rgb(37 177 179 / 76%), rgb(99 64 162 / 0%))",
     primaryColor: "#212121",

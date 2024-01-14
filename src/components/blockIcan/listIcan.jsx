@@ -4,7 +4,7 @@ import { FcWorkflow } from "react-icons/fc";
 const ListIcanDo = styled.li`
   display: flex;
   align-items: center;
-  color: black;
+  color: red;
   font-family: "Montserrat";
   font-size: 12px;
   line-height: 15px;

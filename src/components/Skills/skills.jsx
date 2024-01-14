@@ -2,7 +2,7 @@ import Container from "../container/constainer";
 import styled from "styled-components";
 import { FcMindMap } from "react-icons/fc";
 import { lang } from "../shared/staticText/staticText";
-import { HappyCustomerList } from "./happyCustomerList";
+import { SkillsList } from "./SkilsList";
 import { theme } from "../style/theme";
 const HappyCustomerblock = styled.div`
   text-align: center;
@@ -14,7 +14,7 @@ const HappyCustomerHead = styled.p`
   line-height: 1.17;
   vertical-align: top;
   letter-spacing: 0.06em;
-  color: ${theme.color.primaryColor};
+  color: ${theme.color.HeaderLogocolor};
   text-align: center;
   margin-bottom: 18px;
   @media screen and (min-width: 480px) {
@@ -51,7 +51,7 @@ const HappyCuLi = styled.li`
 `;
 
 const HappySvg = styled.a``;
-export const HappyCustomer = () => {
+export const Skills = () => {
   return (
     <HappyCustomerblock>
       <Container>
@@ -65,7 +65,7 @@ export const HappyCustomer = () => {
         <HappyCustomerHead>{lang.en.HappyCustomer}</HappyCustomerHead>
 
         <HappyCuoUl>
-          {HappyCustomerList.map((item) => (
+          {SkillsList.map((item) => (
             <HappyCuLi key={item.id}>
               <HappySvg>{item.svg}</HappySvg>
             </HappyCuLi>

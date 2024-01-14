@@ -2,7 +2,7 @@ import Container from "../container/constainer";
 import styled from "styled-components";
 import { FcMindMap } from "react-icons/fc";
 import { lang } from "../shared/staticText/staticText";
-import { AwardReg } from "../awards/awards";
+import { AwardReg } from "../education/education";
 import { servicesList } from "./servicesList";
 import { theme } from "../style/theme";
 
@@ -16,7 +16,7 @@ const ServicesHead = styled.p`
   line-height: 1.17;
   vertical-align: top;
   letter-spacing: 0.06em;
-  color: ${theme.color.primaryColor};
+  color: ${theme.color.HeaderLogocolor};
   text-align: center;
   margin-bottom: 18px;
   @media screen and (min-width: 480px) {
@@ -39,7 +39,7 @@ const ServicesLi = styled.li`
   display: flex;
   flex-direction: column;
   text-align: left;
-
+  color: ${theme.color.ColorText};
   padding: 34px 49px;
   border: 2px solid;
   margin-top: 30px;
@@ -50,8 +50,11 @@ const ServicesLi = styled.li`
 
 const ServicesHe = styled.h2`
   margin-bottom: 28px;
+  color: ${theme.color.HeaderLogocolor};
 `;
-const ServicesText = styled.p``;
+const ServicesText = styled.p`
+  color: ${theme.color.ColorText};
+`;
 
 export const Services = () => {
   return (

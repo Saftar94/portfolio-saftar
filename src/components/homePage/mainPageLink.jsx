@@ -1,25 +1,23 @@
 import { Experience } from "../experience/experience";
-import { Awards } from "../awards/awards";
+import { Education } from "../education/education";
 import { Portfolio } from "../portfolio/portfolio";
 import { Services } from "../services/services";
-import { HappyCustomer } from "../happyCustomer/happyCustomer";
+import { Skills } from "../Skills/skills";
 import { Footer } from "../footer/footer";
 import { HelpSection } from "../headerButtonIcon/helpButtonScroll";
+import MailTab from "../sendmail/sendMail";
 
 export const MainPageLink = () => {
   return (
     <>
       <HelpSection />
       <Experience />
-      <Awards />
+      <Education />
       <Portfolio />
       <Services />
-      <HappyCustomer />
+      <Skills />
       <Footer />
+      <MailTab />
     </>
   );
 };
-
-// ticker
-// import { BlockIcan } from "../blockIcan/blockIcan";
-/* <BlockIcan /> */

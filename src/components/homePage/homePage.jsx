@@ -7,28 +7,30 @@ import { HomePageButton } from "./homePageButton";
 import { MainPageLink } from "./mainPageLink";
 import { keyframes } from "styled-components";
 import { theme } from "../style/theme";
-// import { Fragment } from "react";
-// import { Fade } from "react-reveal";
-// import BackgroundImg from '../background/backgrounStyle'
 
 const HomePageContainer = styled.div`
   width: 100%;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   grid-gap: 20px 20px;
   justify-content: space-between;
   padding-top: 40px;
+
+  @media screen and (min-width: 480px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   @media screen and (min-width: 768px) {
     padding-top: 60px;
   }
 `;
 
 const rotateslideright = keyframes`   
-from {
-  transform: translateX(-100%);
-}
-to {
-  transform: translateX(0);
-}
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 `;
 
 const HomePageContainerLeft = styled.div`
@@ -39,54 +41,59 @@ const HomePageContainerLeft = styled.div`
   letter-spacing: 0.04em;
   width: 100%;
 
+  @media screen and (min-width: 480px) {
+    font-size: 53px;
+    line-height: 64px;
+  }
+
   @media screen and (min-width: 768px) {
     padding-top: 100px;
-    font-family: Bai Jamjuree;
-    font-style: Regular;
+    font-family: "Bai Jamjuree", sans-serif;
+    font-style: regular;
     line-height: 64px;
     align-items: left;
-    vertical-align: Top;
+    vertical-align: top;
     letter-spacing: 0.56px;
     width: 100%;
-
     animation: ${rotateslideright} 0.3s ease-in-out;
   }
 `;
 
 const rotateslideLeft = keyframes`   
-from {
-  transform: translateX(100%);
-}
-to {
-  transform: translateX(0);
-}
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 `;
+
 const HomePageContainerRight = styled.div`
-  display: ${(props) => props.isOpen || "none"};
+  display: ${(props) => (props.isOpen ? "block" : "none")};
 
   @media (min-width: 768px) {
-    display: ${(props) => props.isOpen || "block"};
+    display: ${(props) => (props.isOpen ? "block" : "none")};
     width: 100%;
     overflow: hidden;
     animation: ${rotateslideLeft} 0.5s ease-in-out;
   }
 `;
+
 const HomeDivFlex = styled.div`
   display: flex;
 `;
 
 const StyleMain = styled.div`
   color: #161513;
-  font-family: Bai Jamjuree;
-  font-style: Regular;
+  font-family: "Bai Jamjuree", sans-serif;
+  font-style: regular;
   font-size: 30px;
-  line-height: 47px
-  align: Left;
-  vertical-align: Top;
+  line-height: 47px;
+  align: left;
+  vertical-align: top;
   letter-spacing: 0.56px;
- 
 
-  @media screen and (min-width: 480px){
+  @media screen and (min-width: 480px) {
     font-size: 53px;
     line-height: 64px;
     margin-top: 40px;
@@ -94,7 +101,7 @@ const StyleMain = styled.div`
 `;
 
 const Styletext = styled.p`
-  color: ${theme.color.primaryColor};
+  color: ${theme.color.HeaderLogocolor};
 `;
 
 export const HomePage = () => {

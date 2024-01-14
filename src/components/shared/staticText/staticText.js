@@ -6,7 +6,7 @@ export const lang = {
     Creative: "CREATIVE",
     Development: "DEVELOPMENT",
     Webflow: "SMART",
-    ButtonMain: "Let's talk.",
+    ButtonMain: "Let's talk",
     ButtonTextHome: "Got a project?",
     AboutName: "me",
     AboutLastName: "About",

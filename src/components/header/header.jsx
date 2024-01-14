@@ -5,42 +5,39 @@ import { HeaderText } from "../headerButtonIcon/headerTextButton";
 import { ButtonForm } from "../homePage/homePageButton";
 import { lang } from "../shared/staticText/staticText";
 import { SliderMenu } from "../navigation/navSideBar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Divide as Hamburger } from "hamburger-react";
 import { useRef } from "react";
 import { theme } from "../style/theme";
 
+import { openModal } from "../../redux/actions";
+import { useDispatch } from "react-redux";
 const BlockHeader = styled.header`
   position: sticky;
   z-index: 100;
   top: 0px;
   left: 0px;
   width: 100%;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  background: ${(props) => props.isColor || "#253069"};
-  @media screen and (min-width: 768px) {
-    opacity: ${(props) => props.isColor || "1"};
-    padding-top: 27px;
-    padding-bottom: 27px;
+  padding: 20px 27px;
+  background: ${(props) => props.isColor || "#757575"};
+  @media (min-width: 768px) {
+    padding: 27px;
   }
-  @media screen and (min-width: 1920px) {
+  @media (min-width: 1920px) {
     opacity: 1;
   }
 `;
+
 const HeaderWrapButton = styled.div`
   height: 100%;
-  align-items: center;
-  justify-content: center;
   display: none;
-  @media screen and (min-width: 768px) {
+  @media (min-width: 768px) {
     display: flex;
   }
 `;
 
 const NavigationContainer = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: center;
   position: relative;
   &:after {
@@ -51,8 +48,7 @@ const NavigationContainer = styled.div`
     height: 1px;
     border-radius: 2px;
     background-color: #c4c4c4;
-    display: block;
-    bottom: -20px;
+    top: -20px;
   }
 `;
 
@@ -65,37 +61,47 @@ const Wrapper = styled.div`
   justify-content: flex-end;
   align-items: center;
   height: 50px;
+  position: sticky;
+  z-index: 100;
   top: 0px;
   left: 0px;
   width: 100%;
-  padding-top: 27px;
-  padding-bottom: 27px;
+  padding: 27px;
 
-  @media screen and (min-width: 768px) {
-    display: ${(props) => props.isOpen || "none"};
-    padding-top: 27px;
-    padding-bottom: 27px;
+  @media (min-width: 768px) {
+    display: ${(props) => (props.isOpen ? "block" : "none")};
   }
 `;
 
 export const Header = () => {
-  const [isColor, setIsOpen] = useState(true);
+  const [isСolor, setIsOpen] = useState(1);
   const [isOpen, setIssidOpen] = useState(false);
   const toggleMenu = () => setIssidOpen(!isOpen);
   const ref = useRef(null);
 
-  const changeColor = () => {
-    if (window.scrollY >= 60) {
-      setIsOpen(false);
-    } else {
-      setIsOpen(true);
-    }
+  const dispatch = useDispatch();
+
+  const handleOpenModal = () => {
+    dispatch(openModal());
   };
 
-  window.addEventListener("scroll", changeColor);
+  useEffect(() => {
+    const changeColor = () => {
+      if (window.scrollY >= 60) {
+        setIsOpen(0);
+      } else {
+        setIsOpen(1);
+      }
+    };
 
+    window.addEventListener("scroll", changeColor);
+
+    return () => {
+      window.removeEventListener("scroll", changeColor);
+    };
+  }, []);
   return (
-    <BlockHeader changeNav={changeColor} isColor={isColor} ref={ref}>
+    <BlockHeader changeNav={isСolor} isColor={isСolor} ref={ref}>
       <Container style={{ overflowX: "visible" }}>
         <NavigationContainer>
           <HeaderText />
@@ -107,9 +113,11 @@ export const Header = () => {
             </SliderButton>
           </Wrapper>
 
-          <Navigation changeText={changeColor} isColor={isColor} />
+          <Navigation changeText={isСolor} isColor={isСolor} />
           <HeaderWrapButton>
-            <ButtonForm>{lang.en.ButtonMain}</ButtonForm>
+            <ButtonForm onClick={handleOpenModal}>
+              {lang.en.ButtonMain}
+            </ButtonForm>
           </HeaderWrapButton>
         </NavigationContainer>
       </Container>

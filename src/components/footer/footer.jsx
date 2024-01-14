@@ -7,7 +7,7 @@ import { HeaderText } from "../headerButtonIcon/headerTextButton";
 import { theme } from "../style/theme";
 const Footerblock = styled.footer`
   padding: 60px 0px;
-  background: ${(props) => props.isColor || "#253069"};
+  background: ${(props) => props.isColor || theme.color.HeaderSlidecolor};
 `;
 const FooterBlockIn = styled.div`
   display: block;
@@ -32,7 +32,7 @@ const LeftText = styled.p`
   font-size: 10px;
   vertical-align: top;
   letter-spacing: 0.06em;
-  color: ${theme.color.secondaryColor};
+  color: ${theme.color.ColorText};
   margin-top: 20px;
   text-align: center;
 `;
