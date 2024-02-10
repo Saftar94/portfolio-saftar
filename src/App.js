@@ -39,27 +39,3 @@ function App(isOpen) {
 }
 
 export default App;
-
-// import React, { Component } from "react";
-// import {BrowserRouter as Switch, Route, Router } from "react-router-dom";
-// import Rooms from "./contacts/Rooms";
-// import Chat from "./contacts/Chat";
-
-// class App extends Component {
-//   render() {
-//     return (
-// <>
-//         <Header />
-//           <Router>
-//             <Route path="/" element={<HomePage />} />
-//             <Route path="about" element={<AboutMe />} />
-//             <Route path="contacts" element={<Contacts />} />
-//               <Route path="/room/:roomId" component={Chat} />
-//               <Route path="/Rooms" component={Rooms} />
-//           </Router>
-//           </>
-//     );
-//   }
-// }
-
-// export default App;

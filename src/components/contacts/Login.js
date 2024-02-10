@@ -5,22 +5,32 @@ import { Contacts } from "./contacts";
 
 const Login = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleGoogleSignIn = (ecent) => {
-    ecent.preventDefault();
-    signInWithPopup(auth, provider).then((data) => {
-      setEmail(data.user.email);
-      localStorage.setItem("email", data.user.email);
-    });
+  const handleGoogleSignIn = async (event) => {
+    event.preventDefault();
+
+    try {
+      const result = await signInWithPopup(auth, provider);
+      setEmail(result.user.email);
+      localStorage.setItem("email", result.user.email);
+      setIsLoggedIn(true); // Set this state to trigger rendering Contacts
+    } catch (error) {
+      console.error("Login error:", error);
+    }
   };
+
   useEffect(() => {
-    setEmail(localStorage.getItem("email"));
+    const cachedEmail = localStorage.getItem("email");
+    if (cachedEmail) {
+      setEmail(cachedEmail);
+      setIsLoggedIn(true);
+    }
   }, []);
 
   return (
     <div>
-      {email ? (
+      {isLoggedIn ? (
         <Contacts />
       ) : (
         <form onSubmit={handleGoogleSignIn}>
@@ -37,11 +47,10 @@ const Login = () => {
             type="password"
             id="password"
             name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={isLoggedIn}
+            onChange={(e) => setIsLoggedIn(e.target.value)}
           />
           <button type="submit">Login with Google</button>{" "}
-          {/* Добавьте кнопку для аутентификации через Google */}
         </form>
       )}
     </div>
