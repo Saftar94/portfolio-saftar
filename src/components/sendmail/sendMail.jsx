@@ -48,7 +48,7 @@ const MailTab = () => {
 
   const handleEmailSubmit = (formData) => {
     // Логика отправки email
-    console.log("Отправка email:", formData);
+    // console.log("Отправка email:", formData);
   };
 
   return (

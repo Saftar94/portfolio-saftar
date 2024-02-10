@@ -8,22 +8,22 @@ const Container = styled.div`
   @media screen and (min-width: 320px) and (max-width: 767px) {
     padding-left: ${(props) => props.sidePaddings || "15px"};
     padding-right: ${(props) => props.sidePaddings || "15px"};
-    max-width: ${(props) => props.sideWidth || "767px"};
+    max-width: ${(props) => props.sideWidth || "100%"};
   }
   @media screen and (min-width: 768px) {
     padding-left: ${(props) => props.sidePaddings || "20px"};
     padding-right: ${(props) => props.sidePaddings || "20px"};
-    width: ${(props) => props.sideWidth || "768px"};
+    width: ${(props) => props.sideWidth || "100%"};
   }
   @media screen and (min-width: 1200px) {
     padding-left: ${(props) => props.sidePaddings || "80px"};
     padding-right: ${(props) => props.sidePaddings || "80px"};
-    width: ${(props) => props.sideWidth || "1200px"};
+    width: ${(props) => props.sideWidth || "100%"};
   }
   @media screen and (min-width: 1920px) {
     padding-left: ${(props) => props.sidePaddings || "136px"};
     padding-right: ${(props) => props.sidePaddings || "136px"};
-    width: ${(props) => props.sideWidth || "1920px"};
+    width: ${(props) => props.sideWidth || "100%"};
   }
 `;
 

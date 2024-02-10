@@ -93,85 +93,222 @@
 
 // export default EmailForm;
 // EmailForm.js
-import React, { useState } from "react";
-import axios from "axios";
+// import React, { useState } from "react";
+// import axios from "axios";
+
+// const EmailForm = () => {
+//   const [email, setEmail] = useState("");
+//   const [message, setMessage] = useState("");
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     // Проверка текущего URL
+//     const currentUrl = window.location.href;
+
+//     if (currentUrl.includes("https://saf-portfolio-saftar.netlify.app/")) {
+//       // Пользователь зашел на сайт через https://saf-portfolio-saftar.netlify.app/
+//       // Добавьте свою логику для отправки письма или в телеграм
+//       console.log("User came from the specified Netlify URL");
+
+//       // Пример отправки письма на мейл
+//       try {
+//         const response = await axios.post(
+//           "https://your-backend-url/send-email",
+//           {
+//             email,
+//             message,
+//           }
+//         );
+
+//         if (response.data.success) {
+//           console.log("Email sent successfully!");
+//         } else {
+//           console.error("Failed to send email");
+//         }
+//       } catch (error) {
+//         console.error("Error sending email:", error);
+//       }
+
+//       // Пример отправки в телеграм
+//       try {
+//         const telegramResponse = await axios.post(
+//           "https://your-backend-url/send-telegram",
+//           {
+//             message,
+//           }
+//         );
+
+//         if (telegramResponse.data.success) {
+//           console.log("Message sent to Telegram successfully!");
+//         } else {
+//           console.error("Failed to send message to Telegram");
+//         }
+//       } catch (telegramError) {
+//         console.error("Error sending message to Telegram:", telegramError);
+//       }
+//     } else {
+//       // Добавьте логику для других случаев
+//       console.log("User came from a different URL");
+//     }
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <label>Email:</label>
+//       <input
+//         type="email"
+//         value={email}
+//         onChange={(e) => setEmail(e.target.value)}
+//         required
+//       />
+//       <br />
+//       <label>Message:</label>
+//       <textarea
+//         value={message}
+//         onChange={(e) => setMessage(e.target.value)}
+//         required
+//       />
+//       <br />
+//       <button type="submit">Send Message</button>
+//     </form>
+//   );
+// };
+
+// export default EmailForm;
+
+// ==========================================
+
+// import React, { useState, useEffect } from 'react';
+// import io from 'socket.io-client';
+
+// const socket = io('http://localhost:3003');
+
+// const EmailForm = () =>{
+//     const [messages, setMessages] = useState([]);
+//     const [message, setMessage] = useState('');
+
+//     useEffect(() => {
+//         socket.on('message', (newMessage) => {
+//         setMessages((prevMessages) => [...prevMessages, newMessage]);
+//       });
+
+//       return () => {
+//         socket.disconnect();
+//       };
+//     }, []);
+
+//     const handleSendMessage = () => {
+//       if (message.trim() !== '') {
+//         socket.emit('message', message);
+//         setMessage('');
+//       }
+//     };
+//   console.log(messages)
+//     return (
+//       <div>
+//         <div>
+//           {messages.map((msg, index) => (
+//             <div key={index} style={{ marginBottom: '8px', padding: '8px', border: '1px solid #ccc',color:"red", borderRadius: '4px' }}>{msg}</div>
+//           ))}
+//         </div>
+//         <div>
+//           <input type="text" value={message} onChange={(e) => setMessage(e.target.value)} style={{ marginBottom: '8px', padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }} />
+//           <button onClick={handleSendMessage}>Send</button>
+//         </div>
+//       </div>
+//     );
+//   }
+
+// export default EmailForm;
+
+// ==========================================
+
+import io from "socket.io-client";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+
+const BlockActive = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-left: 20px;
+`;
+const TextActive = styled.p``;
+
+const NumberActive = styled.p`
+  border-radius: 20%;
+  margin-top: 5px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.14;
+  border: none;
+  cursor: pointer;
+  border: 2px solid black;
+  padding: 3px;
+`;
+const socket = io("http://localhost:3005");
 
 const EmailForm = () => {
-  const [email, setEmail] = useState("");
+  const [activeSessions, setActiveSessions] = useState(0);
+
+  useEffect(() => {
+    const socket = io("http://localhost:3005");
+
+    socket.on("activeSessions", (count) => {
+      setActiveSessions(count);
+    });
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+  // ================================================
+
   const [message, setMessage] = useState("");
+  const [chatMessages, setChatMessages] = useState([]);
+  console.log(message);
+  useEffect(() => {
+    // Listen for 'chat message' events from the server
+    socket.on("chat message", (message) => {
+      setChatMessages((prevMessages) => [
+        ...prevMessages,
+        { text: message, sender: "other" },
+      ]);
+    });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+    // Clean up the socket connection when the component unmounts
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
-    // Проверка текущего URL
-    const currentUrl = window.location.href;
-
-    if (currentUrl.includes("http://localhost:3000/")) {
-      // Пользователь зашел на сайт через https://saf-portfolio-saftar.netlify.app/
-      // Добавьте свою логику для отправки письма или в телеграм
-      console.log("User came from the specified Netlify URL");
-
-      // Пример отправки письма на мейл
-      try {
-        const response = await axios.post(
-          "https://your-backend-url/send-email",
-          {
-            email,
-            message,
-          }
-        );
-
-        if (response.data.success) {
-          console.log("Email sent successfully!");
-        } else {
-          console.error("Failed to send email");
-        }
-      } catch (error) {
-        console.error("Error sending email:", error);
-      }
-
-      // Пример отправки в телеграм
-      try {
-        const telegramResponse = await axios.post(
-          "https://your-backend-url/send-telegram",
-          {
-            message,
-          }
-        );
-
-        if (telegramResponse.data.success) {
-          console.log("Message sent to Telegram successfully!");
-        } else {
-          console.error("Failed to send message to Telegram");
-        }
-      } catch (telegramError) {
-        console.error("Error sending message to Telegram:", telegramError);
-      }
-    } else {
-      // Добавьте логику для других случаев
-      console.log("User came from a different URL");
-    }
+  const sendMessage = () => {
+    // Emit a 'chat message' event to the server
+    socket.emit("chat message", message);
+    setMessage("");
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>Email:</label>
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <br />
-      <label>Message:</label>
-      <textarea
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        required
-      />
-      <br />
-      <button type="submit">Send Message</button>
-    </form>
+    <BlockActive>
+      <TextActive>Active Sessions:</TextActive>
+      <NumberActive>{activeSessions}</NumberActive>
+      <div>
+        <ul>
+          {chatMessages.map((msg, index) => (
+            <li key={index}>
+              {" "}
+              {msg.text} ({msg.sender})
+            </li>
+          ))}
+        </ul>
+        <input
+          type="text"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+        />
+        <button onClick={sendMessage}>Send</button>
+      </div>
+    </BlockActive>
   );
 };
 

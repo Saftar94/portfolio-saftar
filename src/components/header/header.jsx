@@ -66,10 +66,10 @@ const Wrapper = styled.div`
   top: 0px;
   left: 0px;
   width: 100%;
-  padding: 27px;
 
   @media (min-width: 768px) {
     display: ${(props) => (props.isOpen ? "block" : "none")};
+    padding: 27px;
   }
 `;
 
