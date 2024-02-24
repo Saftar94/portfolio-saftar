@@ -57,7 +57,7 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.static(path.join(__dirname, "../public"))); // Serve static files from the "public" directory
 
-const PORT = process.env.PORT || 3005;
+const PORT = process.env.PORT || 3002;
 const { Server } = require("socket.io");
 
 const io = new Server(http, {
@@ -87,5 +87,5 @@ io.on("connection", (socket) => {
 });
 
 http.listen(PORT, () => {
-  console.log("Server is running on http://localhost:3005");
+  console.log("Server is running on http://localhost:3002");
 });
