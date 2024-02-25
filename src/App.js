@@ -1,14 +1,12 @@
 import { Header } from "./components/header/header";
 import { HomePage } from "./components/homePage/homePage";
-
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { AboutMe } from "./components/aboutMe/aboutExample";
-// import { Contacts } from "./components/contacts/contacts";
-import LoginPage from "./components/contacts/Login";
+import { Contacts } from "./components/contacts/contacts";
 import React, { useState } from "react";
 import Login from "./components/contacts/Login";
 
-function App(isOpen) {
+function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("isLoggedIn") === "true"
   );
@@ -24,8 +22,11 @@ function App(isOpen) {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="about" element={<AboutMe />} />
-        <Route path="login" element={<Login isLoggedIn={isLoggedIn} />} />
-        <Route path="contacts" element={<LoginPage onLogin={handleLogin} />} />
+        <Route
+          path="login"
+          element={isLoggedIn ? <Contacts /> : <Navigate to="/login" replace />}
+        />
+        <Route path="contacts" element={<Login onLogin={handleLogin} />} />
       </Routes>
     </>
   );

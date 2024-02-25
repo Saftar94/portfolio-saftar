@@ -15,6 +15,7 @@ const Login = () => {
       setEmail(result.user.email);
       localStorage.setItem("email", result.user.email);
       setIsLoggedIn(true); // Set this state to trigger rendering Contacts
+      // onLogin();
     } catch (error) {
       console.error("Login error:", error);
     }
@@ -34,22 +35,6 @@ const Login = () => {
         <Contacts />
       ) : (
         <form onSubmit={handleGoogleSignIn}>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={isLoggedIn}
-            onChange={(e) => setIsLoggedIn(e.target.value)}
-          />
           <button type="submit">Login with Google</button>{" "}
         </form>
       )}
