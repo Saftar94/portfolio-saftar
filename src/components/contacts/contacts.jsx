@@ -5,10 +5,39 @@ import "firebase/firestore";
 import { db, auth } from "../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import styled from "styled-components";
+import ChatDisplay from "./ChatDisplay";
 
+const MainHeader = styled.h1`
+  color: white;
+`;
+const ChatInputContainer = styled.form`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+`;
+
+const ChatInputField = styled.input`
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 20px;
+  margin-right: 10px;
+`;
+
+const SendButton = styled.button`
+  background-color: #0084ff;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+`;
 export const Contacts = () => {
   const [message, setMessage] = useState("");
-  const [messages] = useState([]);
   const authState = useAuthState(auth);
 
   const handleChange = (event) => {
@@ -33,7 +62,6 @@ export const Contacts = () => {
     } catch (error) {
       console.error("Error sending message:", error);
     }
-
     setMessage("");
   };
 
@@ -43,22 +71,23 @@ export const Contacts = () => {
   };
   return (
     <Container>
-      <h1>Contacts</h1>
-      <form onSubmit={sendMessage}>
-        <input
+      <MainHeader>Contacts</MainHeader>
+      <ChatDisplay />
+      <ChatInputContainer onSubmit={sendMessage}>
+        <ChatInputField
           type="text"
           value={message}
           onChange={handleChange}
           placeholder="Enter your message"
         />
-        <button type="submit">Send</button>
-      </form>
-      {message && <p>Sent: {message}</p>}
+        <SendButton type="submit">Send</SendButton>
+      </ChatInputContainer>
+      {/* {message && <p>Sent: {message}</p>}
       {messages.map((message) => (
         <div key={message.id}>
           <p>{message.content}</p>
         </div>
-      ))}
+      ))} */}
       <Button onClick={handleSignOut}>Sign Out</Button>
     </Container>
   );
