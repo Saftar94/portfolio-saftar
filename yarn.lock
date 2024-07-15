@@ -3968,10 +3968,10 @@
     tmp-promise "^3.0.3"
     uuid "^9.0.0"
 
-"@netlify/esbuild-darwin-64@0.14.39":
+"@netlify/esbuild-darwin-arm64@0.14.39":
   version "0.14.39"
-  resolved "https://registry.npmjs.org/@netlify/esbuild-darwin-64/-/esbuild-darwin-64-0.14.39.tgz"
-  integrity sha512-eF4GvLYiDxtcyjFT55+h+8c8A2HltjeMezCqkt3AQSgOdu1nhlvwbBhIdg2dyM6gKEaEm5hBtTbicEDSwsLodA==
+  resolved "https://registry.npmjs.org/@netlify/esbuild-darwin-arm64/-/esbuild-darwin-arm64-0.14.39.tgz"
+  integrity sha512-b7rtnX/VtYwNbUCxs3eulrCWJ+u2YvqDcXiIV1ka+od+N0fTx+4RrVkVp1lha9L0wEJYK9J7UWZOMLMyd1ynRg==
 
 "@netlify/esbuild@0.14.39":
   version "0.14.39"
@@ -4036,10 +4036,10 @@
     moize "^6.1.3"
     path-exists "^5.0.0"
 
-"@netlify/local-functions-proxy-darwin-x64@1.1.1":
+"@netlify/local-functions-proxy-darwin-arm64@1.1.1":
   version "1.1.1"
-  resolved "https://registry.npmjs.org/@netlify/local-functions-proxy-darwin-x64/-/local-functions-proxy-darwin-x64-1.1.1.tgz"
-  integrity sha512-4CRB0H+dXZzoEklq5Jpmg+chizXlVwCko94d8+UHWCgy/bA3M/rU/BJ8OLZisnJaAktHoeLABKtcLOhtRHpxZQ==
+  resolved "https://registry.npmjs.org/@netlify/local-functions-proxy-darwin-arm64/-/local-functions-proxy-darwin-arm64-1.1.1.tgz"
+  integrity sha512-lphJ9qqZ3glnKWEqlemU1LMqXxtJ/tKf7VzakqqyjigwLscXSZSb6fupSjQfd4tR1xqxA76ylws/2HDhc/gs+Q==
 
 "@netlify/local-functions-proxy@^1.1.1":
   version "1.1.1"
@@ -7357,7 +7357,7 @@ binary-extensions@^2.0.0:
   resolved "https://registry.npmjs.org/binary-extensions/-/binary-extensions-2.2.0.tgz"
   integrity sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==
 
-bindings@^1.4.0, bindings@^1.5.0:
+bindings@^1.4.0:
   version "1.5.0"
   resolved "https://registry.npmjs.org/bindings/-/bindings-1.5.0.tgz"
   integrity sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==
@@ -15303,11 +15303,6 @@ mute-stream@0.0.7:
   resolved "https://registry.npmjs.org/mute-stream/-/mute-stream-0.0.7.tgz"
   integrity sha512-r65nCZhrbXXb6dXOACihYApHw2Q6pV0M3V0PSxd74N0+D8nzAdEAITq2oAjA1jVnKI+tGvEBUpqiMh0+rW6zDQ==
 
-nan@^2.16.0:
-  version "2.17.0"
-  resolved "https://registry.npmjs.org/nan/-/nan-2.17.0.tgz"
-  integrity sha512-2ZTgtl0nJsO0KQCjEpxcIr5D+Yv90plTitZt9JBfQvVJDS5seMl3FOvsh3+9CoYWXf/1l5OaZzzF6nDm4cagaQ==
-
 nanoid@^3.3.4:
   version "3.3.6"
   resolved "https://registry.npmjs.org/nanoid/-/nanoid-3.3.6.tgz"
@@ -21016,14 +21011,6 @@ universalify@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/universalify/-/universalify-2.0.0.tgz"
   integrity sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==
-
-unix-dgram@2.x:
-  version "2.0.6"
-  resolved "https://registry.npmjs.org/unix-dgram/-/unix-dgram-2.0.6.tgz"
-  integrity sha512-AURroAsb73BZ6CdAyMrTk/hYKNj3DuYYEuOaB8bYMOHGKupRNScw90Q5C71tWJc3uE7dIeXRyuwN0xLLq3vDTg==
-  dependencies:
-    bindings "^1.5.0"
-    nan "^2.16.0"
 
 unixify@^1.0.0:
   version "1.0.0"
