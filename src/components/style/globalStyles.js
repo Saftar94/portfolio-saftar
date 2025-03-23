@@ -7,7 +7,8 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 12px;
     font-weight: 400;
     margin: 0;
-    background:${theme.color.Maincolor}
+    // background:${theme.color.Maincolor}
+    background: rgb(69 178 122);
   }
 
   * {

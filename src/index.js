@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { GlobalStyle } from "./components/style/globalStyles";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+
 const rootElement = document.getElementById("root");
 
 const root = createRoot(rootElement);

@@ -1,4 +1,4 @@
-import Container from "../container/constainer";
+import Container from "../container/container";
 import styled from "styled-components";
 import { Navigation } from "../navigation/navigation";
 import { HeaderText } from "../headerButtonIcon/headerTextButton";
@@ -73,7 +73,7 @@ const Wrapper = styled.div`
   }
 `;
 
-export const Header = () => {
+export const Header = ({ user, onLogout }) => {
   const [isСolor, setIsOpen] = useState(1);
   const [isOpen, setIssidOpen] = useState(false);
   const toggleMenu = () => setIssidOpen(!isOpen);
@@ -113,7 +113,7 @@ export const Header = () => {
             </SliderButton>
           </Wrapper>
 
-          <Navigation changeText={isСolor} isColor={isСolor} />
+          <Navigation changeText={isСolor} isColor={isСolor} user={user} onLogout={onLogout} />
           <HeaderWrapButton>
             <ButtonForm onClick={handleOpenModal}>
               {lang.en.ButtonMain}

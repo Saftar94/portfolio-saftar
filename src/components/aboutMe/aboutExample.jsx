@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { lang } from "../shared/staticText/staticText";
-import Container from "../container/constainer";
+import Container from "../container/container";
 import { FcWorkflow } from "react-icons/fc";
 import { list } from "./listAboutMe";
 

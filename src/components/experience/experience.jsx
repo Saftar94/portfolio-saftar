@@ -1,4 +1,4 @@
-import Container from "../container/constainer";
+import Container from "../container/container";
 import { experineceList } from "./experienceList";
 import styled from "styled-components";
 import { theme } from "../style/theme";

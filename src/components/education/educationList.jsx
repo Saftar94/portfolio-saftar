@@ -21,6 +21,13 @@ export const educationList = [
     number: 3,
     EducationName: "GoIt",
     direction: "FULL STACK",
-    year: "2022",
+    year: "2022-2023",
+  },
+  {
+    id: uuid(),
+    number: 4,
+    EducationName: "Beetrootacademy",
+    direction: "Front-End Developer",
+    year: "2024-2025",
   },
 ];

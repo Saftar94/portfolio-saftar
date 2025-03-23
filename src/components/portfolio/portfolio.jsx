@@ -1,4 +1,4 @@
-import Container from "../container/constainer";
+import Container from "../container/container";
 import styled from "styled-components";
 import { FcMindMap } from "react-icons/fc";
 import { lang } from "../shared/staticText/staticText";

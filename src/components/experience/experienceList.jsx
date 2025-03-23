@@ -3,12 +3,12 @@ import { v4 as uuid } from "uuid";
 export const experineceList = [
   {
     id: uuid(),
-    number: "2 +",
+    number: "4 +",
     experincetext: "YEARS OF EXPERIENCE",
   },
   {
     id: uuid(),
-    number: "4 +",
+    number: "10 +",
     experincetext: "PROJECT COMPLETED",
   },
   {

@@ -25,4 +25,10 @@ export const SidebarData = [
     path: "/contacts",
     cName: "nav-text",
   },
+  {
+    id: uuidv4(),
+    title: "Login",
+    path: "/login",
+    cName: "nav-text",
+  },
 ];

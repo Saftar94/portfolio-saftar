@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { lang } from "../shared/staticText/staticText";
-import Container from "../container/constainer";
+import Container from "../container/container";
 import { FcMindMap } from "react-icons/fc";
 import { HomePageUnder } from "./homepageUnder";
 import { HomePageButton } from "./homePageButton";

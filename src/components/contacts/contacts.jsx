@@ -1,94 +1,70 @@
 import React, { useState } from "react";
-import Container from "../container/constainer";
-import { Button } from "@material-ui/core";
-import "firebase/firestore";
-import { db, auth } from "../utils/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import styled from "styled-components";
-import ChatDisplay from "./ChatDisplay";
+import Container from "../container/container";
+import ChatList from "./ChatList";
 
-const MainHeader = styled.h1`
-  color: white;
-`;
-const ChatInputContainer = styled.form`
+const TabContainer = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #f0f0f0;
-  padding: 10px;
-  border-top: 1px solid #ccc;
+  margin-bottom: 20px;
 `;
 
-const ChatInputField = styled.input`
-  flex: 1;
-  padding: 8px;
+const Tab = styled.button`
+  padding: 10px 20px;
+  background: ${props => props.active ? '#007bff' : '#e9ecef'};
+  color: ${props => props.active ? 'white' : 'black'};
   border: none;
-  border-radius: 20px;
-  margin-right: 10px;
-`;
-
-const SendButton = styled.button`
-  background-color: #0084ff;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  padding: 8px 16px;
   cursor: pointer;
+  margin-right: 5px;
+  
+  &:first-child {
+    border-radius: 4px 0 0 4px;
+  }
+  
+  &:last-child {
+    border-radius: 0 4px 4px 0;
+    margin-right: 0;
+  }
 `;
-export const Contacts = () => {
-  const [message, setMessage] = useState("");
-  const authState = useAuthState(auth);
 
-  const handleChange = (event) => {
-    setMessage(event.target.value);
-  };
-
-  const sendMessage = async (event) => {
-    event.preventDefault();
-    if (!db || !authState) {
-      console.error("Missing firestore or authState");
-      return;
-    }
-
-    const data = {
-      text: message,
-      timestamp: serverTimestamp(),
-      userId: authState.user.displayName,
-    };
-    try {
-      await addDoc(collection(db, "messages"), data);
-      setMessage("");
-    } catch (error) {
-      console.error("Error sending message:", error);
-    }
-    setMessage("");
-  };
-
-  const handleSignOut = () => {
-    localStorage.clear();
-    window.location.reload("");
-  };
+const Contacts = ({ user }) => {
+  const [activeTab, setActiveTab] = useState('chats');
+  console.log("My USER",user)
+  // Проверка на админа
+  const isAdmin = user && user.email === 'admin@example.com';
+  
   return (
     <Container>
-      <MainHeader>Contacts</MainHeader>
-      <ChatDisplay />
-      <ChatInputContainer onSubmit={sendMessage}>
-        <ChatInputField
-          type="text"
-          value={message}
-          onChange={handleChange}
-          placeholder="Enter your message"
-        />
-        <SendButton type="submit">Send</SendButton>
-      </ChatInputContainer>
-      {/* {message && <p>Sent: {message}</p>}
-      {messages.map((message) => (
-        <div key={message.id}>
-          <p>{message.content}</p>
+      <h1>Контакты</h1>
+      
+      <TabContainer>
+        <Tab 
+          active={activeTab === 'chats'} 
+          onClick={() => setActiveTab('chats')}
+        >
+          Чаты
+        </Tab>
+        {isAdmin && (
+          <Tab 
+            active={activeTab === 'admin'} 
+            onClick={() => setActiveTab('admin')}
+          >
+            Администрирование
+          </Tab>
+        )}
+      </TabContainer>
+      
+      {activeTab === 'chats' && (
+        <ChatList currentUser={user} />
+      )}
+      
+      {isAdmin && activeTab === 'admin' && (
+        <div>
+          <h2>Панель администратора</h2>
+          {/* Здесь можно добавить административный функционал */}
         </div>
-      ))} */}
-      <Button onClick={handleSignOut}>Sign Out</Button>
+      )}
     </Container>
   );
 };
+
+export default Contacts;

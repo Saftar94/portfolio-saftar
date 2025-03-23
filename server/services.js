@@ -1,54 +1,3 @@
-// const path = require("path");
-// const express = require("express");
-// const app = express();
-// const http = require("http").createServer(app);
-// const cors = require("cors");
-// app.use(cors());
-
-// const PORT = process.env.PORT || 3003;
-// const { Server } = require("socket.io");
-
-// const io = new Server(http, {
-//   cors: {
-//     origin: "*",
-//     methods: ["GET", "POST"],
-//   },
-// });
-
-// app.get("/", (req, res) => {
-//   res.sendFile(path.join(__dirname, "../public", "index.html"));
-// });
-
-// // let activeSessions = 0;
-
-// // io.on("connection", (socket) => {
-// //   activeSessions++;
-// //   io.emit("activeSessions", activeSessions);
-
-// //   socket.on("disconnect", () => {
-// //     activeSessions--;
-// //     io.emit("activeSessions", activeSessions);
-// //   });
-// // });
-// io.on('connection', (socket) => {
-//   console.log('User connected');
-
-//   // Обработка событий чата
-//   socket.on('message', (message) => {
-//     io.emit('message', message);
-//   });
-
-//   socket.on('disconnect', () => {
-//     console.log('User disconnected');
-//   });
-// });
-
-// http.listen(PORT, () => {
-//   console.log("Server is running on http://localhost:3003");
-// });
-
-// ==============================================
-
 const path = require("path");
 const express = require("express");
 const app = express();
@@ -57,7 +6,6 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.static(path.join(__dirname, "../public"))); // Serve static files from the "public" directory
 
-const PORT = process.env.PORT || 3002;
 const { Server } = require("socket.io");
 
 const io = new Server(http, {
@@ -86,6 +34,38 @@ io.on("connection", (socket) => {
   });
 });
 
-http.listen(PORT, () => {
-  console.log("Server is running on http://localhost:3002");
-});
+const findAvailablePort = async (startPort) => {
+  const net = require('net');
+  
+  const isPortAvailable = (port) => {
+    return new Promise((resolve) => {
+      const server = net.createServer();
+      
+      server.once('error', () => {
+        resolve(false);
+      });
+      
+      server.once('listening', () => {
+        server.close();
+        resolve(true);
+      });
+      
+      server.listen(port);
+    });
+  };
+
+  let port = startPort;
+  while (!(await isPortAvailable(port))) {
+    port++;
+  }
+  return port;
+};
+
+const startServer = async () => {
+  const port = await findAvailablePort(3000);
+  http.listen(port, () => {
+    console.log(`Сервер запущен на http://localhost:${port}`);
+  });
+};
+
+startServer();

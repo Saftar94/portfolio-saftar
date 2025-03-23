@@ -2,31 +2,73 @@ import { Header } from "./components/header/header";
 import { HomePage } from "./components/homePage/homePage";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { AboutMe } from "./components/aboutMe/aboutExample";
-import { Contacts } from "./components/contacts/contacts";
-import React, { useState } from "react";
+import React, {useState, useEffect} from "react";
 import Login from "./components/contacts/Login";
+import Contacts from "./components/contacts/contacts";
+import Chat from "./components/contacts/Chat";
+
+// Компонент защищенного маршрута
+const ProtectedRoute = ({ user, children }) => {
+  if (!user) {
+    // Если пользователь не авторизован, перенаправляем на страницу входа
+    return <Navigate to="/login" replace />;
+  }
+  
+  // Если пользователь авторизован, показываем запрашиваемый компонент
+  return children;
+};
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    localStorage.getItem("isLoggedIn") === "true"
-  );
-
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-    localStorage.setItem("isLoggedIn", true);
+  // Проверяем localStorage при начальной загрузке
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem('user');
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
+  
+  // Обновляем localStorage при изменении пользователя
+  useEffect(() => {
+    if (user) {
+      console.log("Current user in App:", user); // Проверяем данные пользователя
+      localStorage.setItem('user', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('user');
+    }
+  }, [user]);
+  
+  const updateUser = (userData) => {
+    setUser(userData);
   };
-
+  
+  const handleLogout = () => {
+    setUser(null);
+  };
+  
+  // Проверка на администратора
+  const isAdmin = user && user.email === 'aliev.saftar94@gmail.com';
+  
   return (
     <>
-      <Header />
+      <Header user={user} onLogout={handleLogout} />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="about" element={<AboutMe />} />
-        <Route
-          path="login"
-          element={isLoggedIn ? <Contacts /> : <Navigate to="/login" replace />}
+        <Route path="/about" element={<AboutMe />} />
+        <Route path="/login" element={<Login updateUser={updateUser} />} />
+        <Route 
+          path="/contacts" 
+          element={
+            <ProtectedRoute user={user}>
+              <Contacts user={user} />
+            </ProtectedRoute>
+          } 
         />
-        <Route path="contacts" element={<Login onLogin={handleLogin} />} />
+        <Route 
+          path="/chat/:chatId" 
+          element={
+            <ProtectedRoute user={user}>
+              <Chat currentUser={user} isAdmin={isAdmin} />
+            </ProtectedRoute>
+          } 
+        />
       </Routes>
     </>
   );
