@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { auth, provider } from "../utils/firebase";
-import { signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { FcGoogle } from "react-icons/fc";
@@ -68,8 +72,9 @@ const Tab = styled.button`
   border: none;
   background: none;
   cursor: pointer;
-  color: ${props => props.active ? '#0084ff' : '#666'};
-  border-bottom: 2px solid ${props => props.active ? '#0084ff' : 'transparent'};
+  color: ${(props) => (props.active ? "#0084ff" : "#666")};
+  border-bottom: 2px solid
+    ${(props) => (props.active ? "#0084ff" : "transparent")};
 `;
 
 const ErrorMessage = styled.p`
@@ -85,14 +90,72 @@ const Login = ({ updateUser }) => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleGoogleSignIn = async (event) => {
-    event.preventDefault();
+  const handleGoogleSignIn = async () => {
     try {
+      setError("");
       const result = await signInWithPopup(auth, provider);
-      localStorage.setItem("userName", result.user.displayName || result.user.email);
-      updateUser(result.user);
+      const user = result.user;
+      console.log("Google Auth Result:", result);
+
+      // Проверяем, есть ли пользователь в Firestore
+      const userDocRef = doc(db, "users", user.uid);
+      const userDoc = await getDoc(userDocRef);
+
+      let userData = {
+        id: user.uid,
+        email: user.email,
+        displayName: user.displayName || "",
+        photoURL: user.photoURL || "",
+        isAdmin: user.email === "admin@example.com",
+      };
+
+      // Если пользователя нет, создаем его
+      if (!userDoc.exists()) {
+        console.log(
+          "Creating new user document for Google user:",
+          user.uid,
+          user.email
+        );
+        await setDoc(userDocRef, {
+          email: user.email,
+          createdAt: new Date(),
+          isAdmin: user.email === "admin@example.com",
+          loginMethod: "google",
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+        });
+      } else {
+        console.log("User already exists in Firestore:", userDoc.data());
+
+        // Дополняем userData данными из Firestore
+        userData = { ...userDoc.data(), id: user.uid };
+
+        // Если пользователь уже существует, но это admin@example.com, проверим флаг isAdmin
+        if (user.email === "admin@example.com" && !userDoc.data().isAdmin) {
+          // Обновляем документ, добавляя флаг isAdmin
+          await setDoc(
+            userDocRef,
+            {
+              ...userDoc.data(),
+              isAdmin: true,
+            },
+            { merge: true }
+          );
+
+          userData.isAdmin = true;
+          console.log("Updated admin status for Google user");
+        }
+      }
+
+      // Важно: явно обновляем пользователя с необходимыми данными
+      updateUser(userData);
+
+      // Проверяем, что все необходимые данные есть в объекте пользователя
+      console.log("Updated user object:", userData);
+
       navigate("/contacts");
     } catch (error) {
+      console.error("Google sign in error:", error);
       setError(error.message);
     }
   };
@@ -100,42 +163,46 @@ const Login = ({ updateUser }) => {
   const handleRegister = async (email, password) => {
     try {
       // Создаем пользователя в Firebase Auth
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       const user = userCredential.user;
-      
+
       console.log("Firebase Auth user created:", user.uid);
-      
+
       // Создаем данные пользователя
       const userData = {
         email: user.email,
         createdAt: new Date(),
-        isAdmin: email === "admin@example.com"
+        isAdmin: email === "admin@example.com",
       };
-      
+
       console.log("Attempting to save user to Firestore:", userData);
-      
+
       // Явно указываем путь к документу
       await setDoc(doc(db, "users", user.uid), userData);
-      
+
       console.log("User successfully saved to Firestore with ID:", user.uid);
-      
+
       // Проверяем, что document действительно создан
       const docRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
-      
+
       if (docSnap.exists()) {
         console.log("Verification - document exists:", docSnap.data());
       } else {
         console.error("Verification failed - document does not exist!");
       }
-      
+
       // Обновляем состояние
       updateUser({
         id: user.uid,
         email: user.email,
-        isAdmin: email === "admin@example.com"
+        isAdmin: email === "admin@example.com",
       });
-      
+
       navigate("/contacts");
     } catch (error) {
       console.error("Registration error:", error);
@@ -146,23 +213,27 @@ const Login = ({ updateUser }) => {
   const handleLogin = async (email, password) => {
     try {
       // Входим через Firebase Auth
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       const user = userCredential.user;
-      
+
       // Получаем дополнительную информацию из Firestore
       const userDoc = await getDoc(doc(db, "users", user.uid));
       let userData = {
         id: user.uid,
-        email: user.email
+        email: user.email,
       };
-      
+
       if (userDoc.exists()) {
         userData = {
           ...userData,
-          ...userDoc.data()
+          ...userDoc.data(),
         };
       }
-      
+
       // Обновляем состояние пользователя
       updateUser(userData);
       navigate("/contacts");
@@ -174,7 +245,7 @@ const Login = ({ updateUser }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
-    
+
     try {
       if (isRegistering) {
         // Только вызываем handleRegister
@@ -191,22 +262,16 @@ const Login = ({ updateUser }) => {
   return (
     <LoginContainer>
       <TabContainer>
-        <Tab 
-          active={!isRegistering} 
-          onClick={() => setIsRegistering(false)}
-        >
+        <Tab active={!isRegistering} onClick={() => setIsRegistering(false)}>
           Вход
         </Tab>
-        <Tab 
-          active={isRegistering} 
-          onClick={() => setIsRegistering(true)}
-        >
+        <Tab active={isRegistering} onClick={() => setIsRegistering(true)}>
           Регистрация
         </Tab>
       </TabContainer>
 
       <GoogleButton onClick={handleGoogleSignIn}>
-      <FcGoogle />
+        <FcGoogle />
         Войти через Google
       </GoogleButton>
 

@@ -16,8 +16,8 @@ export const MainPageLink = () => {
       <Portfolio />
       <Services />
       <Skills />
-      <Footer />
       <MailTab />
+      <Footer />
     </>
   );
 };

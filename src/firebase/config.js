@@ -8,7 +8,6 @@ export const chatsRef = collection(db, "chats");
 export const messagesRef = collection(db, "messages");
 
 // Реэкспортируем auth и db для использования
-export { auth, db }; 
-
+export { auth, db };
 
 console.log("usersRef", messagesRef);

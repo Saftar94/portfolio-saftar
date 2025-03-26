@@ -10,16 +10,16 @@ const TabContainer = styled.div`
 
 const Tab = styled.button`
   padding: 10px 20px;
-  background: ${props => props.active ? '#007bff' : '#e9ecef'};
-  color: ${props => props.active ? 'white' : 'black'};
+  background: ${(props) => (props.active ? "#007bff" : "#e9ecef")};
+  color: ${(props) => (props.active ? "white" : "black")};
   border: none;
   cursor: pointer;
   margin-right: 5px;
-  
+
   &:first-child {
     border-radius: 4px 0 0 4px;
   }
-  
+
   &:last-child {
     border-radius: 0 4px 4px 0;
     margin-right: 0;
@@ -27,39 +27,37 @@ const Tab = styled.button`
 `;
 
 const Contacts = ({ user }) => {
-  const [activeTab, setActiveTab] = useState('chats');
-  console.log("My USER",user)
+  const [activeTab, setActiveTab] = useState("chats");
+  console.log("My USER", user);
   // Проверка на админа
-  const isAdmin = user && user.email === 'admin@example.com';
-  
+  const isAdmin = user && user.email === "admin@example.com";
+
   return (
     <Container>
-      <h1>Контакты</h1>
-      
+      <h1>Contacts</h1>
+
       <TabContainer>
-        <Tab 
-          active={activeTab === 'chats'} 
-          onClick={() => setActiveTab('chats')}
+        <Tab
+          active={activeTab === "chats"}
+          onClick={() => setActiveTab("chats")}
         >
-          Чаты
+          Chats
         </Tab>
         {isAdmin && (
-          <Tab 
-            active={activeTab === 'admin'} 
-            onClick={() => setActiveTab('admin')}
+          <Tab
+            active={activeTab === "admin"}
+            onClick={() => setActiveTab("admin")}
           >
-            Администрирование
+            Administration
           </Tab>
         )}
       </TabContainer>
-      
-      {activeTab === 'chats' && (
-        <ChatList currentUser={user} />
-      )}
-      
-      {isAdmin && activeTab === 'admin' && (
+
+      {activeTab === "chats" && <ChatList currentUser={user} />}
+
+      {isAdmin && activeTab === "admin" && (
         <div>
-          <h2>Панель администратора</h2>
+          <h2>Admin Panel</h2>
           {/* Здесь можно добавить административный функционал */}
         </div>
       )}

@@ -2,16 +2,13 @@ import Container from "../container/container";
 import styled from "styled-components";
 import { Navigation } from "../navigation/navigation";
 import { HeaderText } from "../headerButtonIcon/headerTextButton";
-import { ButtonForm } from "../homePage/homePageButton";
-import { lang } from "../shared/staticText/staticText";
 import { SliderMenu } from "../navigation/navSideBar";
 import { useState, useEffect } from "react";
 import { Divide as Hamburger } from "hamburger-react";
 import { useRef } from "react";
 import { theme } from "../style/theme";
+import { DesktopAuthButtons } from "../auth/AuthButtons";
 
-import { openModal } from "../../redux/actions";
-import { useDispatch } from "react-redux";
 const BlockHeader = styled.header`
   position: sticky;
   z-index: 100;
@@ -79,12 +76,6 @@ export const Header = ({ user, onLogout }) => {
   const toggleMenu = () => setIssidOpen(!isOpen);
   const ref = useRef(null);
 
-  const dispatch = useDispatch();
-
-  const handleOpenModal = () => {
-    dispatch(openModal());
-  };
-
   useEffect(() => {
     const changeColor = () => {
       if (window.scrollY >= 60) {
@@ -107,17 +98,25 @@ export const Header = ({ user, onLogout }) => {
           <HeaderText />
 
           <Wrapper>
-            <SliderMenu closeMenu={toggleMenu} isOpen={isOpen} />
+            <SliderMenu
+              closeMenu={toggleMenu}
+              isOpen={isOpen}
+              user={user}
+              onLogout={onLogout}
+            />
             <SliderButton onClick={toggleMenu}>
               <Hamburger size={32} toggled={isOpen} closeMenu={setIsOpen} />
             </SliderButton>
           </Wrapper>
 
-          <Navigation changeText={isСolor} isColor={isСolor} user={user} onLogout={onLogout} />
+          <Navigation
+            changeText={isСolor}
+            isColor={isСolor}
+            user={user}
+            onLogout={onLogout}
+          />
           <HeaderWrapButton>
-            <ButtonForm onClick={handleOpenModal}>
-              {lang.en.ButtonMain}
-            </ButtonForm>
+            <DesktopAuthButtons user={user} onLogout={onLogout} />
           </HeaderWrapButton>
         </NavigationContainer>
       </Container>

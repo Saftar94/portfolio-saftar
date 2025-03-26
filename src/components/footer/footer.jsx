@@ -5,7 +5,10 @@ import { FooterList } from "./footerList";
 
 import { HeaderText } from "../headerButtonIcon/headerTextButton";
 import { theme } from "../style/theme";
-const Footerblock = styled.footer`
+const FooterContainer = styled.footer`
+  background-color: #333;
+  color: white;
+  padding: 20px 0;
   padding: 60px 0px;
   background: ${(props) => props.isColor || theme.color.HeaderSlidecolor};
 `;
@@ -97,9 +100,9 @@ const FooterSocialLink = styled.a`
   padding: 5px;
 `;
 
-export const Footer = (props) => {
+export const Footer = () => {
   return (
-    <Footerblock>
+    <FooterContainer>
       <Container>
         <FooterBlockIn>
           <FooterLeftblock>
@@ -122,6 +125,6 @@ export const Footer = (props) => {
         </FooterSvgUl>
         <LeftText>{lang.en.FooterLefttext}</LeftText>
       </Container>
-    </Footerblock>
+    </FooterContainer>
   );
 };

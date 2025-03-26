@@ -5,28 +5,28 @@ import { HomePageButton } from "../homePage/homePageButton";
 import { keyframes } from "styled-components";
 import { NavLink } from "react-router-dom";
 import { theme } from "../style/theme";
+import { MobileAuthButtons } from "../auth/AuthButtons";
 
 const TitleSideBar = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: space-between;
-position: absolute;
-position: fixed;
-top: 0;
-right: ${({ isOpen }) => (isOpen ? "0" : "-100%")};
-transition: all 0.4s ease-in-out;
-rgba(0,212,255,1) 100%);
-background:${theme.color.Maincolor};
-width: 100%;
-padding: 27px 15px 27px 15px;
-margin: 0;
-list-style: none;
-z-index: 10000;
-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+  position: fixed;
+  top: 0;
+  right: ${({ isOpen }) => (isOpen ? "0" : "-100%")};
+  transition: all 0.4s ease-in-out;
+  background: ${theme.color.Maincolor};
+  width: 100%;
+  padding: 27px 15px 27px 15px;
+  margin: 0;
+  list-style: none;
+  z-index: 10000;
+  height: 100%;
 
-@media screen and (min-width: 768px) {
-  display: ${(props) => props.isOpen || "none"};
-}
+  @media screen and (min-width: 768px) {
+    display: ${(props) => props.isOpen || "none"};
+  }
 `;
 
 const MenuSideBar = styled.div`
@@ -43,7 +43,7 @@ const SliderButton = styled.button`
 export const SliderList = styled.ul``;
 
 const fadeInUp = keyframes`   
-0%{transform:translate(0px, 100px); opacity: 0;}
+  0%{transform:translate(0px, 100px); opacity: 0;}
   100%{transform:translate(0px, 0); opacity: 1;}
 `;
 
@@ -81,32 +81,47 @@ export const SliderListItem = styled(NavLink)`
   }
 `;
 
-export const SliderMenu = ({ closeMenu, isOpen }) => {
+export const SliderMenu = ({ closeMenu, isOpen, user, onLogout }) => {
+  // Отфильтруем элемент Login из массива SidebarData
+  const filteredSidebarData = SidebarData.filter(
+    (item) => item.title !== "Login"
+  );
+
   return (
     <>
       <TitleSideBar onClick={closeMenu} isOpen={isOpen}>
-        <MenuSideBar>
-          <SliderList onClick={closeMenu}>
-            {SidebarData.map((item) => {
-              return (
-                <SliderItems isOpen={!isOpen} key={item.id}>
-                  <SliderListItem
-                    to={item.path}
-                    activestyle={{
-                      color: "#536DFE",
-                    }}
-                  >
-                    {item.title}
-                  </SliderListItem>
-                </SliderItems>
-              );
-            })}
-          </SliderList>
+        <div>
+          <MenuSideBar>
+            <SliderList onClick={closeMenu}>
+              {filteredSidebarData.map((item) => {
+                return (
+                  <SliderItems isOpen={!isOpen} key={item.id}>
+                    <SliderListItem
+                      to={item.path}
+                      activestyle={{
+                        color: "#536DFE",
+                      }}
+                    >
+                      {item.title}
+                    </SliderListItem>
+                  </SliderItems>
+                );
+              })}
+            </SliderList>
 
-          <SliderButton onClick={closeMenu}>
-            <Hamburger size={32} closeMenu={closeMenu} toggled={isOpen} />
-          </SliderButton>
-        </MenuSideBar>
+            <SliderButton onClick={closeMenu}>
+              <Hamburger size={32} closeMenu={closeMenu} toggled={isOpen} />
+            </SliderButton>
+          </MenuSideBar>
+
+          {/* Используем компонент авторизации из нового файла */}
+          <MobileAuthButtons
+            user={user}
+            onLogout={onLogout}
+            onClose={closeMenu}
+          />
+        </div>
+
         <HomePageButton />
       </TitleSideBar>
     </>

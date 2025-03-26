@@ -53,37 +53,13 @@ const NavLinkHeader = styled(NavLink)`
   }
 `;
 
-const UserContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-left: 20px;
-`;
-
-const LogoutButton = styled.button`
-  background: #ff3a3a;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  
-  &:hover {
-    background: #cc0000;
-  }
-`;
-
 export const Navigation = ({ changeText, user, onLogout }) => {
-
-  const navigationItems = SidebarData.map(item => {
-    if (item.title === "Login" && user) {
-      return {
-        ...item,
-        title: user.email || "User",
-        path: "/contacts"
-      };
+  // Фильтруем элемент Login из навигации, если пользователь авторизован
+  const navigationItems = SidebarData.filter((item) => {
+    if (item.title === "Login") {
+      return !user; // Показываем Login только если пользователь не авторизован
     }
-    return item;
+    return true;
   });
 
   return (
@@ -105,12 +81,6 @@ export const Navigation = ({ changeText, user, onLogout }) => {
           );
         })}
       </NavUl>
-      
-      {user && (
-        <UserContainer>
-          <LogoutButton onClick={onLogout}>LogOut</LogoutButton>
-        </UserContainer>
-      )}
     </NavigationMenu>
   );
 };
