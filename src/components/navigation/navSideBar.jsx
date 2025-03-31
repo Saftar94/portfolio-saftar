@@ -7,6 +7,7 @@ import { theme } from "../style/theme";
 import { MobileAuthButtons } from "../auth/AuthButtons";
 import { useLanguage } from "../context/LanguageContext";
 import { lang } from "../shared/staticText/staticText";
+import LanguageSwitcher from "../shared/LanguageSwitcher";
 
 const TitleSideBar = styled.div`
   display: flex;
@@ -82,6 +83,15 @@ export const SliderListItem = styled(NavLink)`
   }
 `;
 
+// Добавляем стили для контейнера мобильного переключателя языков
+const MobileLanguageSwitcherWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+`;
+
 export const SliderMenu = ({ isOpen, closeMenu, user, onLogout }) => {
   // Получаем текущий язык и переводы
   const { language } = useLanguage();
@@ -146,6 +156,11 @@ export const SliderMenu = ({ isOpen, closeMenu, user, onLogout }) => {
             onLogout={onLogout}
             onClose={closeMenu}
           />
+
+          {/* Добавляем мобильный переключатель языков */}
+          <MobileLanguageSwitcherWrapper>
+            <LanguageSwitcher />
+          </MobileLanguageSwitcherWrapper>
         </div>
       </TitleSideBar>
     </>

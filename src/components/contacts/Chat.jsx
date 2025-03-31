@@ -16,6 +16,8 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import Container from "../container/container";
+import { useLanguage } from "../context/LanguageContext";
+import { lang } from "../shared/staticText/staticText";
 
 const ChatContainer = styled.div`
   display: flex;
@@ -181,6 +183,10 @@ const Chat = ({ currentUser, isAdmin }) => {
   const [loading, setLoading] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
+  // Получаем текущий язык
+  const { language } = useLanguage();
+  const text = lang[language];
+
   useEffect(() => {
     if (!currentUser || !currentUser.id) {
     }
@@ -227,71 +233,6 @@ const Chat = ({ currentUser, isAdmin }) => {
       fetchChatInfo();
     }
   }, [currentUser, chatId, navigate, isAdmin]);
-
-  // Добавьте эту временную функцию для отладки в компоненте Chat
-  // const debugMessages = async () => {
-  //   try {
-  //     console.log("===== ОТЛАДКА СООБЩЕНИЙ =====");
-  //     console.log("Текущий chatId:", chatId);
-
-  //     // Проверяем все сообщения в коллекции
-  //     const allMessagesSnapshot = await getDocs(collection(db, "messages"));
-  //     console.log("Всего сообщений в базе:", allMessagesSnapshot.size);
-
-  //     if (allMessagesSnapshot.size === 0) {
-  //       console.log("База сообщений пуста! Создаем тестовое сообщение...");
-  //       await addDoc(collection(db, "messages"), {
-  //         chatId: chatId,
-  //         senderId: currentUser?.id || "test-sender",
-  //         senderEmail: currentUser?.email || "test@example.com",
-  //         text: "Тестовое сообщение для отладки",
-  //         createdAt: new Date()
-  //       });
-  //       console.log("Тестовое сообщение создано!");
-  //       return;
-  //     }
-
-  //     // Проверяем структуру сообщений
-  //     console.log("Структура существующих сообщений:");
-  //     allMessagesSnapshot.forEach(doc => {
-  //       const data = doc.data();
-  //       console.log("ID:", doc.id, "Data:", data);
-  //       console.log("  - chatId:", data.chatId);
-  //       console.log("  - тип chatId:", typeof data.chatId);
-  //       console.log("  - текст:", data.text);
-  //     });
-
-  //     // Проверяем именно сообщения для текущего чата
-  //     const chatMessagesQuery = query(
-  //       collection(db, "messages"),
-  //       where("chatId", "==", chatId)
-  //     );
-
-  //     const chatMessagesSnapshot = await getDocs(chatMessagesQuery);
-  //     console.log(`Сообщений для chatId="${chatId}":`, chatMessagesSnapshot.size);
-
-  //     if (chatMessagesSnapshot.size === 0) {
-  //       console.log("Нет сообщений для текущего чата. Создаем тестовое...");
-  //       await addDoc(collection(db, "messages"), {
-  //         chatId: chatId,
-  //         senderId: currentUser?.id || "test-sender",
-  //         senderEmail: currentUser?.email || "test@example.com",
-  //         text: "Тестовое сообщение для текущего чата",
-  //         createdAt: new Date()
-  //       });
-  //       console.log("Тестовое сообщение для текущего чата создано!");
-  //     }
-  //   } catch (error) {
-  //     console.error("Ошибка при отладке сообщений:", error);
-  //   }
-  // };
-
-  // // Вызовите эту функцию в начале компонента
-  // useEffect(() => {
-  //   if (chatId && currentUser) {
-  //     debugMessages();
-  //   }
-  // }, [chatId, currentUser]);
 
   // Исправленный слушатель сообщений
   useEffect(() => {
@@ -443,20 +384,22 @@ const Chat = ({ currentUser, isAdmin }) => {
         <ChatHeader>
           <div style={{ display: "flex", alignItems: "center" }}>
             <BackButton onClick={() => navigate("/contacts")}>
-              ← Back
+              {text.chatBack}
             </BackButton>
             <h2 style={{ marginLeft: "15px" }}>
               {isAdmin ? (
-                <>Chat with user {otherUser.email}</>
+                <>
+                  {text.chatWithUser} {otherUser.email}
+                </>
               ) : (
-                <>Support Chat</>
+                <>{text.chatSupportTitle}</>
               )}
             </h2>
             {isAdmin && (
               <span
                 style={{ marginLeft: "10px", color: "#666", fontSize: "14px" }}
               >
-                (You are replying as administrator)
+                ({text.chatAdminReply})
               </span>
             )}
           </div>
@@ -464,7 +407,7 @@ const Chat = ({ currentUser, isAdmin }) => {
           <div style={{ display: "flex", gap: "10px" }}>
             {isAdmin && (
               <DeleteChatButton onClick={handleDeleteChat}>
-                Delete Chat
+                {text.chatDeleteChat}
               </DeleteChatButton>
             )}
           </div>
@@ -473,11 +416,11 @@ const Chat = ({ currentUser, isAdmin }) => {
         <MessagesContainer>
           {loading ? (
             <div style={{ textAlign: "center", margin: "20px" }}>
-              Loading all messages...
+              {text.chatLoading}
             </div>
           ) : messages.length === 0 ? (
             <div style={{ textAlign: "center", margin: "20px" }}>
-              No messages found
+              {text.chatNoMessages}
             </div>
           ) : (
             messages.map((message) => (
@@ -490,7 +433,7 @@ const Chat = ({ currentUser, isAdmin }) => {
                       <DeleteButton
                         onClick={() => handleDeleteMessage(message.id)}
                       >
-                        Delete
+                        {text.chatDelete}
                       </DeleteButton>
                     )}
                   </div>
@@ -506,9 +449,9 @@ const Chat = ({ currentUser, isAdmin }) => {
           <MessageInput
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
-            placeholder="Enter message..."
+            placeholder={text.chatMessagePlaceholder}
           />
-          <SendButton type="submit">Send</SendButton>
+          <SendButton type="submit">{text.chatSend}</SendButton>
         </InputArea>
       </ChatContainer>
 
@@ -516,9 +459,9 @@ const Chat = ({ currentUser, isAdmin }) => {
       {showConfirmDialog && (
         <ConfirmDialog>
           <DialogContent>
-            <h3>Delete Confirmation</h3>
-            <p>Are you sure you want to delete this chat?</p>
-            <p>All messages will be permanently deleted.</p>
+            <h3>{text.chatDeleteConfirm}</h3>
+            <p>{text.chatDeleteSure}</p>
+            <p>{text.chatDeletePermanent}</p>
 
             <DialogButtons>
               <DialogButton
@@ -526,14 +469,14 @@ const Chat = ({ currentUser, isAdmin }) => {
                 onClick={cancelDeleteChat}
                 disabled={loading}
               >
-                Cancel
+                {text.chatCancel}
               </DialogButton>
               <DialogButton
                 className="confirm"
                 onClick={confirmDeleteChat}
                 disabled={loading}
               >
-                {loading ? "Deleting..." : "Delete"}
+                {loading ? text.chatDeleting : text.chatDelete}
               </DialogButton>
             </DialogButtons>
           </DialogContent>

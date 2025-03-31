@@ -5,6 +5,8 @@ import { getDocs, getDoc, doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import Container from "../container/container";
 import { checkIfAdmin } from "../utils/AuthContext";
+import { useLanguage } from "../context/LanguageContext";
+import { lang } from "../shared/staticText/staticText";
 
 const ChatListContainer = styled.div`
   margin-top: 20px;
@@ -68,6 +70,10 @@ const RoleInfo = styled.div`
 `;
 
 const ChatList = ({ currentUser }) => {
+  // Получаем текущий язык
+  const { language } = useLanguage();
+  const text = lang[language];
+
   const [users, setUsers] = useState([]);
   const [adminUsers, setAdminUsers] = useState([]);
   const [chats, setChats] = useState({});
@@ -225,50 +231,49 @@ const ChatList = ({ currentUser }) => {
   return (
     <Container>
       <ChatListContainer>
-        <PageTitle>{isAdmin ? "User Chats" : "Technical Support"}</PageTitle>
+        <PageTitle>
+          {isAdmin ? text.chatUserChats : text.chatTechSupport}
+        </PageTitle>
 
         {isAdmin ? (
           // Режим администратора - показываем всех пользователей
           <>
             {users.length === 0 ? (
-              <NoUsersMessage>No users to connect with yet.</NoUsersMessage>
+              <NoUsersMessage>{text.chatNoUsers}</NoUsersMessage>
             ) : (
               users.map((user) => (
                 <UserItem key={user.id}>
                   <UserEmail>{user.email}</UserEmail>
                   <StartChatButton onClick={() => handleStartChat(user.id)}>
-                    {chats[user.id] ? "Open Chat" : "Start Chat"}
+                    {chats[user.id] ? text.chatOpenChat : text.chatStartChat}
                   </StartChatButton>
                 </UserItem>
               ))
             )}
             <RoleInfo>
-              <strong>You are logged in as administrator.</strong> You can
-              communicate with all system users.
+              <strong>{text.chatAdminMessage}</strong>
             </RoleInfo>
           </>
         ) : (
           // Режим пользователя - показываем только администраторов
           <>
             {adminUsers.length === 0 ? (
-              <NoUsersMessage>
-                No administrators found. Please contact technical support.
-              </NoUsersMessage>
+              <NoUsersMessage>{text.chatNoAdmins}</NoUsersMessage>
             ) : (
               adminUsers.map((admin) => (
                 <UserItem key={admin.id}>
                   <UserEmail>
-                    Administrator {admin.displayName || admin.email}
+                    {text.chatAdministrator} {admin.displayName || admin.email}
                   </UserEmail>
                   <StartChatButton onClick={() => handleStartChat(admin.id)}>
-                    {chats[admin.id] ? "Open Support Chat" : "Contact Support"}
+                    {chats[admin.id]
+                      ? text.chatOpenSupport
+                      : text.chatContactSupport}
                   </StartChatButton>
                 </UserItem>
               ))
             )}
-            <RoleInfo>
-              In this section you can contact the administrator for assistance.
-            </RoleInfo>
+            <RoleInfo>{text.chatSupportMessage}</RoleInfo>
           </>
         )}
       </ChatListContainer>

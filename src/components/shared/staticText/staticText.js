@@ -37,7 +37,7 @@ export const lang = {
     responsive: "RESPONSIVE DESIGN",
 
     // About page
-    AboutName: "Saftar",
+    AboutName: "SUN4S",
     AboutLastName: "Aliev",
     frontendDeveloper: "Frontend Developer",
     buildingModern: "Building modern and responsive web applications",
@@ -136,6 +136,53 @@ export const lang = {
       "The website allows users to manage inventory, add products, and track stock levels.",
     inventoryHighlights:
       "The website is built using React, Redux, HTML, SCSS, and Styled Components for a clean and responsive design.",
+
+    // Chat and messages
+    chatBack: "← Back",
+    chatSupportTitle: "Support Chat",
+    chatWithUser: "Chat with user",
+    chatAdminReply: "You are replying as administrator",
+    chatDeleteChat: "Delete Chat",
+    chatLoading: "Loading all messages...",
+    chatNoMessages: "No messages found",
+    chatMessagePlaceholder: "Enter message...",
+    chatSend: "Send",
+    chatDeleteConfirm: "Delete Confirmation",
+    chatDeleteSure: "Are you sure you want to delete this chat?",
+    chatDeletePermanent: "All messages will be permanently deleted.",
+    chatCancel: "Cancel",
+    chatDelete: "Delete",
+    chatDeleting: "Deleting...",
+
+    // User chats
+    chatUserChats: "User Chats",
+    chatTechSupport: "Technical Support",
+    chatNoUsers: "No users to connect with yet.",
+    chatOpenChat: "Open Chat",
+    chatStartChat: "Start Chat",
+    chatAdminMessage:
+      "You are logged in as administrator. You can communicate with all system users.",
+    chatNoAdmins: "No administrators found. Please contact technical support.",
+    chatAdministrator: "Administrator",
+    chatOpenSupport: "Open Support Chat",
+    chatContactSupport: "Contact Support",
+    chatSupportMessage:
+      "In this section you can contact the administrator for assistance.",
+
+    // Contacts
+    contactsTitle: "Contacts",
+    contactsChats: "Chats",
+
+    // Login and registration
+    loginTab: "Login",
+    registerTab: "Register",
+    loginWithGoogle: "Sign in with Google",
+    emailPlaceholder: "Email",
+    passwordPlaceholder: "Password",
+    loginButton: "Login",
+    registerButton: "Register",
+    loginError: "Login error",
+    registerError: "Registration error",
   },
   ru: {
     // Header
@@ -273,6 +320,54 @@ export const lang = {
       "Сайт позволяет пользователям управлять инвентарем, добавлять продукты и отслеживать уровень запасов.",
     inventoryHighlights:
       "Сайт создан с использованием React, Redux, HTML, SCSS и Styled Components для чистого и адаптивного дизайна.",
+
+    // Chat and messages
+    chatBack: "← Назад",
+    chatSupportTitle: "Чат поддержки",
+    chatWithUser: "Чат с пользователем",
+    chatAdminReply: "Вы отвечаете как администратор",
+    chatDeleteChat: "Удалить чат",
+    chatLoading: "Загрузка сообщений...",
+    chatNoMessages: "Сообщений не найдено",
+    chatMessagePlaceholder: "Введите сообщение...",
+    chatSend: "Отправить",
+    chatDeleteConfirm: "Подтверждение удаления",
+    chatDeleteSure: "Вы уверены, что хотите удалить этот чат?",
+    chatDeletePermanent: "Все сообщения будут удалены безвозвратно.",
+    chatCancel: "Отмена",
+    chatDelete: "Удалить",
+    chatDeleting: "Удаление...",
+
+    // User chats
+    chatUserChats: "Чаты пользователей",
+    chatTechSupport: "Техническая поддержка",
+    chatNoUsers: "Пока нет пользователей для связи.",
+    chatOpenChat: "Открыть чат",
+    chatStartChat: "Начать чат",
+    chatAdminMessage:
+      "Вы вошли как администратор. Вы можете общаться со всеми пользователями системы.",
+    chatNoAdmins:
+      "Администраторы не найдены. Пожалуйста, обратитесь в техническую поддержку.",
+    chatAdministrator: "Администратор",
+    chatOpenSupport: "Открыть чат поддержки",
+    chatContactSupport: "Связаться с поддержкой",
+    chatSupportMessage:
+      "В этом разделе вы можете связаться с администратором для получения помощи.",
+
+    // Contacts
+    contactsTitle: "Контакты",
+    contactsChats: "Чаты",
+
+    // Login and registration
+    loginTab: "Вход",
+    registerTab: "Регистрация",
+    loginWithGoogle: "Войти через Google",
+    emailPlaceholder: "Email",
+    passwordPlaceholder: "Пароль",
+    loginButton: "Войти",
+    registerButton: "Зарегистрироваться",
+    loginError: "Ошибка входа",
+    registerError: "Ошибка регистрации",
   },
   ua: {
     // Header
@@ -411,6 +506,54 @@ export const lang = {
       "Сайт дозволяє користувачам керувати інвентарем, додавати продукти та відстежувати рівень запасів.",
     inventoryHighlights:
       "Сайт створений з використанням React, Redux, HTML, SCSS та Styled Components для чистого та адаптивного дизайну.",
+
+    // Chat and messages
+    chatBack: "← Назад",
+    chatSupportTitle: "Чат підтримки",
+    chatWithUser: "Чат з користувачем",
+    chatAdminReply: "Ви відповідаєте як адміністратор",
+    chatDeleteChat: "Видалити чат",
+    chatLoading: "Завантаження повідомлень...",
+    chatNoMessages: "Повідомлень не знайдено",
+    chatMessagePlaceholder: "Введіть повідомлення...",
+    chatSend: "Надіслати",
+    chatDeleteConfirm: "Підтвердження видалення",
+    chatDeleteSure: "Ви впевнені, що хочете видалити цей чат?",
+    chatDeletePermanent: "Всі повідомлення будуть видалені безповоротно.",
+    chatCancel: "Скасувати",
+    chatDelete: "Видалити",
+    chatDeleting: "Видалення...",
+
+    // User chats
+    chatUserChats: "Чати користувачів",
+    chatTechSupport: "Технічна підтримка",
+    chatNoUsers: "Поки немає користувачів для зв'язку.",
+    chatOpenChat: "Відкрити чат",
+    chatStartChat: "Почати чат",
+    chatAdminMessage:
+      "Ви увійшли як адміністратор. Ви можете спілкуватися з усіма користувачами системи.",
+    chatNoAdmins:
+      "Адміністраторів не знайдено. Будь ласка, зверніться до технічної підтримки.",
+    chatAdministrator: "Адміністратор",
+    chatOpenSupport: "Відкрити чат підтримки",
+    chatContactSupport: "Зв'язатися з підтримкою",
+    chatSupportMessage:
+      "У цьому розділі ви можете зв'язатися з адміністратором для отримання допомоги.",
+
+    // Contacts
+    contactsTitle: "Контакти",
+    contactsChats: "Чати",
+
+    // Login and registration
+    loginTab: "Вхід",
+    registerTab: "Реєстрація",
+    loginWithGoogle: "Увійти через Google",
+    emailPlaceholder: "Email",
+    passwordPlaceholder: "Пароль",
+    loginButton: "Увійти",
+    registerButton: "Зареєструватися",
+    loginError: "Помилка входу",
+    registerError: "Помилка реєстрації",
   },
   tr: {
     // Header
@@ -550,6 +693,53 @@ export const lang = {
       "Web sitesi, kullanıcıların envanteri yönetmesine, ürün eklemesine ve stok seviyelerini izlemesine olanak tanır.",
     inventoryHighlights:
       "Web sitesi, temiz ve duyarlı bir tasarım için React, Redux, HTML, SCSS ve Styled Components kullanılarak oluşturulmuştur.",
+
+    // Chat and messages
+    chatBack: "← Geri",
+    chatSupportTitle: "Destek Sohbeti",
+    chatWithUser: "Kullanıcı ile sohbet",
+    chatAdminReply: "Yönetici olarak yanıtlıyorsunuz",
+    chatDeleteChat: "Sohbeti Sil",
+    chatLoading: "Mesajlar yükleniyor...",
+    chatNoMessages: "Mesaj bulunamadı",
+    chatMessagePlaceholder: "Mesaj girin...",
+    chatSend: "Gönder",
+    chatDeleteConfirm: "Silme Onayı",
+    chatDeleteSure: "Bu sohbeti silmek istediğinizden emin misiniz?",
+    chatDeletePermanent: "Tüm mesajlar kalıcı olarak silinecektir.",
+    chatCancel: "İptal",
+    chatDelete: "Sil",
+    chatDeleting: "Siliniyor...",
+
+    // User chats
+    chatUserChats: "Kullanıcı Sohbetleri",
+    chatTechSupport: "Teknik Destek",
+    chatNoUsers: "Henüz bağlanacak kullanıcı yok.",
+    chatOpenChat: "Sohbeti Aç",
+    chatStartChat: "Sohbet Başlat",
+    chatAdminMessage:
+      "Yönetici olarak giriş yaptınız. Tüm sistem kullanıcılarıyla iletişim kurabilirsiniz.",
+    chatNoAdmins: "Yönetici bulunamadı. Lütfen teknik desteğe başvurun.",
+    chatAdministrator: "Yönetici",
+    chatOpenSupport: "Destek Sohbetini Aç",
+    chatContactSupport: "Destek ile İletişime Geç",
+    chatSupportMessage:
+      "Bu bölümde yardım almak için yönetici ile iletişime geçebilirsiniz.",
+
+    // Contacts
+    contactsTitle: "Kişiler",
+    contactsChats: "Sohbetler",
+
+    // Login and registration
+    loginTab: "Giriş",
+    registerTab: "Kayıt",
+    loginWithGoogle: "Google ile giriş yap",
+    emailPlaceholder: "E-posta",
+    passwordPlaceholder: "Parola",
+    loginButton: "Giriş Yap",
+    registerButton: "Kaydol",
+    loginError: "Giriş hatası",
+    registerError: "Kayıt hatası",
   },
 };
 

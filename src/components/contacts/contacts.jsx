@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Container from "../container/container";
 import ChatList from "./ChatList";
+import { useLanguage } from "../context/LanguageContext";
+import { lang } from "../shared/staticText/staticText";
 
 const TabContainer = styled.div`
   display: flex;
@@ -27,18 +29,21 @@ const Tab = styled.button`
 
 const Contacts = ({ user }) => {
   const [activeTab, setActiveTab] = useState("chats");
-  // Проверка на админа
+
+  // Получаем текущий язык
+  const { language } = useLanguage();
+  const text = lang[language];
 
   return (
     <Container>
-      <h1>Contacts</h1>
+      <h1>{text.contactsTitle}</h1>
 
       <TabContainer>
         <Tab
           active={activeTab === "chats"}
           onClick={() => setActiveTab("chats")}
         >
-          Chats
+          {text.contactsChats}
         </Tab>
       </TabContainer>
 
