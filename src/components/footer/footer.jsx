@@ -2,12 +2,13 @@ import React from "react";
 import Container from "../container/container";
 import styled from "styled-components";
 import { lang } from "../shared/staticText/staticText";
+import { theme } from "../style/theme";
 import { FooterList } from "./footerList";
 import { HeaderText } from "../headerButtonIcon/headerTextButton";
-import { theme } from "../style/theme";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import { useLanguage } from "../context/LanguageContext";
 
 // Фикс для иконки маркера
 delete L.Icon.Default.prototype._getIconUrl;
@@ -142,8 +143,24 @@ const FooterSvgli = styled.li`
   display: flex;
   padding: 5px;
   margin-left: 16px;
+  transition: all 0.3s ease;
+
   &:first-child {
     margin-left: 0px;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    color: ${theme.color.ButtonColor};
+    border-color: ${theme.color.ButtonColor};
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: translateY(-2px);
+    color: ${theme.color.ButtonColor};
+    border-color: ${theme.color.ButtonColor};
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   }
 `;
 
@@ -154,9 +171,25 @@ const FooterSocialLink = styled.a`
   align-items: center;
   display: flex;
   padding: 5px;
+  color: inherit;
+  width: 100%;
+  height: 100%;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: rotate(5deg) scale(1.1);
+  }
+
+  svg {
+    transition: all 0.3s ease;
+    font-size: 20px;
+  }
 `;
 
 export const Footer = () => {
+  const { language } = useLanguage();
+  const text = lang[language];
+
   return (
     <FooterContainer>
       <MapWrapper>
@@ -193,7 +226,7 @@ export const Footer = () => {
               </FooterSvgli>
             ))}
           </FooterSvgUl>
-          <LeftText>{lang.en.FooterLefttext}</LeftText>
+          <LeftText>{text.FooterLefttext}</LeftText>
         </Container>
       </ContentWrapper>
     </FooterContainer>

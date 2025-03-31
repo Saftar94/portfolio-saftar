@@ -8,6 +8,7 @@ import { Divide as Hamburger } from "hamburger-react";
 import { useRef } from "react";
 import { theme } from "../style/theme";
 import { DesktopAuthButtons } from "../auth/AuthButtons";
+import LanguageSwitcher from "../shared/LanguageSwitcher";
 
 const BlockHeader = styled.header`
   position: sticky;
@@ -72,11 +73,25 @@ const Wrapper = styled.div`
   }
 `;
 
+// Добавим стили для мобильного и десктопного переключателя языков
+const LanguageSwitcherWrapper = styled.div`
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    margin: 15px 0;
+    justify-content: center;
+  }
+`;
+
 export const Header = ({ user, onLogout }) => {
   const [isСolor, setIsOpen] = useState(1);
   const [isOpen, setIssidOpen] = useState(false);
   const toggleMenu = () => setIssidOpen(!isOpen);
   const ref = useRef(null);
+
+  // Получаем текущий язык и переводы
 
   useEffect(() => {
     const changeColor = () => {
@@ -93,6 +108,7 @@ export const Header = ({ user, onLogout }) => {
       window.removeEventListener("scroll", changeColor);
     };
   }, []);
+
   return (
     <BlockHeader changeNav={isСolor} isColor={isСolor} ref={ref}>
       <Container style={{ overflowX: "visible" }}>
@@ -116,8 +132,12 @@ export const Header = ({ user, onLogout }) => {
             user={user}
             onLogout={onLogout}
           />
+
           <HeaderWrapButton>
             <DesktopAuthButtons user={user} onLogout={onLogout} />
+            <LanguageSwitcherWrapper>
+              <LanguageSwitcher />
+            </LanguageSwitcherWrapper>
           </HeaderWrapButton>
         </NavigationContainer>
       </Container>

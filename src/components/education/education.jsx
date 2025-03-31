@@ -4,6 +4,7 @@ import { lang } from "../shared/staticText/staticText";
 import { FcMindMap } from "react-icons/fc";
 import { educationList } from "./educationList";
 import { theme } from "../style/theme";
+import { useLanguage } from "../context/LanguageContext";
 
 const Awardsblock = styled.div`
   text-align: center;
@@ -125,14 +126,17 @@ const AwardsYear = styled.span`
 `;
 
 export const Education = () => {
+  const { language } = useLanguage();
+  const text = lang[language];
+
   return (
     <Awardsblock>
       <Container>
         <FcMindMap
           style={{ marginBottom: "20px", height: "40px", width: "40px" }}
         />
-        <AwardHead>{lang.en.EducationHeader}</AwardHead>
-        <AwardReg>{lang.en.EducationRegion}</AwardReg>
+        <AwardHead>{text.EducationHeader}</AwardHead>
+        <AwardReg>{text.EducationRegion}</AwardReg>
         <AwardsUl>
           {educationList.map((item) => (
             <AwardsLi key={item.id}>

@@ -2,6 +2,7 @@ import { FcMindMap } from "react-icons/fc";
 import { lang } from "../shared/staticText/staticText";
 import styled from "styled-components";
 import { theme } from "../style/theme";
+import { useLanguage } from "../context/LanguageContext";
 
 const StyleUnder = styled.div`
   display: flex;
@@ -25,27 +26,33 @@ const StyledTextUnder = styled.p`
 `;
 
 export const HomePageUnder = () => {
+  // Получаем текущий язык
+  const { language } = useLanguage();
+  const text = lang[language];
+
   return (
-    <StyleUnder>
-      <StyledTextUnder>{lang.en.Creative}</StyledTextUnder>
-      <FcMindMap
-        style={{
-          marginRight: "16px",
-          marginLeft: "16px",
-          height: "20px",
-          width: "20px",
-        }}
-      />
-      <StyledTextUnder>{lang.en.Development}</StyledTextUnder>
-      <FcMindMap
-        style={{
-          marginRight: "16px",
-          marginLeft: "16px",
-          height: "20px",
-          width: "20px",
-        }}
-      />
-      <StyledTextUnder>{lang.en.Webflow}</StyledTextUnder>
-    </StyleUnder>
+    <>
+      <StyleUnder>
+        <FcMindMap
+          style={{
+            marginRight: "16px",
+            marginLeft: "16px",
+            height: "20px",
+            width: "20px",
+          }}
+        />
+        <StyledTextUnder>{text.Creative}</StyledTextUnder>
+
+        <FcMindMap
+          style={{
+            marginRight: "16px",
+            marginLeft: "16px",
+            height: "20px",
+            width: "20px",
+          }}
+        />
+        <StyledTextUnder>{text.Development}</StyledTextUnder>
+      </StyleUnder>
+    </>
   );
 };

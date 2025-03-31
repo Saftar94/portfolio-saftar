@@ -5,6 +5,8 @@ import { keyframes } from "styled-components";
 import { NavLink } from "react-router-dom";
 import { theme } from "../style/theme";
 import { MobileAuthButtons } from "../auth/AuthButtons";
+import { useLanguage } from "../context/LanguageContext";
+import { lang } from "../shared/staticText/staticText";
 
 const TitleSideBar = styled.div`
   display: flex;
@@ -80,11 +82,36 @@ export const SliderListItem = styled(NavLink)`
   }
 `;
 
-export const SliderMenu = ({ closeMenu, isOpen, user, onLogout }) => {
-  // Отфильтруем элемент Login из массива SidebarData
-  const filteredSidebarData = SidebarData.filter(
-    (item) => item.title !== "Login"
-  );
+export const SliderMenu = ({ isOpen, closeMenu, user, onLogout }) => {
+  // Получаем текущий язык и переводы
+  const { language } = useLanguage();
+  const text = lang[language];
+
+  // Функция для получения локализованного названия пункта меню
+  const getLocalizedTitle = (title) => {
+    switch (title) {
+      case "Home":
+        return text.headerHome || "Home";
+      case "About":
+        return text.headerAbout || "About";
+      case "Projects":
+        return text.headerProjects || "Projects";
+      case "Contacts":
+        return text.headerContacts || "Contacts";
+      case "Login":
+        return text.headerLogin || "Login";
+      default:
+        return title;
+    }
+  };
+
+  // Фильтруем элемент Login из навигации, если пользователь авторизован
+  const sidebarItems = SidebarData.filter((item) => {
+    if (item.title === "Login") {
+      return !user; // Показываем Login только если пользователь не авторизован
+    }
+    return true;
+  });
 
   return (
     <>
@@ -92,7 +119,7 @@ export const SliderMenu = ({ closeMenu, isOpen, user, onLogout }) => {
         <div>
           <MenuSideBar>
             <SliderList onClick={closeMenu}>
-              {filteredSidebarData.map((item) => {
+              {sidebarItems.map((item) => {
                 return (
                   <SliderItems isOpen={!isOpen} key={item.id}>
                     <SliderListItem
@@ -101,7 +128,7 @@ export const SliderMenu = ({ closeMenu, isOpen, user, onLogout }) => {
                         color: "#536DFE",
                       }}
                     >
-                      {item.title}
+                      {getLocalizedTitle(item.title)}
                     </SliderListItem>
                   </SliderItems>
                 );

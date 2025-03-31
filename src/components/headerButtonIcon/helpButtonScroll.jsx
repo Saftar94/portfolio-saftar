@@ -38,15 +38,27 @@ const ButtonScrollUP = styled.button`
   background-color: ${theme.color.ButtonColor};
   border-radius: 40%;
   color: white;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    background-color: #ff6347;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: translateY(-2px);
+    background-color: #e73c16;
+  }
 
   @media screen and (min-width: 768px) {
-    width: 50px; /* Изменил размер кнопки для планшета и компьютера */
-    height: 50px; /* Изменил размер кнопки для планшета и компьютера */
+    width: 50px;
+    height: 50px;
   }
 
   @media screen and (min-width: 1024px) {
-    width: 60px; /* Изменил размер кнопки для компьютера с большим экраном */
-    height: 60px; /* Изменил размер кнопки для компьютера с большим экраном */
+    width: 60px;
+    height: 60px;
   }
 `;
 

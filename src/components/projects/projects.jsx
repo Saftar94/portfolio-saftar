@@ -6,8 +6,9 @@ import { FiExternalLink } from "react-icons/fi";
 import Container from "../container/container";
 import { lang } from "../shared/staticText/staticText";
 import { AwardReg } from "../education/education";
-import { portfolioList } from "./projectsList";
+import { usePortfolioList } from "./projectsList";
 import { theme } from "../style/theme";
+import { useLanguage } from "../context/LanguageContext";
 
 const ProjectSection = styled.div`
   text-align: center;
@@ -275,6 +276,10 @@ const LinkButton = styled.a`
 `;
 
 export const Projects = () => {
+  const { language } = useLanguage();
+  const text = lang[language];
+  const portfolioItems = usePortfolioList();
+
   return (
     <ProjectSection className="content-container">
       <Container style={{ overflowX: "visible" }}>
@@ -285,11 +290,11 @@ export const Projects = () => {
             width: "40px",
           }}
         />
-        <ProjectHead>{lang.en.Project}</ProjectHead>
-        <AwardReg>{lang.en.ProjectSite}</AwardReg>
+        <ProjectHead>{text.projectsTitle}</ProjectHead>
+        <AwardReg>{text.projectsSubtitle}</AwardReg>
 
         <ProjectList>
-          {portfolioList.map((project) => (
+          {portfolioItems.map((project) => (
             <ProjectItem key={project.id}>
               <ProjectImageWrapper>
                 <picture>
@@ -316,7 +321,7 @@ export const Projects = () => {
                   <ProjectDescription>{project.description}</ProjectDescription>
 
                   <TechStack>
-                    <TechTitle>Used technologies</TechTitle>
+                    <TechTitle>{text.usedTechnologies}</TechTitle>
                     <TechList>
                       {project.stack.map((tech, index) => (
                         <TechTag key={index}>{tech}</TechTag>
@@ -335,7 +340,7 @@ export const Projects = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <VscGithub /> GitHub
+                    <VscGithub /> {text.viewCode}
                   </LinkButton>
                   {project.demo && (
                     <LinkButton
@@ -344,7 +349,7 @@ export const Projects = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <FiExternalLink /> Demo
+                      <FiExternalLink /> {text.viewDemo}
                     </LinkButton>
                   )}
                 </ProjectLinks>

@@ -1,9 +1,11 @@
 import styled, { keyframes } from "styled-components";
 import Container from "../container/container";
 import { FcWorkflow } from "react-icons/fc";
-import { list } from "./listAboutMe";
+import { useAboutMeList } from "./listAboutMe";
 import { theme } from "../style/theme";
 import aboutSaftar from "../image&svg/imgae/aboutSaftar.jpg";
+import { useLanguage } from "../context/LanguageContext";
+import { lang } from "../shared/staticText/staticText";
 
 // Анимация биения сердца
 const heartbeat = keyframes`
@@ -101,6 +103,19 @@ const SkillTag = styled.span`
   border-radius: 20px;
   font-size: 14px;
   font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-5px);
+    background: #ff6347;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    transform: translateY(-2px);
+    background: #e73c16;
+  }
 `;
 
 const StyleTextDown = styled.p`
@@ -143,14 +158,9 @@ const ListPDown = styled.p`
 `;
 
 export const AboutMe = () => {
-  // Просто используем текст напрямую без переводов
-  const defaultDescription = `I'm a passionate frontend developer specializing in building interactive, high-performance 
-web applications using React.js, and modern UI/UX principles. My focus is on creating 
-seamless user experiences through clean code, component-based architecture, and cutting-edge 
-technologies like styled-components, Tailwind CSS, and Firebase.
-
-I believe that great web applications are a fusion of elegant design, scalability, 
-and optimized performance.`;
+  const { language } = useLanguage();
+  const text = lang[language];
+  const aboutMeList = useAboutMeList();
 
   return (
     <StyleAboutMe>
@@ -165,12 +175,10 @@ and optimized performance.`;
                   width: "40px",
                 }}
               />
-              Frontend Developer
+              {text.frontendDeveloper}
             </StyleLeftDown>
-            <StyleTextUp>
-              Building modern web applications with React and innovation
-            </StyleTextUp>
-            <StyleTextDown>{defaultDescription}</StyleTextDown>
+            <StyleTextUp>{text.buildingModern}</StyleTextUp>
+            <StyleTextDown>{text.developerDescription}</StyleTextDown>
             <SkillTags>
               <SkillTag>React</SkillTag>
               <SkillTag>JavaScript</SkillTag>
@@ -178,7 +186,7 @@ and optimized performance.`;
               <SkillTag>Firebase</SkillTag>
             </SkillTags>
             <ListAboutMeUl>
-              {list.map((item) => (
+              {aboutMeList.map((item) => (
                 <ListAboutMe key={item.id}>
                   <ListPUp>{item.firstname}</ListPUp>
                   <ListPDown>{item.lastname}</ListPDown>

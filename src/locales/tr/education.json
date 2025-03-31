@@ -1,0 +1,25 @@
+{
+  "universities": {
+    "1": {
+      "name": "Sinerji Üniversitesi",
+      "place": "İkinci - Webflow Uzman Tasarımcı",
+      "direction": "Proje Yönetimi ve İnsan Kaynakları!",
+      "year": "2012—2017"
+    },
+    "2": {
+      "name": "Step IT",
+      "direction": "Python Geliştirici",
+      "year": "2021"
+    },
+    "3": {
+      "name": "GoIt",
+      "direction": "FULL STACK",
+      "year": "2022-2023"
+    },
+    "4": {
+      "name": "Beetrootacademy",
+      "direction": "Front-End Geliştirici",
+      "year": "2024-2025"
+    }
+  }
+} 
