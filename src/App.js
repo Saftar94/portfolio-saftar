@@ -1,13 +1,15 @@
 import { Header } from "./components/header/header";
 import { HomePage } from "./components/homePage/homePage";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { AboutMe } from "./components/aboutMe/aboutExample";
 import React, { useState, useEffect } from "react";
 import Login from "./components/contacts/Login";
 import Contacts from "./components/contacts/contacts";
 import Chat from "./components/contacts/Chat";
+import { Projects } from "./components/projects/projects";
+import { LoadingProvider } from "./components/context/LoadingContext";
+import { Footer } from "./components/footer/footer";
 
-// Компонент защищенного маршрута
 function ProtectedRoute({ user, children }) {
   if (!user) {
     return <Navigate to="/login" replace />;
@@ -23,10 +25,14 @@ function App() {
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
+  // Получаем текущий путь для проверки страницы контактов
+  const location = useLocation();
+  const isContactsPage =
+    location.pathname === "/contacts" || location.pathname.startsWith("/chat/");
+
   // Обновляем localStorage при изменении пользователя
   useEffect(() => {
     if (user) {
-      console.log("Current user in App:", user); // Проверяем данные пользователя
       localStorage.setItem("user", JSON.stringify(user));
     } else {
       localStorage.removeItem("user");
@@ -41,15 +47,15 @@ function App() {
     setUser(null);
   };
 
-  // Проверка на администратора
   const isAdmin = user && user.email === "aliev.saftar94@gmail.com";
 
   return (
-    <>
+    <LoadingProvider>
       <Header user={user} onLogout={handleLogout} />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutMe />} />
+        <Route path="/projects" element={<Projects />} />
         <Route path="/login" element={<Login updateUser={updateUser} />} />
         <Route
           path="/contacts"
@@ -68,7 +74,8 @@ function App() {
           }
         />
       </Routes>
-    </>
+      {!isContactsPage && <Footer />}
+    </LoadingProvider>
   );
 }
 

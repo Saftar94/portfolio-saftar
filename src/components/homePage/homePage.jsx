@@ -3,7 +3,6 @@ import { lang } from "../shared/staticText/staticText";
 import Container from "../container/container";
 import { FcMindMap } from "react-icons/fc";
 import { HomePageUnder } from "./homepageUnder";
-import { HomePageButton } from "./homePageButton";
 import { MainPageLink } from "./mainPageLink";
 import { keyframes } from "styled-components";
 import { theme } from "../style/theme";
@@ -116,7 +115,6 @@ export const HomePage = () => {
                 <Styletext>{lang.en.Maintexttwo}</Styletext>
               </StyleMain>
               <HomePageUnder />
-              <HomePageButton />
             </HomePageContainerLeft>
 
             <HomePageContainerRight>

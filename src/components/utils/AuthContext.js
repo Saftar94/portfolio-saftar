@@ -40,7 +40,7 @@ export const AuthContextProvider = ({ children }) => {
               displayName: user.displayName || "",
               photoURL: user.photoURL || "",
               createdAt: serverTimestamp(),
-              isAdmin: user.email === "admin@example.com",
+              isAdmin: user.email === "aliev.saftar94@gmail.com",
             };
 
             console.log("Данные для сохранения:", userData);
@@ -104,5 +104,5 @@ export const checkIfAdmin = (user) => {
   if (!user) return false;
 
   // Проверяем по email или по свойству isAdmin
-  return user.email === "admin@example.com" || user.isAdmin === true;
+  return user.email === "aliev.saftar94@gmail.com" || user.isAdmin === true;
 };

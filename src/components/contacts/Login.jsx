@@ -95,7 +95,6 @@ const Login = ({ updateUser }) => {
       setError("");
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      console.log("Google Auth Result:", result);
 
       // Проверяем, есть ли пользователь в Firestore
       const userDocRef = doc(db, "users", user.uid);
@@ -111,11 +110,6 @@ const Login = ({ updateUser }) => {
 
       // Если пользователя нет, создаем его
       if (!userDoc.exists()) {
-        console.log(
-          "Creating new user document for Google user:",
-          user.uid,
-          user.email
-        );
         await setDoc(userDocRef, {
           email: user.email,
           createdAt: new Date(),
@@ -125,8 +119,6 @@ const Login = ({ updateUser }) => {
           photoURL: user.photoURL,
         });
       } else {
-        console.log("User already exists in Firestore:", userDoc.data());
-
         // Дополняем userData данными из Firestore
         userData = { ...userDoc.data(), id: user.uid };
 
@@ -143,7 +135,6 @@ const Login = ({ updateUser }) => {
           );
 
           userData.isAdmin = true;
-          console.log("Updated admin status for Google user");
         }
       }
 
@@ -151,11 +142,9 @@ const Login = ({ updateUser }) => {
       updateUser(userData);
 
       // Проверяем, что все необходимые данные есть в объекте пользователя
-      console.log("Updated user object:", userData);
 
       navigate("/contacts");
     } catch (error) {
-      console.error("Google sign in error:", error);
       setError(error.message);
     }
   };
@@ -170,8 +159,6 @@ const Login = ({ updateUser }) => {
       );
       const user = userCredential.user;
 
-      console.log("Firebase Auth user created:", user.uid);
-
       // Создаем данные пользователя
       const userData = {
         email: user.email,
@@ -179,21 +166,15 @@ const Login = ({ updateUser }) => {
         isAdmin: email === "admin@example.com",
       };
 
-      console.log("Attempting to save user to Firestore:", userData);
-
       // Явно указываем путь к документу
       await setDoc(doc(db, "users", user.uid), userData);
-
-      console.log("User successfully saved to Firestore with ID:", user.uid);
 
       // Проверяем, что document действительно создан
       const docRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        console.log("Verification - document exists:", docSnap.data());
       } else {
-        console.error("Verification failed - document does not exist!");
       }
 
       // Обновляем состояние
@@ -205,7 +186,6 @@ const Login = ({ updateUser }) => {
 
       navigate("/contacts");
     } catch (error) {
-      console.error("Registration error:", error);
       setError(error.message);
     }
   };
@@ -234,7 +214,6 @@ const Login = ({ updateUser }) => {
         };
       }
 
-      // Обновляем состояние пользователя
       updateUser(userData);
       navigate("/contacts");
     } catch (error) {

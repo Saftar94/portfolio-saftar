@@ -7,8 +7,8 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 12px;
     font-weight: 400;
     margin: 0;
-    // background:${theme.color.Maincolor}
-    background: rgb(69 178 122);
+    background:${theme.color.Maincolor}
+    min-height: 100vh;
   }
 
   * {
@@ -18,6 +18,37 @@ export const GlobalStyle = createGlobalStyle`
       box-sizing: border-box;
     }
   }
+
+.background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.background-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3; 
+}
+
+.background-gif {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3;
+  filter: blur(1px) brightness(0.9);
+}
+
+.content-container {
+  position: relative;
+  z-index: 1;
+}
+
 
   h1, h2, h3, h4, h5, h6 {
     margin: 0;

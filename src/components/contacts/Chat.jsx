@@ -182,17 +182,12 @@ const Chat = ({ currentUser, isAdmin }) => {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
   useEffect(() => {
-    console.log("Chat component currentUser:", currentUser);
     if (!currentUser || !currentUser.id) {
-      console.error("Current user is missing ID in Chat component");
     }
   }, [currentUser]);
 
   useEffect(() => {
     const fetchChatInfo = async () => {
-      console.log("Fetching chat info for ID:", chatId);
-      console.log("Current user:", currentUser);
-
       try {
         const chatRef = doc(db, "chats", chatId);
         const chatDoc = await getDoc(chatRef);
@@ -301,25 +296,18 @@ const Chat = ({ currentUser, isAdmin }) => {
   // Исправленный слушатель сообщений
   useEffect(() => {
     if (!chatId) {
-      console.error("Отсутствует chatId, невозможно загрузить сообщения");
       return;
     }
 
-    console.log("Настраиваем слушатель сообщений для чата:", chatId);
     setLoading(true);
 
     // Создаем запрос без where условия для начальной отладки
     const q = query(collection(db, "messages"), orderBy("createdAt", "asc"));
 
-    console.log("Запрос всех сообщений для отладки");
-
     const unsubscribe = onSnapshot(
       q,
       (querySnapshot) => {
-        console.log(`Получено ${querySnapshot.size} сообщений всего`);
-
         if (querySnapshot.empty) {
-          console.log("Сообщений вообще нет в базе!");
           setMessages([]);
           setLoading(false);
           return;
@@ -335,37 +323,24 @@ const Chat = ({ currentUser, isAdmin }) => {
             createdAt: data.createdAt?.toDate?.() || new Date(),
           };
 
-          // Проверяем chatId
-          console.log("Сообщение:", doc.id);
-          console.log("  chatId в сообщении:", data.chatId);
-          console.log("  текущий chatId:", chatId);
-          console.log("  совпадают?", data.chatId === chatId);
-
           // Добавляем все сообщения для отладки
           messagesData.push(messageObj);
         });
 
-        console.log("Все сообщения:", messagesData);
         // Теперь фильтруем только для текущего чата
         const filteredMessages = messagesData.filter(
           (msg) => String(msg.chatId) === String(chatId)
-        );
-        console.log(
-          "Отфильтрованные сообщения для текущего чата:",
-          filteredMessages
         );
 
         setMessages(filteredMessages); // Показываем только сообщения текущего чата
         setLoading(false);
       },
       (error) => {
-        console.error("Ошибка при подписке на сообщения:", error);
         setLoading(false);
       }
     );
 
     return () => {
-      console.log("Отписываемся от обновлений сообщений");
       unsubscribe();
     };
   }, [chatId]);
@@ -381,7 +356,6 @@ const Chat = ({ currentUser, isAdmin }) => {
 
     try {
       if (!chatId) {
-        console.error("Отсутствует chatId, невозможно отправить сообщение");
         return;
       }
 
@@ -394,15 +368,11 @@ const Chat = ({ currentUser, isAdmin }) => {
         createdAt: serverTimestamp(),
       };
 
-      console.log("Отправляем сообщение в чат:", chatId);
-
       // Добавляем документ в коллекцию messages
       await addDoc(collection(db, "messages"), messageData);
 
       setNewMessage("");
-    } catch (error) {
-      console.error("Ошибка при отправке сообщения:", error);
-    }
+    } catch (error) {}
   };
 
   const handleDeleteMessage = async (messageId) => {
@@ -413,14 +383,11 @@ const Chat = ({ currentUser, isAdmin }) => {
     try {
       const messageRef = doc(db, "messages", messageId);
       await deleteDoc(messageRef);
-      console.log("Сообщение успешно удалено:", messageId);
 
       setMessages((prevMessages) =>
         prevMessages.filter((msg) => msg.id !== messageId)
       );
-    } catch (error) {
-      console.error("Ошибка при удалении сообщения:", error);
-    }
+    } catch (error) {}
   };
 
   // Функция для удаления всего чата
@@ -452,10 +419,8 @@ const Chat = ({ currentUser, isAdmin }) => {
       const chatRef = doc(db, "chats", chatId);
       await deleteDoc(chatRef);
 
-      console.log("Чат и все сообщения успешно удалены");
       navigate("/contacts");
     } catch (error) {
-      console.error("Ошибка при удалении чата:", error);
       alert("Не удалось удалить чат. Попробуйте позже.");
     } finally {
       setLoading(false);
@@ -497,9 +462,11 @@ const Chat = ({ currentUser, isAdmin }) => {
           </div>
 
           <div style={{ display: "flex", gap: "10px" }}>
-            <DeleteChatButton onClick={handleDeleteChat}>
-              Delete Chat
-            </DeleteChatButton>
+            {isAdmin && (
+              <DeleteChatButton onClick={handleDeleteChat}>
+                Delete Chat
+              </DeleteChatButton>
+            )}
           </div>
         </ChatHeader>
 

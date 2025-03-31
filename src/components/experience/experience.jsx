@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { theme } from "../style/theme";
 const ExperiendBlock = styled.div`
   padding-top: 40px;
+  margin-bottom: 120px;
 `;
 const ExperienceUl = styled.ul`
   display: grid;

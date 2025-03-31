@@ -3,29 +3,6 @@ import { FaArrowUp } from "react-icons/fa";
 import { useState } from "react";
 import { useRef } from "react";
 import { theme } from "../style/theme";
-// const BlockHelp = styled.div`
-//   position: fixed;
-//   top: 80vh;
-//   right: 70px;
-//   z-index: 1000;
-//   display: inline-flex;
-//   flex-direction: column;
-//   align-items: center;
-//   opacity: ${(props) => props.isShow || "0"};
-// `;
-// const ButtonScrollUP = styled.button`
-//   position: relative;
-//   border-style: none;
-//   cursor: pointer;
-//   background-repeat: no-repeat;
-//   background-position: 50%;
-//   right: 10px;
-//   width: 50px;
-//   height: 50px;
-//   background-color: ${theme.color.ButtonColor};
-//   border-radius: 40%;
-//   color: white;
-// `;
 
 const BlockHelp = styled.div`
   position: fixed;
@@ -56,24 +33,24 @@ const ButtonScrollUP = styled.button`
   background-repeat: no-repeat;
   background-position: 50%;
   right: 10px;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   background-color: ${theme.color.ButtonColor};
   border-radius: 40%;
   color: white;
 
   @media screen and (min-width: 768px) {
-    width: 60px; /* Изменил размер кнопки для планшета и компьютера */
-    height: 60px; /* Изменил размер кнопки для планшета и компьютера */
+    width: 50px; /* Изменил размер кнопки для планшета и компьютера */
+    height: 50px; /* Изменил размер кнопки для планшета и компьютера */
   }
 
   @media screen and (min-width: 1024px) {
-    width: 70px; /* Изменил размер кнопки для компьютера с большим экраном */
-    height: 70px; /* Изменил размер кнопки для компьютера с большим экраном */
+    width: 60px; /* Изменил размер кнопки для компьютера с большим экраном */
+    height: 60px; /* Изменил размер кнопки для компьютера с большим экраном */
   }
 `;
 
-export const HelpSection = () => {
+export const ScrollUpButton = () => {
   const [isShow, setIsOpen] = useState(false);
   const ref = useRef(null);
 
@@ -95,8 +72,8 @@ export const HelpSection = () => {
       <ButtonScrollUP onClick={scrollToTop}>
         <FaArrowUp
           style={{
-            height: "38px",
-            width: "38px",
+            height: "28px",
+            width: "28px",
           }}
         />
       </ButtonScrollUP>

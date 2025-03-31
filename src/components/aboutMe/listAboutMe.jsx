@@ -9,11 +9,11 @@ export const list = [
   {
     id: uuid(),
     firstname: "EXPERIENCE",
-    lastname: "2+ Years",
+    lastname: "+3 Years",
   },
   {
     id: uuid(),
-    firstname: "DATE OF BIRTH",
-    lastname: "03 AUGUSTE 1994",
+    firstname: "Location",
+    lastname: "Stockholm",
   },
 ];

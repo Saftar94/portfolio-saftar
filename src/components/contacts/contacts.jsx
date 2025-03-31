@@ -19,7 +19,6 @@ const Tab = styled.button`
   &:first-child {
     border-radius: 4px 0 0 4px;
   }
-
   &:last-child {
     border-radius: 0 4px 4px 0;
     margin-right: 0;
@@ -28,9 +27,7 @@ const Tab = styled.button`
 
 const Contacts = ({ user }) => {
   const [activeTab, setActiveTab] = useState("chats");
-  console.log("My USER", user);
   // Проверка на админа
-  const isAdmin = user && user.email === "admin@example.com";
 
   return (
     <Container>
@@ -43,24 +40,9 @@ const Contacts = ({ user }) => {
         >
           Chats
         </Tab>
-        {isAdmin && (
-          <Tab
-            active={activeTab === "admin"}
-            onClick={() => setActiveTab("admin")}
-          >
-            Administration
-          </Tab>
-        )}
       </TabContainer>
 
       {activeTab === "chats" && <ChatList currentUser={user} />}
-
-      {isAdmin && activeTab === "admin" && (
-        <div>
-          <h2>Admin Panel</h2>
-          {/* Здесь можно добавить административный функционал */}
-        </div>
-      )}
     </Container>
   );
 };

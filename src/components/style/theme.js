@@ -1,6 +1,7 @@
 export const theme = {
   color: {
-    Maincolor: "#212121",
+    Maincolor:
+      "linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);",
     ColorText: "#BDBDBD",
     HeaderSlidecolor: "#757575",
     HeaderLogocolor: "#F5F5F5",

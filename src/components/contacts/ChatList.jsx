@@ -80,18 +80,12 @@ const ChatList = ({ currentUser }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        console.log("Current user:", currentUser);
-
         if (!currentUser || !currentUser.email) {
           console.error("Current user lacks email:", currentUser);
           return;
         }
 
         const usersSnapshot = await getDocs(usersRef);
-        console.log(
-          "Total documents in 'users' collection:",
-          usersSnapshot.size
-        );
 
         const usersList = [];
         const adminsList = [];
@@ -117,9 +111,6 @@ const ChatList = ({ currentUser }) => {
           }
         });
 
-        console.log("Admin users:", adminsList);
-        console.log("Regular users:", usersList);
-
         // Если текущий пользователь админ, показываем ему обычных пользователей
         // Если текущий пользователь обычный, показываем ему только админов
         if (isAdmin) {
@@ -129,9 +120,7 @@ const ChatList = ({ currentUser }) => {
           // Показываем только админов для обычных пользователей
           setAdminUsers(adminsList);
         }
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      }
+      } catch (error) {}
     };
 
     if (currentUser && currentUser.email) {
@@ -143,42 +132,31 @@ const ChatList = ({ currentUser }) => {
   useEffect(() => {
     const fetchChats = async () => {
       try {
-        console.log("Current user for chat checks:", currentUser);
         if (!currentUser || !currentUser.id) {
-          console.error("Current user is missing ID:", currentUser);
           return;
         }
 
         // Определяем, для какого списка пользователей проверять чаты
         const usersToCheck = isAdmin ? users : adminUsers;
 
-        console.log("Checking existing chats for users:", usersToCheck);
         const chatData = {};
 
         for (const user of usersToCheck) {
           if (!user.id) {
-            console.warn("User missing ID:", user);
             continue;
           }
 
           // Формируем уникальный ID чата из ID двух пользователей
           const chatId = [currentUser.id, user.id].sort().join("_");
-          console.log(
-            `Checking chat between ${currentUser.id} and ${user.id} -> ${chatId}`
-          );
 
           const chatRef = doc(db, "chats", chatId);
           const chatDoc = await getDoc(chatRef);
 
           chatData[user.id] = chatDoc.exists();
-          console.log(`Chat with ${user.email} exists:`, chatDoc.exists());
         }
 
-        console.log("Final chat existence data:", chatData);
         setChats(chatData);
-      } catch (error) {
-        console.error("Error checking existing chats:", error);
-      }
+      } catch (error) {}
     };
 
     // Проверяем, какой список пользователей использовать
@@ -193,7 +171,6 @@ const ChatList = ({ currentUser }) => {
   const handleStartChat = async (userId) => {
     try {
       if (!currentUser || !currentUser.id) {
-        console.error("Current user is missing ID:", currentUser);
         alert(
           "Отсутствует информация о пользователе. Попробуйте выйти и войти снова."
         );
@@ -205,7 +182,6 @@ const ChatList = ({ currentUser }) => {
       const targetUser = targetList.find((u) => u.id === userId);
 
       if (!targetUser) {
-        console.error("Target user not found:", userId);
         return;
       }
 
@@ -216,13 +192,11 @@ const ChatList = ({ currentUser }) => {
 
       // Уникальный ID чата
       const chatId = [currentUser.id, userId].sort().join("_");
-      console.log("Chat ID:", chatId);
 
       const chatRef = doc(db, "chats", chatId);
       const chatDoc = await getDoc(chatRef);
 
       if (!chatDoc.exists()) {
-        console.log("Chat doesn't exist, creating new one");
         // Создаем новый чат
         await setDoc(chatRef, {
           participants: [
@@ -236,13 +210,11 @@ const ChatList = ({ currentUser }) => {
           createdAt: new Date(),
           isAdminChat: true, // Помечаем, что это чат с админом
         });
-        console.log("New chat created successfully");
       } else {
         console.log("Existing chat found:", chatDoc.data());
       }
 
       // Переходим к чату
-      console.log("Navigating to chat:", `/chat/${chatId}`);
       navigate(`/chat/${chatId}`);
     } catch (error) {
       console.error("Error in handleStartChat:", error);
@@ -295,8 +267,7 @@ const ChatList = ({ currentUser }) => {
               ))
             )}
             <RoleInfo>
-              In this section you can contact the system administrator for
-              assistance.
+              In this section you can contact the administrator for assistance.
             </RoleInfo>
           </>
         )}

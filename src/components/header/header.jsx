@@ -16,7 +16,9 @@ const BlockHeader = styled.header`
   left: 0px;
   width: 100%;
   padding: 20px 27px;
-  background: ${(props) => props.isColor || "#757575"};
+  background: ${(props) =>
+    props.isColor ||
+    "linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);"};
   @media (min-width: 768px) {
     padding: 27px;
   }
@@ -96,7 +98,6 @@ export const Header = ({ user, onLogout }) => {
       <Container style={{ overflowX: "visible" }}>
         <NavigationContainer>
           <HeaderText />
-
           <Wrapper>
             <SliderMenu
               closeMenu={toggleMenu}

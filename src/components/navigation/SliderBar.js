@@ -15,8 +15,8 @@ export const SidebarData = [
   },
   {
     id: uuidv4(),
-    title: "Order",
-    path: "/order",
+    title: "Projects",
+    path: "/projects",
     cName: "nav-text",
   },
   {

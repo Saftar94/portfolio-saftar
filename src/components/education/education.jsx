@@ -8,6 +8,7 @@ import { theme } from "../style/theme";
 const Awardsblock = styled.div`
   text-align: center;
   padding-top: 40px;
+  margin-bottom: 120px;
 `;
 const AwardHead = styled.p`
   font-weight: 500;

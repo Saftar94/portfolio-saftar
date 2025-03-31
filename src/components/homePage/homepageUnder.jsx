@@ -2,6 +2,7 @@ import { FcMindMap } from "react-icons/fc";
 import { lang } from "../shared/staticText/staticText";
 import styled from "styled-components";
 import { theme } from "../style/theme";
+
 const StyleUnder = styled.div`
   display: flex;
   flex-direction: initial;

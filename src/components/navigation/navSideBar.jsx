@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { SidebarData } from "./SliderBar";
 import { Divide as Hamburger } from "hamburger-react";
-import { HomePageButton } from "../homePage/homePageButton";
 import { keyframes } from "styled-components";
 import { NavLink } from "react-router-dom";
 import { theme } from "../style/theme";
@@ -121,8 +120,6 @@ export const SliderMenu = ({ closeMenu, isOpen, user, onLogout }) => {
             onClose={closeMenu}
           />
         </div>
-
-        <HomePageButton />
       </TitleSideBar>
     </>
   );

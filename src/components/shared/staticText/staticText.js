@@ -21,7 +21,8 @@ export const lang = {
     Project: "Project",
     Services: "SERVICES",
     HappyCustomer: "TECH SKILLS",
-    FooterLefttext: "© Made by Portfolio Template & powered by Flowbase",
+    FooterLefttext:
+      "© Made from a portfolio template, a personal project by Saftar.",
   },
 };
 export const startOfWarDate = new Date(2022, 1, 24);
