@@ -58,6 +58,18 @@ const NavLi = styled.li`
     opacity: 0;
   }
 
+  // Стили для активного элемента
+  &.active-link {
+    a {
+      color: ${theme.color.ButtonColor};
+    }
+
+    &::after {
+      width: 100%;
+      opacity: 1;
+    }
+  }
+
   @media screen and (min-width: 768px) {
     &:not(:last-child) {
       margin-right: 17px;
@@ -80,6 +92,12 @@ const NavLinkHeader = styled(NavLink)`
     border: none;
     cursor: pointer;
     transition: color 100ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    &.active {
+      color: ${theme.color.ButtonColor};
+      text-decoration: underline;
+    }
+
     &:hover,
     &:focus,
     &:active {
@@ -131,13 +149,14 @@ export const Navigation = ({ changeText, user, onLogout }) => {
       <NavUl>
         {navigationItems.map((item) => {
           return (
-            <NavLi key={item.id}>
+            <NavLi
+              key={item.id}
+              className={({ isActive }) => (isActive ? "active-link" : "")}
+            >
               <NavLinkHeader
                 iscolor={changeText}
                 to={item.path}
-                activestyle={{
-                  color: "#ffd700",
-                }}
+                className={({ isActive }) => (isActive ? "active" : "")}
               >
                 {getLocalizedTitle(item.title)}
               </NavLinkHeader>

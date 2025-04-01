@@ -55,7 +55,7 @@ const SkillsUl = styled.ul`
 `;
 
 const SkillsLi = styled.li`
-  margin-bottom: 30px;
+  margin-bottom: 5px;
 `;
 
 const SkillsTextBlock = styled.div`

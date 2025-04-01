@@ -7,66 +7,124 @@ import Container from "../container/container";
 import { checkIfAdmin } from "../utils/AuthContext";
 import { useLanguage } from "../context/LanguageContext";
 import { lang } from "../shared/staticText/staticText";
+import { theme } from "../style/theme";
+import { FaComments, FaUsersCog, FaUserTie } from "react-icons/fa";
 
 const ChatListContainer = styled.div`
+  padding: 15px;
+  border-radius: 8px;
+
+  @media (min-width: 768px) {
+    padding: 20px;
+  }
+`;
+
+const PageTitle = styled.h2`
+  font-size: 22px;
+  font-weight: 500;
+  color: ${theme.color.HeaderLogocolor};
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: 10px;
+    color: ${theme.color.ButtonColor};
+    font-size: 24px;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 24px;
+  }
+`;
+
+const UserList = styled.div`
   margin-top: 20px;
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
 `;
 
 const UserItem = styled.div`
-  padding: 15px;
-  background: white;
-  border-radius: 8px;
-  margin-bottom: 10px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  margin-bottom: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 
   &:hover {
-    background: #f5f5f5;
+    background: rgba(255, 255, 255, 0.07);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+`;
+
+const UserEmail = styled.div`
+  color: #f1f1f1;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: 8px;
+    color: ${theme.color.ButtonColor};
+    opacity: 0.8;
   }
 `;
 
 const StartChatButton = styled.button`
-  background: #4caf50;
-  color: white;
+  background: ${theme.color.ButtonColor};
+  color: ${theme.color.HeaderLogocolor};
   border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
+  border-radius: 20px;
+  padding: 8px 18px;
+  font-size: 14px;
   cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  letter-spacing: 0.3px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 
   &:hover {
-    background: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background: #ffd700;
+  }
+
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 `;
 
-const UserEmail = styled.p`
-  font-size: 16px;
-  margin: 0;
-`;
-
-const PageTitle = styled.h1`
-  margin-bottom: 20px;
-  color: #333;
-`;
-
-const NoUsersMessage = styled.p`
+const NoUsersMessage = styled.div`
+  padding: 30px;
   text-align: center;
-  color: #666;
+  color: #aaa;
   font-size: 16px;
-  margin-top: 30px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+  margin: 20px 0;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
 `;
 
 const RoleInfo = styled.div`
-  margin-top: 20px;
+  margin-top: 30px;
   padding: 15px;
-  background: #f8f9fa;
+  background: rgba(255, 215, 0, 0.05);
   border-radius: 8px;
-  border-left: 4px solid #4caf50;
+  font-size: 14px;
+  color: #e0e0e0;
+  line-height: 1.5;
+  border-left: 3px solid ${theme.color.ButtonColor};
+
+  strong {
+    color: ${theme.color.ButtonColor};
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
 `;
 
 const ChatList = ({ currentUser }) => {
@@ -77,10 +135,8 @@ const ChatList = ({ currentUser }) => {
   const [users, setUsers] = useState([]);
   const [adminUsers, setAdminUsers] = useState([]);
   const [chats, setChats] = useState({});
+  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
-
-  // Определяем, является ли текущий пользователь администратором
-  const isAdmin = checkIfAdmin(currentUser);
 
   // Загружаем список пользователей
   useEffect(() => {
@@ -228,22 +284,38 @@ const ChatList = ({ currentUser }) => {
     }
   };
 
+  // Исправляем объявление состояния isAdmin
+  useEffect(() => {
+    // Устанавливаем состояние isAdmin на основе результата функции checkIfAdmin
+    setIsAdmin(checkIfAdmin(currentUser));
+  }, [currentUser]);
+
   return (
     <Container>
       <ChatListContainer>
         <PageTitle>
-          {isAdmin ? text.chatUserChats : text.chatTechSupport}
+          {isAdmin ? (
+            <>
+              <FaUsersCog /> {text.chatUserChats}
+            </>
+          ) : (
+            <>
+              <FaComments /> {text.chatTechSupport}
+            </>
+          )}
         </PageTitle>
 
         {isAdmin ? (
           // Режим администратора - показываем всех пользователей
-          <>
+          <UserList>
             {users.length === 0 ? (
               <NoUsersMessage>{text.chatNoUsers}</NoUsersMessage>
             ) : (
               users.map((user) => (
                 <UserItem key={user.id}>
-                  <UserEmail>{user.email}</UserEmail>
+                  <UserEmail>
+                    <FaUserTie /> {user.email}
+                  </UserEmail>
                   <StartChatButton onClick={() => handleStartChat(user.id)}>
                     {chats[user.id] ? text.chatOpenChat : text.chatStartChat}
                   </StartChatButton>
@@ -253,17 +325,18 @@ const ChatList = ({ currentUser }) => {
             <RoleInfo>
               <strong>{text.chatAdminMessage}</strong>
             </RoleInfo>
-          </>
+          </UserList>
         ) : (
-          // Режим пользователя - показываем только администраторов
-          <>
+          // Режим обычного пользователя - показываем администраторов
+          <UserList>
             {adminUsers.length === 0 ? (
               <NoUsersMessage>{text.chatNoAdmins}</NoUsersMessage>
             ) : (
               adminUsers.map((admin) => (
                 <UserItem key={admin.id}>
                   <UserEmail>
-                    {text.chatAdministrator} {admin.displayName || admin.email}
+                    <FaUserTie /> {text.chatAdministrator}{" "}
+                    {admin.displayName || admin.email}
                   </UserEmail>
                   <StartChatButton onClick={() => handleStartChat(admin.id)}>
                     {chats[admin.id]
@@ -273,8 +346,11 @@ const ChatList = ({ currentUser }) => {
                 </UserItem>
               ))
             )}
-            <RoleInfo>{text.chatSupportMessage}</RoleInfo>
-          </>
+            <RoleInfo>
+              <strong>{text.chatSupportTitle}</strong>
+              {text.chatSupportMessage}
+            </RoleInfo>
+          </UserList>
         )}
       </ChatListContainer>
     </Container>

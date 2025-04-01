@@ -159,7 +159,7 @@ export const SliderMenu = ({ isOpen, closeMenu, user, onLogout }) => {
 
           {/* Добавляем мобильный переключатель языков */}
           <MobileLanguageSwitcherWrapper>
-            <LanguageSwitcher />
+            <LanguageSwitcher isMobile={true} />
           </MobileLanguageSwitcherWrapper>
         </div>
       </TitleSideBar>
