@@ -1,0 +1,25 @@
+{
+  "universities": {
+    "1": {
+      "name": "Університет Синергія",
+      "place": "Друге місце - Експерт з дизайну Webflow",
+      "direction": "Управління проектами та людські ресурси!",
+      "year": "2012—2017"
+    },
+    "2": {
+      "name": "Step IT",
+      "direction": "Python Розробник",
+      "year": "2021"
+    },
+    "3": {
+      "name": "GoIt",
+      "direction": "FULL STACK",
+      "year": "2022-2023"
+    },
+    "4": {
+      "name": "Beetrootacademy",
+      "direction": "Front-End Розробник",
+      "year": "2024-2025"
+    }
+  }
+} 

@@ -1,0 +1,25 @@
+{
+  "universities": {
+    "1": {
+      "name": "Synergy University",
+      "place": "Runner Up - Webflow Expert Design",
+      "direction": "Project Management and Human Resources!",
+      "year": "2012—2017"
+    },
+    "2": {
+      "name": "Step IT",
+      "direction": "Python Developer",
+      "year": "2021"
+    },
+    "3": {
+      "name": "GoIt",
+      "direction": "FULL STACK",
+      "year": "2022-2023"
+    },
+    "4": {
+      "name": "Beetrootacademy",
+      "direction": "Front-End Developer",
+      "year": "2024-2025"
+    }
+  }
+} 

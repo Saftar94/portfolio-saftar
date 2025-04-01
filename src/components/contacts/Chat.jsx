@@ -16,22 +16,35 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import Container from "../container/container";
+import { useLanguage } from "../context/LanguageContext";
+import { lang } from "../shared/staticText/staticText";
+import { theme } from "../style/theme";
+import {
+  FaArrowLeft,
+  FaTrashAlt,
+  FaPaperPlane,
+  FaRegClock,
+} from "react-icons/fa";
 
 const ChatContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: calc(100vh - 200px);
-  background: white;
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
 `;
 
 const ChatHeader = styled.div`
-  padding: 15px;
-  background: #f0f0f0;
+  padding: 18px 20px;
+  background: rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 `;
 
 const BackButton = styled.button`
@@ -39,88 +52,239 @@ const BackButton = styled.button`
   border: none;
   cursor: pointer;
   font-size: 16px;
-  color: #333;
+  color: ${theme.color.HeaderLogocolor};
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+
+  svg {
+    margin-right: 8px;
+    font-size: 14px;
+  }
+
+  &:hover {
+    background: rgba(255, 215, 0, 0.1);
+    transform: translateX(-2px);
+  }
+
+  &:active {
+    transform: translateX(-1px);
+  }
+`;
+
+const ChatTitle = styled.h2`
+  color: ${theme.color.HeaderLogocolor};
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+  display: flex;
+  align-items: center;
+`;
+
+const AdminInfo = styled.span`
+  margin-left: 10px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  font-weight: normal;
+  padding: 3px 10px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
 `;
 
 const MessagesContainer = styled.div`
   flex: 1;
-  padding: 15px;
+  padding: 20px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  background: rgba(0, 0, 0, 0.1);
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
 `;
 
 const MessageCard = styled.div`
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  padding: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.07);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
 `;
 
 const MessageHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
-  font-size: 12px;
-  color: #6c757d;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  align-items: center;
+`;
+
+const SenderInfo = styled.span`
+  font-weight: 500;
+  color: ${theme.color.ButtonColor};
+  display: flex;
+  align-items: center;
+`;
+
+const TimeInfo = styled.span`
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: 5px;
+    font-size: 12px;
+    opacity: 0.7;
+  }
 `;
 
 const MessageText = styled.p`
   margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+  font-size: 15px;
 `;
 
 const DeleteButton = styled.button`
-  background: #ff5252;
-  color: white;
+  background: rgba(255, 0, 0, 0.15);
+  color: #ff6b6b;
   border: none;
-  border-radius: 4px;
-  padding: 4px 8px;
+  border-radius: 20px;
+  padding: 4px 10px;
   font-size: 12px;
   cursor: pointer;
-  margin-left: 8px;
+  margin-left: 12px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: 4px;
+    font-size: 10px;
+  }
 
   &:hover {
-    background: #ff0000;
+    background: rgba(255, 0, 0, 0.25);
+    color: #ff3333;
+  }
+
+  &:active {
+    transform: scale(0.95);
   }
 `;
 
 const InputArea = styled.form`
   display: flex;
-  padding: 15px;
-  border-top: 1px solid #eee;
+  padding: 15px 20px;
+  background: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  align-items: center;
 `;
 
 const MessageInput = styled.input`
   flex: 1;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 16px;
+  padding: 12px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 25px;
+  font-size: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  &:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 215, 0, 0.3);
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.1);
+  }
 `;
 
 const SendButton = styled.button`
   margin-left: 10px;
   padding: 0 20px;
-  background: #4caf50;
-  color: white;
+  height: 42px;
+  background: ${theme.color.ButtonColor};
+  color: ${theme.color.HeaderLogocolor};
   border: none;
-  border-radius: 4px;
+  border-radius: 25px;
   cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+  svg {
+    margin-left: 6px;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background: #ffd700;
+  }
+
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
 `;
 
 const DeleteChatButton = styled.button`
-  background: #ff0000;
-  color: white;
-  border: none;
+  background: rgba(255, 0, 0, 0.1);
+  color: #ff6b6b;
+  border: 1px solid rgba(255, 0, 0, 0.2);
   padding: 8px 15px;
-  border-radius: 4px;
+  border-radius: 25px;
   font-size: 14px;
   cursor: pointer;
-  margin-left: 10px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: 6px;
+    font-size: 12px;
+  }
 
   &:hover {
-    background: #cc0000;
+    background: rgba(255, 0, 0, 0.2);
+    color: #ff3333;
+  }
+
+  &:active {
+    transform: scale(0.97);
   }
 `;
 
@@ -130,44 +294,123 @@ const ConfirmDialog = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  animation: fadeIn 0.3s ease;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `;
 
 const DialogContent = styled.div`
-  background: white;
-  padding: 30px;
-  border-radius: 8px;
-  max-width: 400px;
+  background: #1a1a1a;
+  padding: 35px;
+  border-radius: 15px;
+  max-width: 450px;
   text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  animation: scaleIn 0.3s ease;
+
+  h3 {
+    color: #ff6b6b;
+    margin-top: 0;
+    font-size: 22px;
+  }
+
+  p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  @keyframes scaleIn {
+    from {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
 `;
 
 const DialogButtons = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 30px;
   gap: 15px;
 `;
 
 const DialogButton = styled.button`
-  padding: 10px 20px;
+  padding: 12px 24px;
   border: none;
-  border-radius: 4px;
+  border-radius: 25px;
   cursor: pointer;
   font-weight: bold;
+  transition: all 0.3s ease;
 
   &.confirm {
-    background: #ff0000;
+    background: #ff3333;
     color: white;
+
+    &:hover {
+      background: #ff0000;
+      box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(-1px);
+    }
+
+    &:disabled {
+      background: #b33030;
+      cursor: not-allowed;
+    }
   }
 
   &.cancel {
-    background: #f0f0f0;
-    color: #333;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(-1px);
+    }
+
+    &:disabled {
+      background: rgba(255, 255, 255, 0.05);
+      color: rgba(255, 255, 255, 0.5);
+      cursor: not-allowed;
+    }
   }
+`;
+
+const EmptyStateMessage = styled.div`
+  text-align: center;
+  margin: 30px auto;
+  padding: 20px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 16px;
+  max-width: 300px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
 `;
 
 const Chat = ({ currentUser, isAdmin }) => {
@@ -180,6 +423,10 @@ const Chat = ({ currentUser, isAdmin }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+
+  // Получаем текущий язык
+  const { language } = useLanguage();
+  const text = lang[language];
 
   useEffect(() => {
     if (!currentUser || !currentUser.id) {
@@ -227,71 +474,6 @@ const Chat = ({ currentUser, isAdmin }) => {
       fetchChatInfo();
     }
   }, [currentUser, chatId, navigate, isAdmin]);
-
-  // Добавьте эту временную функцию для отладки в компоненте Chat
-  // const debugMessages = async () => {
-  //   try {
-  //     console.log("===== ОТЛАДКА СООБЩЕНИЙ =====");
-  //     console.log("Текущий chatId:", chatId);
-
-  //     // Проверяем все сообщения в коллекции
-  //     const allMessagesSnapshot = await getDocs(collection(db, "messages"));
-  //     console.log("Всего сообщений в базе:", allMessagesSnapshot.size);
-
-  //     if (allMessagesSnapshot.size === 0) {
-  //       console.log("База сообщений пуста! Создаем тестовое сообщение...");
-  //       await addDoc(collection(db, "messages"), {
-  //         chatId: chatId,
-  //         senderId: currentUser?.id || "test-sender",
-  //         senderEmail: currentUser?.email || "test@example.com",
-  //         text: "Тестовое сообщение для отладки",
-  //         createdAt: new Date()
-  //       });
-  //       console.log("Тестовое сообщение создано!");
-  //       return;
-  //     }
-
-  //     // Проверяем структуру сообщений
-  //     console.log("Структура существующих сообщений:");
-  //     allMessagesSnapshot.forEach(doc => {
-  //       const data = doc.data();
-  //       console.log("ID:", doc.id, "Data:", data);
-  //       console.log("  - chatId:", data.chatId);
-  //       console.log("  - тип chatId:", typeof data.chatId);
-  //       console.log("  - текст:", data.text);
-  //     });
-
-  //     // Проверяем именно сообщения для текущего чата
-  //     const chatMessagesQuery = query(
-  //       collection(db, "messages"),
-  //       where("chatId", "==", chatId)
-  //     );
-
-  //     const chatMessagesSnapshot = await getDocs(chatMessagesQuery);
-  //     console.log(`Сообщений для chatId="${chatId}":`, chatMessagesSnapshot.size);
-
-  //     if (chatMessagesSnapshot.size === 0) {
-  //       console.log("Нет сообщений для текущего чата. Создаем тестовое...");
-  //       await addDoc(collection(db, "messages"), {
-  //         chatId: chatId,
-  //         senderId: currentUser?.id || "test-sender",
-  //         senderEmail: currentUser?.email || "test@example.com",
-  //         text: "Тестовое сообщение для текущего чата",
-  //         createdAt: new Date()
-  //       });
-  //       console.log("Тестовое сообщение для текущего чата создано!");
-  //     }
-  //   } catch (error) {
-  //     console.error("Ошибка при отладке сообщений:", error);
-  //   }
-  // };
-
-  // // Вызовите эту функцию в начале компонента
-  // useEffect(() => {
-  //   if (chatId && currentUser) {
-  //     debugMessages();
-  //   }
-  // }, [chatId, currentUser]);
 
   // Исправленный слушатель сообщений
   useEffect(() => {
@@ -443,28 +625,24 @@ const Chat = ({ currentUser, isAdmin }) => {
         <ChatHeader>
           <div style={{ display: "flex", alignItems: "center" }}>
             <BackButton onClick={() => navigate("/contacts")}>
-              ← Back
+              <FaArrowLeft /> {text.chatBack}
             </BackButton>
-            <h2 style={{ marginLeft: "15px" }}>
+            <ChatTitle>
               {isAdmin ? (
-                <>Chat with user {otherUser.email}</>
+                <>
+                  {text.chatWithUser} {otherUser.email}
+                </>
               ) : (
-                <>Support Chat</>
+                <>{text.chatSupportTitle}</>
               )}
-            </h2>
-            {isAdmin && (
-              <span
-                style={{ marginLeft: "10px", color: "#666", fontSize: "14px" }}
-              >
-                (You are replying as administrator)
-              </span>
-            )}
+              {isAdmin && <AdminInfo>{text.chatAdminReply}</AdminInfo>}
+            </ChatTitle>
           </div>
 
-          <div style={{ display: "flex", gap: "10px" }}>
+          <div>
             {isAdmin && (
               <DeleteChatButton onClick={handleDeleteChat}>
-                Delete Chat
+                <FaTrashAlt /> {text.chatDeleteChat}
               </DeleteChatButton>
             )}
           </div>
@@ -472,25 +650,23 @@ const Chat = ({ currentUser, isAdmin }) => {
 
         <MessagesContainer>
           {loading ? (
-            <div style={{ textAlign: "center", margin: "20px" }}>
-              Loading all messages...
-            </div>
+            <EmptyStateMessage>{text.chatLoading}</EmptyStateMessage>
           ) : messages.length === 0 ? (
-            <div style={{ textAlign: "center", margin: "20px" }}>
-              No messages found
-            </div>
+            <EmptyStateMessage>{text.chatNoMessages}</EmptyStateMessage>
           ) : (
             messages.map((message) => (
               <MessageCard key={message.id}>
                 <MessageHeader>
-                  <span>From: {message.senderEmail}</span>
-                  <div>
-                    <span>{message.createdAt.toLocaleString()}</span>
+                  <SenderInfo>From: {message.senderEmail}</SenderInfo>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <TimeInfo>
+                      <FaRegClock /> {message.createdAt.toLocaleString()}
+                    </TimeInfo>
                     {(message.senderId === currentUser.id || isAdmin) && (
                       <DeleteButton
                         onClick={() => handleDeleteMessage(message.id)}
                       >
-                        Delete
+                        <FaTrashAlt /> {text.chatDelete}
                       </DeleteButton>
                     )}
                   </div>
@@ -506,9 +682,11 @@ const Chat = ({ currentUser, isAdmin }) => {
           <MessageInput
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
-            placeholder="Enter message..."
+            placeholder={text.chatMessagePlaceholder}
           />
-          <SendButton type="submit">Send</SendButton>
+          <SendButton type="submit">
+            {text.chatSend} <FaPaperPlane />
+          </SendButton>
         </InputArea>
       </ChatContainer>
 
@@ -516,9 +694,9 @@ const Chat = ({ currentUser, isAdmin }) => {
       {showConfirmDialog && (
         <ConfirmDialog>
           <DialogContent>
-            <h3>Delete Confirmation</h3>
-            <p>Are you sure you want to delete this chat?</p>
-            <p>All messages will be permanently deleted.</p>
+            <h3>{text.chatDeleteConfirm}</h3>
+            <p>{text.chatDeleteSure}</p>
+            <p>{text.chatDeletePermanent}</p>
 
             <DialogButtons>
               <DialogButton
@@ -526,14 +704,14 @@ const Chat = ({ currentUser, isAdmin }) => {
                 onClick={cancelDeleteChat}
                 disabled={loading}
               >
-                Cancel
+                {text.chatCancel}
               </DialogButton>
               <DialogButton
                 className="confirm"
                 onClick={confirmDeleteChat}
                 disabled={loading}
               >
-                {loading ? "Deleting..." : "Delete"}
+                {loading ? text.chatDeleting : text.chatDelete}
               </DialogButton>
             </DialogButtons>
           </DialogContent>

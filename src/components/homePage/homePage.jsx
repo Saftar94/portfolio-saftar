@@ -6,6 +6,7 @@ import { HomePageUnder } from "./homepageUnder";
 import { MainPageLink } from "./mainPageLink";
 import { keyframes } from "styled-components";
 import { theme } from "../style/theme";
+import { useLanguage } from "../context/LanguageContext";
 
 const HomePageContainer = styled.div`
   width: 100%;
@@ -104,15 +105,18 @@ const Styletext = styled.p`
 `;
 
 export const HomePage = () => {
+  const { language } = useLanguage();
+  const text = lang[language];
+
   return (
-    <>
+    <main>
       <HomePageContainer>
         <Container style={{ overflowX: "visible" }}>
           <HomeDivFlex>
             <HomePageContainerLeft>
               <StyleMain>
-                <Styletext>{lang.en.Maintext}</Styletext>
-                <Styletext>{lang.en.Maintexttwo}</Styletext>
+                <Styletext>{text.Maintext}</Styletext>
+                <Styletext>{text.Maintexttwo}</Styletext>
               </StyleMain>
               <HomePageUnder />
             </HomePageContainerLeft>
@@ -130,6 +134,6 @@ export const HomePage = () => {
       </HomePageContainer>
 
       <MainPageLink />
-    </>
+    </main>
   );
 };

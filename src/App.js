@@ -8,6 +8,7 @@ import Contacts from "./components/contacts/contacts";
 import Chat from "./components/contacts/Chat";
 import { Projects } from "./components/projects/projects";
 import { LoadingProvider } from "./components/context/LoadingContext";
+import { LanguageProvider } from "./components/context/LanguageContext";
 import { Footer } from "./components/footer/footer";
 
 function ProtectedRoute({ user, children }) {
@@ -50,32 +51,34 @@ function App() {
   const isAdmin = user && user.email === "aliev.saftar94@gmail.com";
 
   return (
-    <LoadingProvider>
-      <Header user={user} onLogout={handleLogout} />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutMe />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/login" element={<Login updateUser={updateUser} />} />
-        <Route
-          path="/contacts"
-          element={
-            <ProtectedRoute user={user}>
-              <Contacts user={user} />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/chat/:chatId"
-          element={
-            <ProtectedRoute user={user}>
-              <Chat currentUser={user} isAdmin={isAdmin} />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-      {!isContactsPage && <Footer />}
-    </LoadingProvider>
+    <LanguageProvider>
+      <LoadingProvider>
+        <Header user={user} onLogout={handleLogout} />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutMe />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/login" element={<Login updateUser={updateUser} />} />
+          <Route
+            path="/contacts"
+            element={
+              <ProtectedRoute user={user}>
+                <Contacts user={user} />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/chat/:chatId"
+            element={
+              <ProtectedRoute user={user}>
+                <Chat currentUser={user} isAdmin={isAdmin} />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+        {!isContactsPage && <Footer />}
+      </LoadingProvider>
+    </LanguageProvider>
   );
 }
 

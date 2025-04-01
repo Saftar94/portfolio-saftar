@@ -1,11 +1,13 @@
 import Container from "../container/container";
-import { experineceList } from "./experienceList";
+import { useExperienceList } from "./experienceList";
 import styled from "styled-components";
 import { theme } from "../style/theme";
-const ExperiendBlock = styled.div`
+
+const ExprienceMain = styled.div`
+  margin-bottom: 60px;
   padding-top: 40px;
-  margin-bottom: 120px;
 `;
+
 const ExperienceUl = styled.ul`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
@@ -24,7 +26,7 @@ const ExperienceLi = styled.li`
   flex-direction: column;
 `;
 
-const ExperienceNumber = styled.p`
+const ExperienceTextUp = styled.p`
   color: ${theme.color.ButtonColor};
   font-weight: 400;
   line-height: 1.14;
@@ -35,7 +37,7 @@ const ExperienceNumber = styled.p`
   text-align: center;
 `;
 
-const ExperienceText = styled.p`
+const ExperienceTextDown = styled.p`
   color: ${theme.color.ColorText};
   font-size: 18px;
   letter-spacing: 0.03em;
@@ -46,18 +48,20 @@ const ExperienceText = styled.p`
 `;
 
 export const Experience = () => {
+  const experienceList = useExperienceList();
+
   return (
-    <ExperiendBlock>
+    <ExprienceMain>
       <Container>
         <ExperienceUl>
-          {experineceList.map((item) => (
+          {experienceList.map((item) => (
             <ExperienceLi key={item.id}>
-              <ExperienceNumber>{item.number}</ExperienceNumber>
-              <ExperienceText>{item.experincetext}</ExperienceText>
+              <ExperienceTextUp>{item.number}</ExperienceTextUp>
+              <ExperienceTextDown>{item.experincetext}</ExperienceTextDown>
             </ExperienceLi>
           ))}
         </ExperienceUl>
       </Container>
-    </ExperiendBlock>
+    </ExprienceMain>
   );
 };

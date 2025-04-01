@@ -2,12 +2,13 @@ import Container from "../container/container";
 import styled from "styled-components";
 import { FcMindMap } from "react-icons/fc";
 import { lang } from "../shared/staticText/staticText";
-import { AwardReg } from "../education/education";
-import { servicesList } from "./servicesList";
+import { useServicesList } from "./servicesList";
 import { theme } from "../style/theme";
+import { useLanguage } from "../context/LanguageContext";
 
 const Servicesblock = styled.div`
   text-align: center;
+  padding-top: 40px;
   margin-bottom: 120px;
 `;
 const ServicesHead = styled.p`
@@ -24,6 +25,17 @@ const ServicesHead = styled.p`
   }
   @media screen and (min-width: 768px) {
     font-size: 45px;
+  }
+`;
+const ServicesReg = styled.p`
+  font-size: 15px;
+  vertical-align: top;
+  letter-spacing: 0.06em;
+  color: ${theme.color.ColorText};
+  margin-bottom: 40px;
+
+  @media screen and (min-width: 480px) {
+    font-size: 18px;
   }
 `;
 const ServicesUl = styled.ul`
@@ -57,6 +69,10 @@ const ServicesText = styled.p`
 `;
 
 export const Services = () => {
+  const servicesList = useServicesList();
+  const { language } = useLanguage();
+  const text = lang[language];
+
   return (
     <Servicesblock>
       <Container>
@@ -67,8 +83,8 @@ export const Services = () => {
             width: "40px",
           }}
         />
-        <ServicesHead>{lang.en.Services}</ServicesHead>
-        <AwardReg>{lang.en.AwardsRegion}</AwardReg>
+        <ServicesHead>{text.servicesTitle}</ServicesHead>
+        <ServicesReg>{text.servicesSubtitle}</ServicesReg>
         <ServicesUl>
           {servicesList.map((item) => (
             <ServicesLi key={item.id}>

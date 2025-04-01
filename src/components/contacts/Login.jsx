@@ -10,6 +10,8 @@ import styled from "styled-components";
 import { FcGoogle } from "react-icons/fc";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
+import { useLanguage } from "../context/LanguageContext";
+import { lang } from "../shared/staticText/staticText";
 
 const LoginContainer = styled.div`
   max-width: 400px;
@@ -84,6 +86,10 @@ const ErrorMessage = styled.p`
 `;
 
 const Login = ({ updateUser }) => {
+  // Получаем текущий язык
+  const { language } = useLanguage();
+  const text = lang[language];
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isRegistering, setIsRegistering] = useState(false);
@@ -242,36 +248,36 @@ const Login = ({ updateUser }) => {
     <LoginContainer>
       <TabContainer>
         <Tab active={!isRegistering} onClick={() => setIsRegistering(false)}>
-          Вход
+          {text.loginTab}
         </Tab>
         <Tab active={isRegistering} onClick={() => setIsRegistering(true)}>
-          Регистрация
+          {text.registerTab}
         </Tab>
       </TabContainer>
 
       <GoogleButton onClick={handleGoogleSignIn}>
         <FcGoogle />
-        Войти через Google
+        {text.loginWithGoogle}
       </GoogleButton>
 
       <Form onSubmit={handleSubmit}>
         <Input
           type="email"
-          placeholder="Email"
+          placeholder={text.emailPlaceholder}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
         <Input
           type="password"
-          placeholder="Пароль"
+          placeholder={text.passwordPlaceholder}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
         {error && <ErrorMessage>{error}</ErrorMessage>}
         <Button type="submit">
-          {isRegistering ? "Зарегистрироваться" : "Войти"}
+          {isRegistering ? text.registerButton : text.loginButton}
         </Button>
       </Form>
     </LoginContainer>

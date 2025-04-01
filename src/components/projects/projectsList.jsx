@@ -1,4 +1,6 @@
 import { v4 as uuid } from "uuid";
+import { useLanguage } from "../context/LanguageContext";
+import { lang } from "../shared/staticText/staticText";
 
 import filmotekax1 from "../image&svg/imgae/filmotekaX1.jpg";
 import filmotekax2 from "../image&svg/imgae/filmotekaX2.jpeg";
@@ -55,6 +57,98 @@ import inventoryX3 from "../image&svg/imgae/inventoryX3.jpg";
 //   },
 // ];
 
+export const usePortfolioList = () => {
+  const { language } = useLanguage();
+  const text = lang[language];
+
+  return [
+    {
+      id: uuid(),
+      title: "Filmoteka",
+      image: filmotekax1,
+      image2: filmotekax2,
+      image3: filmotekax3,
+      description: text.filmotekaDesc,
+      category: text.frontendCategory,
+      stack: [
+        "HTML,CSS ",
+        "JavaScript (ES6+) ",
+        "Handlebars",
+        "TMDB API",
+        "Firebase",
+      ],
+      highlights: text.filmotekaHighlights,
+      link: "https://github.com/Saftar94/Filmoteka",
+      demo: "https://saftar94.github.io/Filmoteka/",
+      year: "2023",
+    },
+    {
+      id: uuid(),
+      title: "eleanshop",
+      image: Elenashopx1,
+      image2: Elenashopx2,
+      image3: Elenashopx3,
+      description: text.eleanshopDesc,
+      category: text.frontendCategory,
+      stack: [
+        "HTML, CSS",
+        "JavaScript (ES6+)",
+        "Handlebars",
+        "firebase",
+        "webpack",
+        "bootstrap",
+      ],
+      highlights: text.eleanshopHighlights,
+      link: "https://github.com/Saftar94/Elenashop",
+      demo: "https://nikitamelnychencko.github.io/eleanshop/",
+      year: "2023",
+    },
+    {
+      id: uuid(),
+      title: "HellEnglish",
+      image: HellEnglish,
+      image2: HellEnglishx2,
+      image3: HellEnglishx3,
+      description: text.hellEnglishDesc,
+      category: text.frontendCategory,
+      stack: ["HTML", "SCSS", "JavaScript (ES6+)"],
+      highlights: text.hellEnglishHighlights,
+      link: "https://github.com/Viktor-Kostiuchenko/hellen-english",
+      demo: "https://viktor-kostiuchenko.github.io/hellen-english/",
+      year: "2023",
+    },
+    {
+      id: uuid(),
+      title: "WebStudio",
+      image: WebStudio,
+      image2: WebStudiox2,
+      image3: WebStudiox3,
+      description: text.webStudioDesc,
+      category: text.frontendCategory,
+      stack: ["HTML", "SCSS", "JavaScript (ES6+)", "CSS Flexbox & Grid"],
+      highlights: text.webStudioHighlights,
+      link: "https://github.com/Saftar94/goit-markup-hw-08",
+      demo: "https://saftar94.github.io/goit-markup-hw-08/GOIT%20DZ8/",
+      year: "2023",
+    },
+    {
+      id: uuid(),
+      title: "INVENTORY",
+      image: inventoryX1,
+      image2: inventoryX2,
+      image3: inventoryX3,
+      description: text.inventoryDesc,
+      category: text.frontendCategory,
+      stack: ["React", "Redux", "HTMl", "SCSS", "Styled Components"],
+      highlights: text.inventoryHighlights,
+      link: "https://github.com/Saftar94/orders-products",
+      demo: "https://saftar94.github.io/orders-products/",
+      year: "2023",
+    },
+  ];
+};
+
+// Сохраняем оригинальный список для обратной совместимости
 export const portfolioList = [
   {
     id: uuid(),
